@@ -2,8 +2,8 @@
 
 namespace OCR_Fusion {
     public class OutputDefinition {
-        string imageLink { get; set; }
-        List<string> words { get; set; }
-        Dictionary<string, Vector2[]> regions { get; set; }
+        public string imageLink { get; set; }
+        public List<string> words { get; set; }
+        public Dictionary<string, Vector2[]> regions { get; set; }
     }
 }
