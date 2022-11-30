@@ -10,14 +10,15 @@ namespace OCR_Fusion.Controllers {
     [Route("[controller]")]
     public class OcrController : ControllerBase {
 
-
-        private IWebHostEnvironment Environment;
         private string uploadPath;
+        private string[] allowedExtention { get {
+                string[] ae = { "png", "jepg", "jpg" };
+                return ae;
+            } 
+        }
 
-        public OcrController(IWebHostEnvironment _environment) {
-            Environment = _environment;
+        public OcrController() {
 
-            //uploadPath = Path.Combine(Environment.WebRootPath, "Uploads/");
             uploadPath = "Uploads/";
 
         }
@@ -26,9 +27,14 @@ namespace OCR_Fusion.Controllers {
         [HttpGet(Name = "GetText")]
         public OutputDefinition Get(InputDefinition input) {
 
-            
+            OCRController ocrController = new OCRController(Multiplex.GetOCR(input.IsHandWritten));
 
-            return new OutputDefinition();
+            if (!System.IO.File.Exists(uploadPath + input.imageLink)) {
+                throw new Exception("File not found");
+            }
+
+
+            return ocrController.GetText(input);
         }
 
 
@@ -39,17 +45,22 @@ namespace OCR_Fusion.Controllers {
                 Directory.CreateDirectory(uploadPath);
             }
 
-            if (file.Length > 0) {
-
-                string filename = Path.Combine(uploadPath, file.FileName);
-
-                using (var fileStream = new FileStream(filename, FileMode.Create)) {
-                    file.CopyToAsync(fileStream);
-                }
-                return filename;
+            if(file.Length == 0) {
+                return "0";
             }
 
-            return "0";
+            string extention = Utils.GetExtention(file.FileName);
+            if(!allowedExtention.Contains(extention)){
+                return "not supported extention";
+            }
+
+            string filename = Path.Combine(uploadPath, file.FileName);
+
+            using (var fileStream = new FileStream(filename, FileMode.Create)) {
+                file.CopyToAsync(fileStream);
+            }
+            return file.FileName;
+
         }
     }
 }
