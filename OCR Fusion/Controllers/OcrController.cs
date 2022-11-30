@@ -8,7 +8,10 @@ namespace OCR_Fusion.Controllers {
     public class OcrController : ControllerBase {
 
         [HttpGet(Name = "GetText")]
-        public OutputDefinition Get() {
+        public OutputDefinition Get(InputDefinition input) {
+
+                
+
             return new OutputDefinition();
         }
     }
