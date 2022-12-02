@@ -11,16 +11,15 @@
             }
         }
 
-        public OCRController(IOCRManager oCRManager){ 
+        public OCRController(IOCRManager oCRManager ) { 
             this.ocrManager = oCRManager;
         }
-
 
         public OutputDefinition GetText(InputDefinition input) {
 
             OutputDefinition output = ocrManager.GetText(input);
 
-            if (!File.Exists(uploadPath + input.imageLink)) {
+            if (!File.Exists(uploadPath + input.imageName)) {
                 throw new Exception("File not found");
             }
 
