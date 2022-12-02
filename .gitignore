@@ -362,5 +362,6 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-appsettings.json
+OCR Fusion/appsettings.json
 Uploads/
+/OCR Fusion/appsettings.json
