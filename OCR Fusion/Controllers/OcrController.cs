@@ -9,11 +9,15 @@ namespace OCR_Fusion.Controllers {
     [ApiController]
     [Route("[controller]")]
     public class OcrController : ControllerBase {
+        private IConfiguration configuration;
+        public OcrController(IConfiguration configuration) {
+            this.configuration = configuration;
+        }
 
-        [HttpGet(Name = "GetText")]
+        [HttpGet]
         public OutputDefinition Get(InputDefinition input) {
 
-            OCRController ocrController = new OCRController(Multiplex.GetOCR(input.IsHandWritten));
+            OCRController ocrController = new OCRController(Multiplex.GetOCR(input,configuration));
 
             return ocrController.GetText(input);
         }
