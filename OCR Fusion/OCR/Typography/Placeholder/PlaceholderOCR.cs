@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+﻿using OCR_Fusion.API_Object;
 
 namespace OCR_Fusion.OCR.Typography.Placeholder {
     public class PlaceholderOCR : IOCRManager {
@@ -16,10 +16,10 @@ namespace OCR_Fusion.OCR.Typography.Placeholder {
                 "?"
             };
 
-            Dictionary<string, Vector2[]> regions = new Dictionary<string, Vector2[]>();
+            Dictionary<string, Vector[]> regions = new Dictionary<string, Vector[]>();
 
             for(int i = 0; i < text.Count; i++) {
-                regions.Add(i.ToString(), new Vector2[] { new Vector2(10, 10 + (i*10)), new Vector2(10, 10 + (i * 10)) });
+                regions.Add(i.ToString(), new Vector[] { new Vector(10, 10 + (i*10)), new Vector(10, 10 + (i * 10)) });
             }
 
 
