@@ -1,23 +1,22 @@
 ﻿namespace OCR_Fusion.OCR.Typography.Iron {
     using IronOcr;
     public class IronOCR : IOCRManager {
+        OutputDefinition output = new();
         public OutputDefinition GetText(InputDefinition input) {
-            IronText();
-            throw new NotImplementedException();
+            IronText(input.imageName);
+            output.imageName = input.imageName;
+            return output;
         }
 
-        private List<string> IronText()
+        private void IronText(String imageName)
         {
-            List<string> text = new List<string>();
             var Ocr = new IronTesseract();
             using (var Input = new OcrInput())
             {
-                Input.AddImage(@"OCR_Test.png");
+                Input.AddImage(@"Uploads\"+imageName);
                 var Result = Ocr.Read(Input);
-                Console.WriteLine(Result.Text);
-                text.Add(Result.Text);
+                output.words.Add(Result.Text);
             }
-            return text;
         }
     }
 }
