@@ -43,7 +43,7 @@
             string filename = Path.Combine(uploadPath, file.FileName);
 
             using (var fileStream = new FileStream(filename, FileMode.Create)) {
-                file.CopyToAsync(fileStream);
+                file.CopyTo(fileStream);
             }
             return file.FileName;
 
