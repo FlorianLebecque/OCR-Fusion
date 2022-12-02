@@ -14,7 +14,7 @@ namespace OCR_Fusion.Controllers {
             this.configuration = configuration;
         }
 
-        [HttpGet]
+        [HttpPost]
         public OutputDefinition Get(InputDefinition input) {
 
             OCRController ocrController = new OCRController(Multiplex.GetOCR(input,configuration));
@@ -22,7 +22,7 @@ namespace OCR_Fusion.Controllers {
             return ocrController.GetText(input);
         }
 
-        [HttpPost]
+        [HttpPut]
         public string PostImage(IFormFile file) {
 
             return OCRController.UploadImage(file);
