@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>OCR AI</title>
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1>OCR AI </h1>
+        <h2>By Louis-Antoine Devos, Florian and Sarah Liettefti Lens</h2>
+
+        <section>
+            <form action="" method="put">
+            <div class="center">
+                <div class="form-input">
+                    <div class="preview">
+                        <img id="file-ip-1-preview">
+                      </div>
+                      <label for="file-ip-1">Upload Image</label>
+                      <input type="file" id="file-ip-1" accept="image/*, .pdf" onchange="showPreview(event);">
+                </div>
+              </div> 
+   
+            <label class="switch">
+                <label>Handwritten</label>
+                <input type="checkbox" id="type">
+                <span></span>
+            </label>
+            <label>Find Text</label>
+            <input type="submit" id="submit"> 
+            </form>
+            <p id="recherche"></p>
+        <script src="script.js"></script>
+        </section>
+    </body>
+</html>
