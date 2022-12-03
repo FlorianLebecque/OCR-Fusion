@@ -14,6 +14,12 @@ namespace OCR_Fusion.Controllers {
             this.configuration = configuration;
         }
 
+        [HttpGet]
+        public string test() {
+            return "hello world";
+        }
+
+
         [HttpPost]
         public OutputDefinition Get(InputDefinition input) {
 
