@@ -1,46 +1,66 @@
 let nameimg;
-let isHandWrittenVal;
+let isHandWritten;
+let algorithm = [];
+let srcimg;
 
 function showPreview(event){ 
     if(event.target.files.length > 0){
-        var img = document.getElementById('file-ip-1');
+        var img = document.getElementById('file-ip-1');//prend le nom du premier,faire que prend le nom du deuxieme
         if (img.files.item(0).type =="application/pdf"){
             alert('Convertir en jpeg png  on senfout');
         }
       nameimg = img.files.item(0).name;
       var src = URL.createObjectURL(event.target.files[0]);
+      srcimg = src;
+      document.getElementById("firstpreview").style.display = "block";
       var preview = document.getElementById("file-ip-1-preview");
       preview.src = src;
       preview.style.display = "block";
-      document.getElementById("recherche").innerHTML = nameimg + isHandWrittenVal;
     }
   }
 
-document.getElementById('type').onchange = function(){
-    isHandWrittenVal = document.getElementById('type').checked;
-    document.getElementById("recherche").innerHTML = nameimg + isHandWrittenVal;
-}
-
-document.getElementById('submit').onclick = function() {
-    isHandWrittenVal = document.getElementById('type').checked;
+document.getElementById('findtext').onclick = function() {
+    isHandWritten = document.getElementById('handwritten').checked;
+    isPrinted = document.getElementById('printed').checked;
+    isOther = document.getElementById('other').checked;
     if (nameimg =="" || nameimg == null){
         alert("Attention, n'oubliez pas de charger une image! ");
     }
-    else{
+    else if (!isHandWritten && !isPrinted && !isOther){
+        alert("Select an algorithm ");
+    }
+    else {
+        if (isHandWritten){
+            algorithm.push("handwritten")
+        }
+        if (isPrinted){
+            algorithm.push("printed")
+        }
+        if (isOther){
+            algorithm.push("other")
+        }
         let body = {
             imageName : nameimg,
-            isHandWritten : isHandWrittenVal,
+            algorithm : algorithm,
             regions :[]
         }
         let bodyJSON = JSON.stringify(body);
-        alert(bodyJSON);
+        ShowResults();
+        alert(bodyJSON);//envoie el body à l'API
+        document.getElementById("firstpreview").style.display = "none";
+        document.getElementById("recherche").innerHTML = nameimg + algorithm;//fonctionne pas
     }
-    //let isHandWritten = document.getElementById('type').checked;
-    document.getElementById("recherche").innerHTML = nameimg + isHandWrittenVal;
-    //si true alors c'est manuscrit et bleu foncé
-    //si false c'est que typographie et bleu clair
-    //document.getElementById('type').value pour voir la valeur
+    return false;
 
 }
 
 //function EnvoiePost()
+function ShowResults(){
+    document.getElementById("preview-results").style.display = "block";
+    var preview = document.getElementById("display-result-img");
+    preview.src = srcimg;
+    preview.style.display = "block";
+    document.getElementById("preview-is-handwritten").style.display = "block";
+    document.getElementById("preview-is-printed").style.display = "block";
+    document.getElementById("preview-is-other").style.display = "block";
+}

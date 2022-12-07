@@ -2,36 +2,115 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>OCR AI</title>
         <link href="style.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
     <body>
         <h1>OCR AI </h1>
-        <h2>By Louis-Antoine Devos, Florian and Sarah Liettefti Lens</h2>
+        <p>By Louis-Antoine Devos, Florian and Sarah Liettefti Lens</p>
 
-        <section>
+        <div class="container">
             <form action="" method="put">
-            <div class="center">
-                <div class="form-input">
-                    <div class="preview">
-                        <img id="file-ip-1-preview">
-                      </div>
-                      <label for="file-ip-1">Upload Image</label>
-                      <input type="file" id="file-ip-1" accept="image/*, .pdf" onchange="showPreview(event);">
+                <div class="row">
+                    <div class="center">
+                        <div class="preview" id="firstpreview">
+                            <img id="file-ip-1-preview">
+                        </div>
+                    </div>
                 </div>
-              </div> 
-   
-            <label class="switch">
-                <label>Handwritten</label>
-                <input type="checkbox" id="type">
-                <span></span>
-            </label>
-            <label>Find Text</label>
-            <input type="submit" id="submit"> 
+                <div class="row">
+                    <div class="col">
+                        <div class="center">
+                            <div class="form-input">
+                                <label for="file-ip-1">Upload Image</label>
+                                <input type="file" id="file-ip-1" accept="image/*, .pdf" onchange="showPreview(event);">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="center">
+                            <div class="form-input">
+                                <label for="file-ip-2">Take a picture</label>
+                                <input type="file" id="file-ip-2" accept="image/*" onchange="showPreview(event);">
+                                <!-- Doit changer ça pour que ce soit un truc qui prenne des photos-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="switch">
+                        <div class="left">
+                            <p>
+                                Select the algorithm :<br>
+                                <input type="checkbox" name="handwritten" id="handwritten"> <label for="handwritten">Handwritten</label><br>
+                                <input type="checkbox" name="printed" id="printed"> <label for="printed">Printed</label><br>
+                                <input type="checkbox" name="other" id="other"> <label for="other">Other</label><br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="left">
+                        <div class="form-button">
+                            <input type="submit" id="findtext" value="Find Text"> 
+                        </div>
+                    </div>
+                </div>
             </form>
-            <p id="recherche"></p>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="center">
+                    <div class="preview" id="preview-results">
+                        <img id="display-result-img">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="center">
+                    <div class="col">
+                        <div class="card" id="preview-is-handwritten">
+                            <div class="card-body">
+                                <h5 class="card-title">Algorithm : Handwritten</h5>
+                                <form action="" method="get">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <input type="button" value="Save Changes" class="btn btn-primary">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" id="preview-is-printed">
+                            <div class="card-body">
+                                <h5 class="card-title">Algorithm : Printed</h5>
+                                <form action="" method="get">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <input type="button" value="Save Changes" class="btn btn-primary">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" id="preview-is-other">
+                            <div class="card-body">
+                                <h5 class="card-title">Algorithm : Other</h5>
+                                <form action="" method="get">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <input type="button" value="Save Changes" class="btn btn-primary">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="script.js"></script>
-        </section>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>    
     </body>
 </html>
 
