@@ -14,6 +14,12 @@ namespace OCR_Fusion.Controllers {
             this.configuration = configuration;
         }
 
+        [HttpPatch]
+        public void UpdateOuput(OutputDefinition output) {
+            Utils.Update<OutputDefinition>("outputs", output);
+        }
+
+
         [HttpGet]
         public List<OutputDefinition> test(string session) {
             return Utils.Gets<OutputDefinition>("outputs", session);
