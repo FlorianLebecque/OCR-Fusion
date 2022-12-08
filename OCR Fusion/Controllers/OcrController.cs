@@ -15,16 +15,14 @@ namespace OCR_Fusion.Controllers {
         }
 
         [HttpGet]
-        public string test() {
-            return "hello world";
+        public List<OutputDefinition> test(string session) {
+            return Utils.Gets<OutputDefinition>("outputs", session);
         }
 
-
         [HttpPost]
-        public OutputDefinition Get(InputDefinition input) {
+        public OutputDefinition RequestOCR(InputDefinition input) {
 
             OCRController ocrController = new OCRController(Multiplex.GetOCR(input,configuration));
-
             return ocrController.GetText(input);
         }
 
