@@ -6,7 +6,9 @@ namespace OCR_Fusion.Controllers {
     [Route("[controller]")]
     [ApiController]
     public class ImageController : ControllerBase {
-        [HttpGet(Name = "{filename}")]
+
+
+        [HttpGet("{filename}")]
         public IActionResult GetImg(string filename) {
 
             filename = "Uploads/" + filename;
