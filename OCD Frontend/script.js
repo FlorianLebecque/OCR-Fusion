@@ -40,29 +40,56 @@ document.getElementById("findtext").addEventListener("click", function(event){
         if (isOther){
             algorithm.push("other")
         }
-        let session = "Sarah"
+        let sessions = "Sarah"
         let body = {
-            session : session,
+            session : sessions,
             imageName : nameimg,
             isHandWritten : true,
-            regions :[]
+            regions :[[{
+                x : 0,
+                y : 0
+            }]]
         }
-        //let bodyJSON = JSON.stringify(body);
-        ShowResults();
-        fetch('http://127.0.0.1:5154/swagger/index.html/Ocr', {
-        method: 'POST', // or 'PUT'
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        bodyJSON: JSON.stringify(body),
+
+        //essaye d'envoyer image a l'API mais fonctionne pas
+        const formData = new FormData();
+        const fileField = document.getElementById('file-ip-1');
+
+        //formData.append('username', 'abc123');
+        formData.append('file', fileField.files[0]);
+
+        fetch('http://127.0.0.1:5154/Ocr', {
+        method: 'PUT',
+        body: formData
         })
         .then((response) => response.json())
-        .then((data) => {
-            console.log('Success:', data);
+        .then((result) => {
+            console.log('Success:', result);
         })
         .catch((error) => {
             console.error('Error:', error);
         });
+        //let bodyJSON = JSON.stringify(body);
+        console.log("body : " +body);
+        postData('http://127.0.0.1:5154/Ocr', body)
+        .then((data) => {
+        console.log(data); // JSON data parsed by `data.json()` call
+        });
+        ShowResults();
+        // fetch('http://127.0.0.1:5154/Ocr', { mode: 'no-cors'},{
+        // method: 'POST', // or 'PUT'
+        // headers: {
+        //     'Content-Type': 'application/json',
+        // },
+        // bodyJSON: JSON.stringify(body),
+        // })
+        // .then((response) => response.json())
+        // .then((data) => {
+        //     console.log('Success:', data);
+        // })
+        // .catch((error) => {
+        //     console.error('Error********:', error);
+        // });
         //alert(bodyJSON);//envoie el body à l'API
         document.getElementById("firstpreview").style.display = "none";}
 });
@@ -79,3 +106,24 @@ function ShowResults(){
     document.getElementById("preview-is-other").style.display = "block";
     //return false;
 }
+
+async function postData(url = '', data = {}) {//fonctionne pas
+    // Default options are marked with *
+    const response = await fetch(url, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
+    });
+    console.log("data : " +data);
+    return response.json(); // parses JSON response into native JavaScript objects
+  }
+  
+  
