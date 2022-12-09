@@ -40,14 +40,30 @@ document.getElementById("findtext").addEventListener("click", function(event){
         if (isOther){
             algorithm.push("other")
         }
+        let session = "Sarah"
         let body = {
+            session : session,
             imageName : nameimg,
-            algorithm : algorithm,
+            isHandWritten : true,
             regions :[]
         }
-        let bodyJSON = JSON.stringify(body);
+        //let bodyJSON = JSON.stringify(body);
         ShowResults();
-        alert(bodyJSON);//envoie el body à l'API
+        fetch('http://127.0.0.1:5154/swagger/index.html/Ocr', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        bodyJSON: JSON.stringify(body),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+        //alert(bodyJSON);//envoie el body à l'API
         document.getElementById("firstpreview").style.display = "none";}
 });
 
