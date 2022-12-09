@@ -11,8 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-//MangoCRUD db = new("test");
-//Utils.SetDatabaseInterface(db);
+MangoCRUD db = new("test");
+Utils.SetDatabaseInterface(db);
 
 
 
