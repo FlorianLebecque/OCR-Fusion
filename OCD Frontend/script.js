@@ -21,46 +21,51 @@ function showPreview(event, iduplaod){
 
 document.getElementById("findtext").addEventListener("click", function(event){
     event.preventDefault();
+    isHandWritten = document.getElementById('handwritten').checked;
+    isPrinted = document.getElementById('printed').checked;
+    isOther = document.getElementById('other').checked;
+    if (nameimg =="" || nameimg == null){
+        alert("Attention, n'oubliez pas de charger une image! ");
+    }
+    else if (!isHandWritten && !isPrinted && !isOther){
+        alert("Select an algorithm ");
+    }
+    else {
+        if (isHandWritten){
+            algorithm.push("handwritten")
+        }
+        if (isPrinted){
+            algorithm.push("printed")
+        }
+        if (isOther){
+            algorithm.push("other")
+        }
+        let session = "Sarah"
+        let body = {
+            session : session,
+            imageName : nameimg,
+            isHandWritten : true,
+            regions :[]
+        }
+        //let bodyJSON = JSON.stringify(body);
         ShowResults();
-        alert(bodyJSON);//envoie el body à l'API
-        //document.getElementById("firstpreview").style.display = "none";
+        fetch('http://127.0.0.1:5154/swagger/index.html/Ocr', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        bodyJSON: JSON.stringify(body),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+        //alert(bodyJSON);//envoie el body à l'API
+        document.getElementById("firstpreview").style.display = "none";}
 });
-
-
-// document.getElementById('findtext').onclick = function() {
-//     isHandWritten = document.getElementById('handwritten').checked;
-//     isPrinted = document.getElementById('printed').checked;
-//     isOther = document.getElementById('other').checked;
-//     if (nameimg =="" || nameimg == null){
-//         alert("Attention, n'oubliez pas de charger une image! ");
-//     }
-//     else if (!isHandWritten && !isPrinted && !isOther){
-//         alert("Select an algorithm ");
-//     }
-//     else {
-//         if (isHandWritten){
-//             algorithm.push("handwritten")
-//         }
-//         if (isPrinted){
-//             algorithm.push("printed")
-//         }
-//         if (isOther){
-//             algorithm.push("other")
-//         }
-//         let body = {
-//             imageName : nameimg,
-//             algorithm : algorithm,
-//             regions :[]
-//         }
-//         let bodyJSON = JSON.stringify(body);
-//         ShowResults();
-//         alert(bodyJSON);//envoie el body à l'API
-//         //document.getElementById("firstpreview").style.display = "none";
-//         document.getElementById("recherche").innerHTML = nameimg + algorithm;//fonctionne pas
-//     }
-//     return false;
-
-// }
 
 //function EnvoiePost()
 
