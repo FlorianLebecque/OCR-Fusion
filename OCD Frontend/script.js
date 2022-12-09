@@ -19,41 +19,48 @@ function showPreview(event, iduplaod){
     }
 }
 
-
-document.getElementById('findtext').onclick = function() {
-    isHandWritten = document.getElementById('handwritten').checked;
-    isPrinted = document.getElementById('printed').checked;
-    isOther = document.getElementById('other').checked;
-    if (nameimg =="" || nameimg == null){
-        alert("Attention, n'oubliez pas de charger une image! ");
-    }
-    else if (!isHandWritten && !isPrinted && !isOther){
-        alert("Select an algorithm ");
-    }
-    else {
-        if (isHandWritten){
-            algorithm.push("handwritten")
-        }
-        if (isPrinted){
-            algorithm.push("printed")
-        }
-        if (isOther){
-            algorithm.push("other")
-        }
-        let body = {
-            imageName : nameimg,
-            algorithm : algorithm,
-            regions :[]
-        }
-        let bodyJSON = JSON.stringify(body);
+document.getElementById("findtext").addEventListener("click", function(event){
+    event.preventDefault();
         ShowResults();
         alert(bodyJSON);//envoie el body à l'API
         //document.getElementById("firstpreview").style.display = "none";
-        document.getElementById("recherche").innerHTML = nameimg + algorithm;//fonctionne pas
-    }
-    return false;
+});
 
-}
+
+// document.getElementById('findtext').onclick = function() {
+//     isHandWritten = document.getElementById('handwritten').checked;
+//     isPrinted = document.getElementById('printed').checked;
+//     isOther = document.getElementById('other').checked;
+//     if (nameimg =="" || nameimg == null){
+//         alert("Attention, n'oubliez pas de charger une image! ");
+//     }
+//     else if (!isHandWritten && !isPrinted && !isOther){
+//         alert("Select an algorithm ");
+//     }
+//     else {
+//         if (isHandWritten){
+//             algorithm.push("handwritten")
+//         }
+//         if (isPrinted){
+//             algorithm.push("printed")
+//         }
+//         if (isOther){
+//             algorithm.push("other")
+//         }
+//         let body = {
+//             imageName : nameimg,
+//             algorithm : algorithm,
+//             regions :[]
+//         }
+//         let bodyJSON = JSON.stringify(body);
+//         ShowResults();
+//         alert(bodyJSON);//envoie el body à l'API
+//         //document.getElementById("firstpreview").style.display = "none";
+//         document.getElementById("recherche").innerHTML = nameimg + algorithm;//fonctionne pas
+//     }
+//     return false;
+
+// }
 
 //function EnvoiePost()
 
@@ -65,5 +72,5 @@ function ShowResults(){
     document.getElementById("preview-is-handwritten").style.display = "block";
     document.getElementById("preview-is-printed").style.display = "block";
     document.getElementById("preview-is-other").style.display = "block";
-    return false;
+    //return false;
 }
