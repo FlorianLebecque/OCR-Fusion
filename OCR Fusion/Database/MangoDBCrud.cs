@@ -5,13 +5,19 @@ namespace OCR_Fusion.Database {
     public class MangoCRUD : IDBCrud {
         private IMongoDatabase db;
 
-        public MangoCRUD(string database) {
+        public MangoCRUD(string database_name) {
 
-            //Create the database if it don't exist
 
-            //initiate database connection
-            var client = new MongoClient();
-            db = client.GetDatabase(database);
+            var settings = MongoClientSettings.FromConnectionString("mongodb+srv://test:123@cluster0.syhqt6b.mongodb.net/?retryWrites=true&w=majority");
+
+
+            settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+
+            var client = new MongoClient(settings);
+            db = client.GetDatabase(database_name);
+
+
+
 
         }
 
