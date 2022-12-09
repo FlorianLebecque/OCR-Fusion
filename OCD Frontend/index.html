@@ -13,6 +13,7 @@
 
         <div class="container">
             <form action="" method="put">
+
                 <div class="row">
                     <div class="center">
                         <div class="preview" id="firstpreview">
@@ -20,12 +21,13 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col">
                         <div class="center">
                             <div class="form-input">
                                 <label for="file-ip-1">Upload Image</label>
-                                <input type="file" id="file-ip-1" accept="image/*, .pdf" onchange="showPreview(event);">
+                                <input type="file" id="file-ip-1" accept="image/*, .pdf" onchange="showPreview(event, 'file-ip-1');">
                             </div>
                         </div>
                     </div>
@@ -33,12 +35,13 @@
                         <div class="center">
                             <div class="form-input">
                                 <label for="file-ip-2">Take a picture</label>
-                                <input type="file" id="file-ip-2" accept="image/*" onchange="showPreview(event);">
+                                <input type="file" id="file-ip-2" accept="image/*" onchange="showPreview(event, 'file-ip-2');">
                                 <!-- Doit changer ça pour que ce soit un truc qui prenne des photos-->
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="switch">
                         <div class="left">
@@ -51,17 +54,18 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="left">
                         <div class="form-button">
-                            <input type="submit" id="findtext" value="Find Text"> 
+                            <input type="submit" id="findtext" value="Find Text" > 
                         </div>
                     </div>
                 </div>
             </form>
         </div>
 
-        <div class="container">
+        <div class="container" id="results">
             <div class="row">
                 <div class="center">
                     <div class="preview" id="preview-results">
@@ -69,6 +73,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="center">
                     <div class="col">
