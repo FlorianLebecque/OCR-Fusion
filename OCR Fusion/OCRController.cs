@@ -11,9 +11,11 @@
 
             OutputDefinition output = ocrManager.GetText(input);
 
+            output.session = input.session;
+
             Utils.CheckImage(input.imageName);
 
-            //Utils.Insert<OutputDefinition>("outputs", output);
+            Utils.Insert<OutputDefinition>("outputs", output);
 
             return output;
         }
