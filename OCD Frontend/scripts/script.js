@@ -3,6 +3,12 @@ let isHandWritten;
 let algorithm = [];
 let srcimg;
 
+
+let builder = new Builder();
+builder.Load();
+
+
+
 function showPreview(event, iduplaod){ 
     if(event.target.files.length > 0){
         var img = document.getElementById(iduplaod);//prend le nom du premier,faire que prend le nom du deuxieme
