@@ -1,6 +1,6 @@
 ﻿using OCR_Fusion.API_Object;
-using OCR_Fusion.OCR.Typography.Iron;
-using OCR_Fusion.OCR.Typography.Placeholder;
+using OCR_Fusion.OCR.Iron;
+using OCR_Fusion.OCR.Placeholder;
 
 
 namespace OCR_Fusion {
@@ -26,10 +26,7 @@ namespace OCR_Fusion {
             if (!algos.ContainsKey(input.algo)) {
                 throw new NotImplementedException();
             }
-            else
-            {
-                return new VisionOCR();
-            }
+
 
             return (IOCRManager) Activator.CreateInstance(algos[input.algo].GetClass());
 

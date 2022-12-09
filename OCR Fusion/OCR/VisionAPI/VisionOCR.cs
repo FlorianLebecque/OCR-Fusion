@@ -6,6 +6,8 @@
     using Google.Apis.Auth.OAuth2;
     using System.Buffers.Text;
 
+    [Register("VisionOCR", "Vision", "Recognise printed caractere")]
+
     public class VisionOCR : IOCRManager
     {
         OutputDefinition output = new();
