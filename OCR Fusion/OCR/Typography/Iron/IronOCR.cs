@@ -1,5 +1,7 @@
 ﻿namespace OCR_Fusion.OCR.Typography.Iron {
     using IronOcr;
+
+    [Register("IronOCR","Iron","Recognise printed caractere")]
     public class IronOCR : IOCRManager {
         OutputDefinition output = new();
         public OutputDefinition GetText(InputDefinition input) {
