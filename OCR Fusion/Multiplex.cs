@@ -1,29 +1,41 @@
-﻿using OCR_Fusion.OCR.Iron;
-using OCR_Fusion.OCR.Placeholder;
-using OCR_Fusion.OCR.VisionAPI;
+﻿using OCR_Fusion.API_Object;
+using OCR_Fusion.OCR.Typography.Iron;
+using OCR_Fusion.OCR.Typography.Placeholder;
+
 
 namespace OCR_Fusion {
     public class Multiplex {
-    
-    
+
+        private static Dictionary<string, Algorithme> algos = new();
+        public static void Register(Type T, RegisterAttribute attribute) {
+
+            algos.Add(attribute.id, new(attribute.id, attribute.name, attribute.description,T));
+
+        }
+
+        public static List<Algorithme> GetAlgos() {
+            return algos.Values.ToList();
+        }
+
         public static IOCRManager GetOCR(InputDefinition input,IConfiguration config) {
 
             if (config.GetValue<string>("mode") == "test") {
                 return new PlaceholderOCR();
             }
 
-
-            if (!input.IsHandWritten) {
-                return new IronOCR();
+            if (!algos.ContainsKey(input.algo)) {
+                throw new NotImplementedException();
             }
             else
             {
                 return new VisionOCR();
             }
 
-            throw new NotImplementedException();
+            return (IOCRManager) Activator.CreateInstance(algos[input.algo].GetClass());
 
         }
     
     }
+
+
 }

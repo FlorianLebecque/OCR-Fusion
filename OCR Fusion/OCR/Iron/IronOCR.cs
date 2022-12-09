@@ -1,8 +1,9 @@
 ﻿namespace OCR_Fusion.OCR.Iron
 {
     using IronOcr;
-    public class IronOCR : IOCRManager
-    {
+
+    [Register("IronOCR","Iron","Recognise printed caractere")]
+    public class IronOCR : IOCRManager {
         OutputDefinition output = new();
         public OutputDefinition GetText(InputDefinition input)
         {
