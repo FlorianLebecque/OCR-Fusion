@@ -9,8 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="Google.Cloud.Vision.V1" Version="3.2.0" />
+    <PackageReference Include="IronOcr" Version="2022.11.10109" />
     <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
-    <PackageReference Include="IronOcr" Version="2022.12.10830" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
