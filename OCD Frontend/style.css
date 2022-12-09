@@ -45,6 +45,9 @@ footer{
 	width:100%;
 	/* display:none; */
 }
+#preview-results{
+	display: none;
+}
 
 .form-input {
 	width:350px;
