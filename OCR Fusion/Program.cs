@@ -1,5 +1,20 @@
 using OCR_Fusion;
 using OCR_Fusion.Database;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+
+var assembly = Assembly.GetExecutingAssembly();
+
+foreach (var type in assembly.GetTypes()) {
+    var registerAttribute = type.GetCustomAttribute<RegisterAttribute>();
+
+    if (registerAttribute != null) {
+        Multiplex.Register(type, registerAttribute);
+    }
+    
+}
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
