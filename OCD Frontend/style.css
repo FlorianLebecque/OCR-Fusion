@@ -8,6 +8,17 @@ body {
 	/* background: #1283da; */
 }
 
+nav{
+    box-shadow: 10px 10px 37px 0px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1em;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 .center {
 	height:100%;
 	display:flex;
