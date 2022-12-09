@@ -8,6 +8,17 @@ body {
 	/* background: #1283da; */
 }
 
+nav{
+    box-shadow: 10px 10px 37px 0px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1em;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 .center {
 	height:100%;
 	display:flex;
@@ -32,7 +43,7 @@ body {
 
 .preview img {
 	width:100%;
-	display:none;
+	/* display:none; */
 }
 
 .form-input {
@@ -94,9 +105,9 @@ cursor:pointer;
 	display: none;
 }
 
-#preview-results{
+/* #preview-results{
 	display: none;
-}
+} */
 
 .card{
 	margin-left : 25px;
