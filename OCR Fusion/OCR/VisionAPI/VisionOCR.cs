@@ -7,8 +7,7 @@
     using System.Buffers.Text;
 
     [Register("VisionOCR", "Vision", "Recognise printed caractere")]
-
-    public class VisionOCR : IOCRManager
+        public class VisionOCR : IOCRManager
     {
         OutputDefinition output = new();
         public OutputDefinition GetText(InputDefinition input)
