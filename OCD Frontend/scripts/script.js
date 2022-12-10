@@ -4,6 +4,10 @@ let algorithm = [];
 let srcimg;
 
 
+$("#imageWrapper").hide();
+
+let ocr = new OcrAPI();
+
 let builder = new Builder();
 builder.Load();
 
