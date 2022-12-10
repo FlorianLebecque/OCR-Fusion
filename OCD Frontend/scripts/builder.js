@@ -3,28 +3,17 @@
 
 class Builder{
 
-    constructor(){
-
-        
-    }
-
     async Load(){
 
-        var opts = {
-            //mode:'no-cors'
-        }
-
-        await fetch('http://127.0.0.1:5154/Algorithme',opts)
+        await fetch('http://127.0.0.1:5154/Algorithme')
             .then((response) => response.json())
             .then((json) => {
-                
                 this.BuildCheckBox(json);
             });
     }
 
     BuildCheckBox(algo){
-
-        console.log(algo)
+        this.algo = algo;
 
         let wrapper = document.getElementById("checkbox-wrapper");
 
