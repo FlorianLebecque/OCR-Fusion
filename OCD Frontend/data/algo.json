@@ -1,0 +1,12 @@
+[
+    {
+        "id":"handwritten",
+        "name": "Hand written",
+        "description":  "Specialised on hand written recognition"
+    },
+    {
+        "id":"printed",
+        "name": "Printed",
+        "description":  "Specialised on hand written recognition"
+    }
+]

@@ -1,0 +1,23 @@
+body {
+	margin:0px;
+	height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+	/* background: #1283da; */
+}
+
+nav{
+    box-shadow: 10px 10px 37px 0px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5em;
+}
+
+footer{
+    width: 100%;
+}
+
+
+.panel{
+    padding: 1em;
+    border-radius: 0.2em;
+}
