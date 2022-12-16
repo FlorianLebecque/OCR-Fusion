@@ -158,10 +158,27 @@ class OcrAPI{
 
         let params = {session:session_name};
         url.search = new URLSearchParams(params).toString();
-
         fetch(url)
-            .then(response => response.text())
-            .then(data => console.log(data));
+        // Converting received data to JSON
+        .then((response) => response.json())
+        .then((json) => {
+            
+        // 2. Create a variable to store HTML table headers
+            let li = `<tr><th>Image name</th><th>Preview of the result</th><th>Algorithm</th><th>View</th></tr>`;
+        
+            // 3. Loop through each data and add a table row
+            json.forEach((user) => {
+            li += `<tr>
+                <td>${user.imageName}</td>
+                <td>${user.words} </td>
+                <td>Algo</td>
+                <td>View</td>
+            </tr>`;
+            });
+        
+            // 4. DOM Display result
+            document.getElementById("table_result").innerHTML = li;
+        });
 
     }
 
