@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Text.Json.Nodes;
 
 namespace OCR_Fusion {
     public class RegisterAttribute : Attribute {
@@ -11,5 +12,6 @@ namespace OCR_Fusion {
             this.name = name;
             this.description = description;
         }
+
     }
 }

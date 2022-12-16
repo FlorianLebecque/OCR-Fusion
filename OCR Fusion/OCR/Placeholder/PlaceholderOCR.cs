@@ -1,9 +1,16 @@
 ﻿using OCR_Fusion.API_Object;
+using System.Text.Json.Nodes;
 
 namespace OCR_Fusion.OCR.Placeholder
+
 {
+    [Register("placeholder", "Just a dumb thing", "Give a placeholder response, it does nothing")]
     public class PlaceholderOCR : IOCRManager
     {
+        public JsonObject GetParameters() {
+            return new();
+        }
+
         public OutputDefinition GetText(InputDefinition input)
         {
 
