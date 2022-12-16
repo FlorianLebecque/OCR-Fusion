@@ -20,7 +20,7 @@ let ocr = new OcrAPI(builder);
 
 
 
-
+/*
 
 function showPreview(event, iduplaod){ 
     if(event.target.files.length > 0){
@@ -86,3 +86,4 @@ function ShowResults(){
     document.getElementById("preview-is-other").style.display = "block";
     return false;
 }
+*/

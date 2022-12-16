@@ -146,4 +146,41 @@ class OcrAPI{
 
     }
 
+    BrowseHistory(){
+        //let session_name = "test";
+        let session_name = (document.getElementById("session_name").value == "")? "default": document.getElementById("session_name").value;
+
+        //let session_name = (document.getElementById("session_name").value);
+        let payload = {
+            session : session_name
+        };
+        let url = new URL('http://127.0.0.1:5154/Ocr');
+
+        let params = {session:session_name};
+        url.search = new URLSearchParams(params).toString();
+        fetch(url)
+        // Converting received data to JSON
+        .then((response) => response.json())
+        .then((json) => {
+            
+        // 2. Create a variable to store HTML table headers
+            let li = `<tr><th>Image name</th><th>Preview of the result</th><th>Algorithm</th><th>View</th></tr>`;
+        
+            // 3. Loop through each data and add a table row//https://getbootstrap.com/docs/5.0/helpers/text-truncation/
+            json.forEach((user) => {
+            li += `<tr>
+                <td>${user.imageName}</td>
+                <td class="d-inline-block text-truncate" style="max-width: 350px;">${user.words} </td>
+                <td class="d-inline-block text-truncate" style="max-width: 150px;">Algo</td>
+                <td class="d-inline-block text-truncate" style="max-width: 150px;">View</td>
+            </tr>`;
+            });
+            //<td>${user.words} </td>
+        
+            // 4. DOM Display result
+            document.getElementById("table_result").innerHTML = li;
+        });
+
+    }
+
 }
