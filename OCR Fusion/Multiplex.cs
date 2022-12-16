@@ -6,14 +6,14 @@ using OCR_Fusion.OCR.Placeholder;
 namespace OCR_Fusion {
     public class Multiplex {
 
-        private static Dictionary<string, Algorithme> algos = new();
+        private static Dictionary<string, Algorithms> algos = new();
         public static void Register(Type T, RegisterAttribute attribute) {
 
             algos.Add(attribute.id, new(attribute.id, attribute.name, attribute.description,T));
 
         }
 
-        public static List<Algorithme> GetAlgos() {
+        public static List<Algorithms> GetAlgos() {
             return algos.Values.ToList();
         }
 
