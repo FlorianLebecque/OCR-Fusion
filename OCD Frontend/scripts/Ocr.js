@@ -166,15 +166,16 @@ class OcrAPI{
         // 2. Create a variable to store HTML table headers
             let li = `<tr><th>Image name</th><th>Preview of the result</th><th>Algorithm</th><th>View</th></tr>`;
         
-            // 3. Loop through each data and add a table row
+            // 3. Loop through each data and add a table row//https://getbootstrap.com/docs/5.0/helpers/text-truncation/
             json.forEach((user) => {
             li += `<tr>
                 <td>${user.imageName}</td>
-                <td>${user.words} </td>
-                <td>Algo</td>
-                <td>View</td>
+                <td class="d-inline-block text-truncate" style="max-width: 350px;">${user.words} </td>
+                <td class="d-inline-block text-truncate" style="max-width: 150px;">Algo</td>
+                <td class="d-inline-block text-truncate" style="max-width: 150px;">View</td>
             </tr>`;
             });
+            //<td>${user.words} </td>
         
             // 4. DOM Display result
             document.getElementById("table_result").innerHTML = li;
