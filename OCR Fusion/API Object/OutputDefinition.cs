@@ -13,6 +13,8 @@ namespace OCR_Fusion {
         [BsonId]
         public Guid Id { get; set; }
         public string session { get; set; }
+
+        public string algorithm { get; set; }
         public string imageName { get; set; }
         public List<string> words { get; set; }
         public Dictionary<string, Vector[]>? regions { get; set; }
