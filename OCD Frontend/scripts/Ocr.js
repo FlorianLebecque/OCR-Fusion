@@ -147,19 +147,21 @@ class OcrAPI{
     }
 
     BrowseHistory(){
-        let session_name = "test";
+        //let session_name = "test";
+        let session_name = (document.getElementById("session_name").value == "")? "default": document.getElementById("session_name").value;
+
+        //let session_name = (document.getElementById("session_name").value);
         let payload = {
             session : session_name
-        }
-        fetch('http://127.0.0.1:5154/Ocr', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
-            })
+        };
+        let url = new URL('http://127.0.0.1:5154/Ocr');
+
+        let params = {session:session_name};
+        url.search = new URLSearchParams(params).toString();
+
+        fetch(url)
             .then(response => response.text())
-        .then(data => console.log(data));
+            .then(data => console.log(data));
 
     }
 
