@@ -12,6 +12,7 @@
             OutputDefinition output = ocrManager.GetText(input);
 
             output.session = input.session;
+            output.algorithm = input.algo;
 
             Utils.CheckImage(input.imageName);
 
