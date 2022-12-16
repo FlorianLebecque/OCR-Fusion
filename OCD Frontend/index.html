@@ -34,36 +34,44 @@
 
         <div class="container">
             
-            <div class="row panel border mb-3">
-                <h2>Algorithms</h2><hr>
-                <div id="checkbox-wrapper">
+            <div id="camera-wrapper">
+                <video id="video" autoplay></video>
+                <button onclick="ocr.TakePhoto()" id="click-photo">Click Photo</button>
+                <canvas hidden id="canvas"></canvas>
+            </div>
+
+            <div id="main-wrapper">
+                <div class="row panel border mb-3">
+                    <h2>Algorithms</h2><hr>
+                    <div id="checkbox-wrapper">
+
+                    </div>
+                </div>
+
+                <div class="row panel border mb-3">
+                    <h2>Commands</h2><hr>
+
+                    <div class="input-group mb-3">
+                        <input class="form-control" type="file" id="imageUpload">
+                        <input type="button" onclick="ocr.Upload()"  class="form-control btn btn-outline-primary" value="Upload">
+                        <input type="button" onclick="ocr.OpenCamera()"  class="form-control btn btn-outline-primary" value="Take photo">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text"   class="form-control" placeholder="Session name" id="session">
+                        <input type="button" class="form-control btn btn-success" value="Process" onclick="ocr.RequestOCR()">
+                    </div>
+                </div>
+                    
+                <div class="row panel border mb-3 text-center" id="imageWrapper" >
+                    <canvas id="canvas" width="320" height="240"></canvas>
+                    
+                </div>
+
+                <div id="cards-wrapper">
 
                 </div>
             </div>
-
-            <div class="row panel border mb-3">
-                <h2>Commands</h2><hr>
-
-                <div class="input-group mb-3">
-                    <input class="form-control" type="file" id="imageUpload">
-                    <input type="button" onclick="ocr.Upload()"  class="form-control btn btn-outline-primary" value="Upload">
-                    <input type="button" onclick="ocr.Upload()"  class="form-control btn btn-outline-primary" value="Take photo">
-                </div>
-
-                <div class="input-group mb-3">
-                    <input type="text"   class="form-control" placeholder="Session name" id="session">
-                    <input type="button" class="form-control btn btn-success" value="Process" onclick="ocr.RequestOCR()">
-                </div>
-            </div>
-                
-            <div class="row panel border mb-3 text-center" id="imageWrapper" >
-                
-            </div>
-
-            <div id="cards-wrapper">
-
-            </div>
-
 
         </div>
 
