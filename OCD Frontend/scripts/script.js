@@ -5,12 +5,21 @@ let srcimg;
 
 
 $("#imageWrapper").hide();
+$("#camera-wrapper").hide();
 
 
 let builder = new Builder();
 builder.Load();
 
 let ocr = new OcrAPI(builder);
+
+
+
+
+
+
+
+
 
 
 function showPreview(event, iduplaod){ 
