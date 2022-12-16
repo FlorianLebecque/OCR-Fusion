@@ -40,7 +40,7 @@ class OcrAPI{
     RequestOCR(){
 
         let algos = document.getElementsByName("check-algos");
-        let session_name = document.getElementById("session").value;
+        let session_name = (document.getElementById("session").value == "")? "default": document.getElementById("session").value;
 
         this.builder.InitCardWrapper();
 
