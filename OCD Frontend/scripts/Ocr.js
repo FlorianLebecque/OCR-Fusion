@@ -63,13 +63,17 @@ class OcrAPI{
         canvas.height = video.offsetHeight;
 
         canvas.getContext('2d').drawImage(video, 0, 0, video.offsetWidth, video.offsetHeight);
-        let image_data_url = canvas.toDataURL('image/jpeg');
 
 
+
+        let filename = "test.jpeg";
+        
         let file = null;
         let blob = canvas.toBlob(function(blob) {
                 file = new File([blob], 'test.jpg', { type: 'image/jpeg' });
         }, 'image/jpeg');
+
+        console.log(file);
 
         let data_file = new FormData();
         data_file.append("file",file);
