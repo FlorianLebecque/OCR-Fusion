@@ -146,4 +146,21 @@ class OcrAPI{
 
     }
 
+    BrowseHistory(){
+        let session_name = "test";
+        let payload = {
+            session : session_name
+        }
+        fetch('http://127.0.0.1:5154/Ocr', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            })
+            .then(response => response.text())
+        .then(data => console.log(data));
+
+    }
+
 }
