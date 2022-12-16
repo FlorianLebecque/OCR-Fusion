@@ -13,6 +13,7 @@
 
             output.session = input.session;
             output.algorithm = input.algo;
+            output.parameters = input.parameters;
 
             Utils.CheckImage(input.imageName);
 

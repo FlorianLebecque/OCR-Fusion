@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using OCR_Fusion.API_Object;
+using System.Text.Json.Nodes;
 
 namespace OCR_Fusion {
     public class OutputDefinition {
@@ -16,6 +17,8 @@ namespace OCR_Fusion {
 
         public string algorithm { get; set; }
         public string imageName { get; set; }
+
+        public JsonObject? parameters { get; set; }
         public List<string> words { get; set; }
         public Dictionary<string, Vector[]>? regions { get; set; }
     }
