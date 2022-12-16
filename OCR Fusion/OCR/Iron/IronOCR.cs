@@ -2,7 +2,7 @@
 {
     using IronOcr;
 
-    [Register("IronOCR","Iron","Recognise printed caractere")]
+    [Register("IronOCR","Iron","Great recognition of printed caracters")]
     public class IronOCR : IOCRManager {
         OutputDefinition output = new();
         public OutputDefinition GetText(InputDefinition input)

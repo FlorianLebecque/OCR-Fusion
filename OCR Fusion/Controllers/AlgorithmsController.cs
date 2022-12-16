@@ -5,10 +5,10 @@ using OCR_Fusion.API_Object;
 namespace OCR_Fusion.Controllers {
     [Route("[controller]")]
     [ApiController]
-    public class AlgorithmeController : ControllerBase {
+    public class AlgorithmsController : ControllerBase {
 
         [HttpGet]
-        public List<Algorithme> Index() {
+        public List<Algorithms> Index() {
 
             return Multiplex.GetAlgos();
         }
