@@ -1,5 +1,9 @@
 class OcrAPI{
 
+    constructor(_builder) {
+        this.builder = _builder;
+    }
+
     Upload()
     {
 
@@ -31,5 +35,50 @@ class OcrAPI{
             
         });
     };
+
+
+    RequestOCR(){
+
+        let algos = document.getElementsByName("check-algos");
+        let session_name = document.getElementById("session").value;
+
+        this.builder.InitCardWrapper();
+
+        algos.forEach((check)=>{
+
+            if(check.checked == false){
+                return;
+            }
+
+
+            let ocr_algo = check.id;
+
+            this.builder.InitCard(ocr_algo);
+
+
+            let payload = {
+                session : session_name,
+                imageName : this.filename,
+                algo : ocr_algo,
+                regions : []
+            }
+            
+            fetch('http://127.0.0.1:5154/Ocr', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                this.builder.BuildCard(ocr_algo,data);
+            })
+            .catch((error) => {
+                //display error
+            });
+        });
+
+    }
 
 }

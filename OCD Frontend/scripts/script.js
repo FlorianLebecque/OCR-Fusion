@@ -6,11 +6,11 @@ let srcimg;
 
 $("#imageWrapper").hide();
 
-let ocr = new OcrAPI();
 
 let builder = new Builder();
 builder.Load();
 
+let ocr = new OcrAPI(builder);
 
 
 function showPreview(event, iduplaod){ 

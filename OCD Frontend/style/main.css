@@ -1,6 +1,9 @@
 body {
 	margin:0px;
 	height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 	/* background: #1283da; */
 }
 
@@ -10,8 +13,6 @@ nav{
 }
 
 footer{
-    position: absolute;
-    bottom: 0;
     width: 100%;
 }
 
