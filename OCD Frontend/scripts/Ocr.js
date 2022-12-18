@@ -150,13 +150,12 @@ class OcrAPI{
     }
 
     BrowseHistory(){
-        //let session_name = "test";
         let session_name = (document.getElementById("session_name").value == "")? "default": document.getElementById("session_name").value;
 
-        //let session_name = (document.getElementById("session_name").value);
-        // let payload = {
-        //     session : session_name
-        // };
+        let current_index = 1;//commence par la première page
+        let start_index = 1;
+        let end_index = 10;
+
         let url = new URL('http://127.0.0.1:5154/Ocr');
         document.getElementById("itemShow").innerHTML = "";
 
@@ -166,11 +165,19 @@ class OcrAPI{
         // Converting received data to JSON
         .then((response) => response.json())
         .then((json) => {
+            let table_size = 10;
+            let array_lenght = json.length;
+            let max_index = array_lenght / table_size;
+            if(array_lenght % table_size > 0){
+                max_index++;
+            }
             
         // 2. Create a variable to store HTML table headers
 
             // 3. Loop through each data and add a table row//https://getbootstrap.com/docs/5.0/helpers/text-truncation/
-            json.forEach((data) => {
+            //json.forEach((data) => {
+            for (let i = 0; i<array_lenght; i++){
+                let data = json[i];
 
                 var tr = document.createElement("tr");
                 var tdImageName = document.createElement("td");
@@ -190,15 +197,6 @@ class OcrAPI{
                     this.builder.InitCardWrapper();
                     this.builder.InitCard(data.algorithm);
                     this.builder.BuildCardHistory(data.algorithm,data);
-
-
-                    // let li = `<link href="history.css" rel="stylesheet">
-                    //             <div class="preview">
-                    //                 <img src="http://127.0.0.1:5154/Image/${data.imageName}">
-                    //             </div>`;
-                    // document.getElementById("preview-results").innerHTML = li;
-                    // document.getElementById("ImageName").innerHTML = `Image Name : ${data.imageName}`;
-                    // document.getElementById("Algo").innerHTML = `Algorithm : ${data.algorithm}`;
                     event.preventDefault();//garder le event sinon fonctionne pas !!! 
                 });
                 tdView.appendChild(button);
@@ -207,18 +205,19 @@ class OcrAPI{
                 tr.appendChild(tdAlgo);
                 tr.appendChild(tdView);
                 document.getElementById("itemShow").appendChild(tr);
+                //Regarder pour le style https://www.youtube.com/watch?v=EsB0ufgLytk&list=PLyb-PdAs945lKNTwnXzmP58kWhk_0Xteg&index=1&t=0s
 
-            });
+            };
         
+        $(".index_buttons button").remove();
+        $(".index_buttons").append('<button>Previous</button>');
+        for(var i=1; i<+ max_index; i++){
+            $(".index_buttons").append('<button index="'+i+'">'+i+'</button>');
+        }
+        $(".index_buttons").append('<button>Next</button>');
         });
+        //Finir tuto = https://www.youtube.com/watch?v=xKjz4mv77Ls&list=PLyb-PdAs945lKNTwnXzmP58kWhk_0Xteg&index=1&t=0s
 
-    }
-
-    GetPicture(he){
-        // let url = new URL(`http://127.0.0.1:5154/Image/${fileName}`);
-        // let li = `<img src="http://127.0.0.1:5154/Image/${fileName}">`;
-        console.log(he);
-        // document.getElementById("preview-results").innerHTML = li;
-    }
+    };
 
 }

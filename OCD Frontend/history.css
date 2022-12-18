@@ -18,3 +18,27 @@
 	width:100%;
 	/* display:block; */
 }
+
+tr:hover td{
+	background-color: rgb(196, 228, 247);
+}
+
+.footer{
+	margin-top: 25px;
+	font-size: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+button{
+	padding: 7px 15px;
+	color: rgb(37, 36, 36);
+	background-color: transparent;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+button.active, button:hover{
+	background: linear-gradient(to bottom, rgb(243, 241, 241), rgb(190, 189, 189));
+}
