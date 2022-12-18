@@ -170,7 +170,7 @@ class OcrAPI{
         // 2. Create a variable to store HTML table headers
 
             // 3. Loop through each data and add a table row//https://getbootstrap.com/docs/5.0/helpers/text-truncation/
-            json.forEach((user) => {
+            json.forEach((data) => {
 
                 var tr = document.createElement("tr");
                 var tdImageName = document.createElement("td");
@@ -178,16 +178,27 @@ class OcrAPI{
                 var tdAlgo = document.createElement("td");
                 var tdView = document.createElement("td");
                 var button = document.createElement("button");
-                tdImageName.innerHTML = user.imageName;
-                tdPreview.innerHTML = user.words;
-                tdAlgo.innerHTML = user.algorithm;
+                tdImageName.innerHTML = data.imageName;
+                tdPreview.innerHTML = data.words;
+                tdAlgo.innerHTML = data.algorithm;
                 button.innerText = "View";
                 tdPreview.className="d-inline-block text-truncate";
                 tdPreview.style.maxWidth="350px";
 
                 button.addEventListener("click", () => {
-                    let li = `<img src="http://127.0.0.1:5154/Image/${user.imageName}">`;
-                    document.getElementById("preview-results").innerHTML = li;
+
+                    this.builder.InitCardWrapper();
+                    this.builder.InitCard(data.algorithm);
+                    this.builder.BuildCardHistory(data.algorithm,data);
+
+
+                    // let li = `<link href="history.css" rel="stylesheet">
+                    //             <div class="preview">
+                    //                 <img src="http://127.0.0.1:5154/Image/${data.imageName}">
+                    //             </div>`;
+                    // document.getElementById("preview-results").innerHTML = li;
+                    // document.getElementById("ImageName").innerHTML = `Image Name : ${data.imageName}`;
+                    // document.getElementById("Algo").innerHTML = `Algorithm : ${data.algorithm}`;
                     event.preventDefault();//garder le event sinon fonctionne pas !!! 
                 });
                 tdView.appendChild(button);

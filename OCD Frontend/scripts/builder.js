@@ -80,6 +80,32 @@ class Builder{
         wrapper.innerHTML += inner;
     }
 
+    BuildCardHistory(algo,result){
+        let card = document.getElementById("card-"+algo);
+
+        card.innerHTML = "";
+
+        let inner = "";
+        
+            inner += '<div>';
+                inner += '<div class="card-body">';
+                    inner += '<h5 class="card-title mb-3">Algorithm : '+ algo +'</h5>';
+
+                    inner += '<div class="form-floating mb-3">';
+                        inner += '<textarea class="form-control" placeholder="Leave a comment here" id="text-'+algo+'" style="height: 30vh">';
+                            inner += result.words[0];
+                        inner += '</textarea>';
+                        inner += '<label for="text-'+algo+'">Words</label>';
+                    inner += '</div>';
+
+                    inner += '<input type="button" value="Save Changes" class="btn btn-primary">';
+                inner += '</div>';
+            inner += '</div>';
+        
+        card.innerHTML = inner;
+
+    }
+
 
 
 
