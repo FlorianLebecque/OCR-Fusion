@@ -82,6 +82,7 @@ class Builder{
 
     BuildCardHistory(algo,result){
         let card = document.getElementById("card-"+algo);
+        let urlimage = 'http://127.0.0.1:5154/Image/'+result.imageName;
 
         card.innerHTML = "";
 
@@ -89,14 +90,22 @@ class Builder{
         
             inner += '<div>';
                 inner += '<div class="card-body">';
-                    inner += '<h5 class="card-title mb-3">Algorithm : '+ algo +'</h5>';
+                    inner += '<h4 class="card-title mb-3">Image Name : '+ result.imageName +'</h4>';
+                        inner += '<h5 class="card-title mb-3">Algorithm : '+ algo +'</h5>';
+                        inner += '<link href="history.css" rel="stylesheet">';
+                            inner += '<div class="preview">';
+                                //inner += '<p>'+urlimage+'</p>'
+                                //inner += '<img src='+urlimage+'>';
+                                inner += `<img src="http://127.0.0.1:5154/Image/${result.imageName}">`;
+                                //inner += '<img src="http://127.0.0.1:5154/Image/"'+result.imageName+'"">';
+                            inner += '</div>';
 
-                    inner += '<div class="form-floating mb-3">';
-                        inner += '<textarea class="form-control" placeholder="Leave a comment here" id="text-'+algo+'" style="height: 30vh">';
-                            inner += result.words[0];
-                        inner += '</textarea>';
-                        inner += '<label for="text-'+algo+'">Words</label>';
-                    inner += '</div>';
+                        inner += '<div class="form-floating mb-3">';
+                            inner += '<textarea class="form-control" placeholder="Leave a comment here" id="text-'+algo+'" style="height: 30vh">';
+                                inner += result.words[0];
+                            inner += '</textarea>';
+                            inner += '<label for="text-'+algo+'">Words</label>';
+                        inner += '</div>';
 
                     inner += '<input type="button" value="Save Changes" class="btn btn-primary">';
                 inner += '</div>';
