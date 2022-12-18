@@ -158,6 +158,7 @@ class OcrAPI{
         //     session : session_name
         // };
         let url = new URL('http://127.0.0.1:5154/Ocr');
+        document.getElementById("itemShow").innerHTML = "";
 
         let params = {session:session_name};
         url.search = new URLSearchParams(params).toString();
@@ -168,35 +169,36 @@ class OcrAPI{
             
         // 2. Create a variable to store HTML table headers
 
-            let li = `<tr><th>Image name</th>
-                <th style="width:350px">Preview of the result</th>
-                <th>Algorithm</th>
-                <th>View</th><th>View Button</th></tr>`;
-        
             // 3. Loop through each data and add a table row//https://getbootstrap.com/docs/5.0/helpers/text-truncation/
             json.forEach((user) => {
-                let r="hehehehhehehe";
-            li += `<tr>
-                <td>${user.imageName}</td>
-                <td class="d-inline-block text-truncate" style="max-width: 350px;">${user.words} </td>
-                <td>${user.algorithm}</td>
-                <td><a href="http://127.0.0.1:5154/Image/${user.imageName}">View</td>
-                <td><input type="button" onclick="ocr.GetPicture(${r})"  class="form-control btn btn-outline-primary" value="View"></td>
-            </tr>`;
-            });
 
-            // json.forEach((user) => {
-            //     li += `<tr>
-            //         <td>${user.imageName}</td>
-            //         <td class="d-inline-block text-truncate" style="max-width: 350px;">${user.words} </td>
-            //         <td>${user.algorithm}</td>
-            //         <td> <input type="button" onclick="ocr.GetPicture(${user.imageName})"  class="form-control btn btn-outline-primary" value="View"></td>
-            //     </tr>`;
-            //     });
-            //<td>${user.words} </td>
+                var tr = document.createElement("tr");
+                var tdImageName = document.createElement("td");
+                var tdPreview = document.createElement("td");
+                var tdAlgo = document.createElement("td");
+                var tdView = document.createElement("td");
+                var button = document.createElement("button");
+                tdImageName.innerHTML = user.imageName;
+                tdPreview.innerHTML = user.words;
+                tdAlgo.innerHTML = user.algorithm;
+                button.innerText = "View";
+                tdPreview.className="d-inline-block text-truncate";
+                tdPreview.style.maxWidth="350px";
+
+                button.addEventListener("click", () => {
+                    let li = `<img src="http://127.0.0.1:5154/Image/${user.imageName}">`;
+                    document.getElementById("preview-results").innerHTML = li;
+                    event.preventDefault();//garder le event sinon fonctionne pas !!! 
+                });
+                tdView.appendChild(button);
+                tr.appendChild(tdImageName);
+                tr.appendChild(tdPreview);
+                tr.appendChild(tdAlgo);
+                tr.appendChild(tdView);
+                document.getElementById("itemShow").appendChild(tr);
+
+            });
         
-            // 4. DOM Display result
-            document.getElementById("table_result").innerHTML = li;
         });
 
     }
