@@ -51,21 +51,24 @@
                         <input type="button" onclick="ocr.OpenCamera()"  class="form-control btn btn-outline-primary" value="Take photo">
                     </div>
 
-                    <div class="input-group mb-3">
-                        <input type="text"   class="form-control" placeholder="Session name" id="session">
-                        <input type="button" class="form-control btn btn-success" value="Process" onclick="ocr.RequestOCR()">
-                    </div>
+                    
                 </div>
                     
                 <div class="row panel border mb-3 text-center" id="imageWrapper" >
                     <canvas id="canvas" width="320" height="240"></canvas>
-                    
                 </div>
 
                 <div class="row panel border mb-3">
                     <h2>Algorithms</h2><hr>
                     <div id="checkbox-wrapper">
 
+                    </div>
+                </div>
+
+                <div class="row panel border mb-3">
+                    <div class="input-group">
+                        <input type="text"   class="form-control" placeholder="Session name" id="session">
+                        <input type="button" class="form-control btn btn-success" value="Process" onclick="ocr.RequestOCR()">
                     </div>
                 </div>
 
@@ -91,6 +94,7 @@
 
     </div>
 
+        <script src="scripts/ParametersBuilder.js"></script>
         <script src="scripts/builder.js"></script>
         <script src="scripts/Ocr.js"></script>
         <script src="scripts/script.js"></script>
