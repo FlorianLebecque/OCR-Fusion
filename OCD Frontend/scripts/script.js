@@ -7,8 +7,9 @@ let srcimg;
 $("#imageWrapper").hide();
 $("#camera-wrapper").hide();
 
+let parametersBuilder = new Paramertersbuilder();
 
-let builder = new Builder();
+let builder = new Builder(parametersBuilder);
 builder.Load();
 
 let ocr = new OcrAPI(builder);
