@@ -18,7 +18,7 @@ namespace OCR_Fusion {
         public string algorithm { get; set; }
         public string imageName { get; set; }
 
-        public JsonObject? parameters { get; set; }
+        public Dictionary<string,string>? parameters { get; set; }
         public List<string> words { get; set; }
         public Dictionary<string, Vector[]>? regions { get; set; }
     }
