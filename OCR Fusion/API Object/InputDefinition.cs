@@ -10,7 +10,7 @@ namespace OCR_Fusion {
         public string algo { get; set; }
         public List<Vector[]> regions { get; set; }
 
-        public JsonObject? parameters { get; set; }
+        public Dictionary<string,string>? parameters { get; set; }
 
     }
 }
