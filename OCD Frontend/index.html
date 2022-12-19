@@ -9,6 +9,7 @@
         <link href="style/spinner.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     </head>
     <body>
 
@@ -35,23 +36,32 @@
             
             <div id="camera-wrapper">
                 <video id="video" autoplay></video>
-                <button onclick="ocr.TakePhoto()" id="click-photo">Click Photo</button>
+                <button onclick="ocr.TakePhoto()"  class="form-control btn btn-primary" id="click-photo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-camera-fill" viewBox="0 0 16 16">
+                        <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                        <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+                    </svg>
+                </button>
                 <canvas hidden id="canvas"></canvas>
             </div>
 
             <div id="main-wrapper">
                 
-
                 <div class="row panel border mb-3">
-                    <h2>Commands</h2><hr>
-
-                    <div class="input-group mb-3">
-                        <input class="form-control" type="file" id="imageUpload">
-                        <input type="button" onclick="ocr.Upload()"  class="form-control btn btn-outline-primary" value="Upload">
-                        <input type="button" onclick="ocr.OpenCamera()"  class="form-control btn btn-outline-primary" value="Take photo">
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input class="form-control form-control-lg" type="file" id="imageUpload">
+                            <button type="button" onclick="ocr.Upload()" style="font-size: larger;"  class="form-control btn btn-outline-primary bi bi-upload display-1" value="Upload"></button>
+                        </div>
                     </div>
-
-                    
+                    <div class="col-4">
+                        <button type="button" onclick="ocr.OpenCamera()"  class="form-control btn btn-primary" value="Take photo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-camera-fill" viewBox="0 0 16 16">
+                                <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
                     
                 <div class="row panel border mb-3 text-center" id="imageWrapper" >
@@ -59,7 +69,6 @@
                 </div>
 
                 <div class="row panel border mb-3">
-                    <h2>Algorithms</h2><hr>
                     <div id="checkbox-wrapper">
 
                     </div>
