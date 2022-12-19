@@ -3,6 +3,10 @@
 
 class Builder{
 
+    constructor(_paramertersbuilder) {
+        this.parametersBuilder = _paramertersbuilder;
+    }
+
     async Load(){
 
         await fetch('http://127.0.0.1:5154/Algorithms')
@@ -21,14 +25,26 @@ class Builder{
             
             let checkbox = '';
 
-            checkbox += '<div class="form-check form-switch">';
-            checkbox += '   <input class="form-check-input" name="check-algos" type="checkbox" role="switch" id="'+algorithm.id+'">';
+            checkbox += '<div class="mb-3" style="display:flex;">';
+
+            checkbox += '<div class="form-check form-switch me-2">';
+            checkbox += '   <input class="form-check-input" name="check-algos" type="checkbox" role="switch" id="'+algorithm.id+'" data-bs-toggle="collapse" data-bs-target="#param-'+algorithm.id+'" aria-expanded="false" aria-controls="param-'+algorithm.id+'">';
             checkbox += '   <label class="form-check-label" for="'+algorithm.id+'">'+algorithm.name+'</label>';
-            checkbox += '<div id="emailHelp" class="form-text">'+algorithm.description+'</div>'
             checkbox += '</div>';
+            checkbox += '<div class="form-text">'+algorithm.description+'</div>'
+
+            checkbox += '</div>';
+
+            if(Object.keys(algorithm.parameters).length !== 0){
+                checkbox += '<div class="collapse" id="param-'+algorithm.id+'">';
+                checkbox += '   <div class="card card-body">';
+                checkbox += this.parametersBuilder.Build(algorithm.id,algorithm.parameters);
+                checkbox += '   </div>';
+                checkbox += '</div>';
+            }
+            
             
             wrapper.innerHTML += checkbox;
-
         });
 
 
