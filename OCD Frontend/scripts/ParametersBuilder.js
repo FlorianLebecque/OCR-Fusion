@@ -54,11 +54,9 @@ class Paramertersbuilder{
 
         textParam += '<label for="'+id+'" class="form-label">'+textParameter.title+'</label>';
 
-        textParam += '<select class="form-select" aria-label="Default select example">';
+        textParam += '<select name="'+algo_id+'" class="form-select" id="'+id+'">';
 
         let options = JSON.parse(textParameter.options);
-        console.log(options);
-
         for(const val in options){
 
             if(val == textParameter.default){
