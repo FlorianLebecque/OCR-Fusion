@@ -8,22 +8,25 @@ namespace OCR_Fusion.OCR.Placeholder
     public class PlaceholderOCR : IOCRManager
     {
         public JsonObject GetParameters() {
-            return new();
+
+            JsonObject parameters = new();
+
+            JsonObject return_text = new();
+            return_text.Add("type", "text");
+            return_text.Add("title", "Returned value");
+            return_text.Add("description", "Output text returned by the OCR");
+            return_text.Add("default", "Hello World!");
+
+            parameters.Add("return", return_text);
+
+            return parameters;
         }
 
         public OutputDefinition GetText(InputDefinition input)
         {
 
             List<string> text = new List<string> {
-                "hello",
-                "World",
-                "!",
-                "How",
-                "is",
-                "your",
-                "day",
-                "going",
-                "?"
+                (input.parameters["return"] != null)? input.parameters["return"]: "Hello world !"
             };
 
             Dictionary<string, Vector[]> regions = new Dictionary<string, Vector[]>();
@@ -36,7 +39,7 @@ namespace OCR_Fusion.OCR.Placeholder
 
             OutputDefinition output = new OutputDefinition();
 
-            output.imageName = "test.png";
+            output.imageName = input.imageName;
             output.words = text;
             output.regions = regions;
 
