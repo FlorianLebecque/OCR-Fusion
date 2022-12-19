@@ -102,7 +102,6 @@ class OcrAPI{
         
     }
 
-
     RequestOCR(){
 
         let algos = document.getElementsByName("check-algos");
@@ -118,6 +117,18 @@ class OcrAPI{
 
 
             let ocr_algo = check.id;
+            let parameters_obj = {};
+
+            let parameters_inputs = document.getElementsByName(ocr_algo);
+
+            parameters_inputs.forEach((input) => {
+
+                let key = input.id.split('_')[1];
+                let val = input.value;
+
+                parameters_obj[key] = val;
+
+            });
 
             this.builder.InitCard(ocr_algo);
 
@@ -126,6 +137,7 @@ class OcrAPI{
                 session : session_name,
                 imageName : this.filename,
                 algo : ocr_algo,
+                parameters : parameters_obj,
                 regions : []
             }
             
