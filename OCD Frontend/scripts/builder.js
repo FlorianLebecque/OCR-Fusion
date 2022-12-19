@@ -43,7 +43,7 @@ class Builder{
             checkbox += '</div>';
 
             if(Object.keys(algorithm.parameters).length !== 0){
-                checkbox += '<div class="collapse mt-3" id="param-'+algorithm.id+'">';
+                checkbox += '<div class="collapse mt-3 mb-3" id="param-'+algorithm.id+'">';
                 checkbox += '   <div class="card card-body">';
                 checkbox += this.parametersBuilder.Build(algorithm.id,algorithm.parameters);
                 checkbox += '   </div>';
@@ -58,6 +58,16 @@ class Builder{
 
     }
 
+    GetAlgoName(algo_id){
+        
+
+        for(let index in this.algo){
+            if(this.algo[index].id == algo_id){
+                return this.algo[index].name;
+            }
+        }
+
+    }
 
     BuildCard(algo,result){
         let card = document.getElementById("card-"+algo);
@@ -68,13 +78,13 @@ class Builder{
         
             inner += '<div>';
                 inner += '<div class="card-body">';
-                    inner += '<h5 class="card-title mb-3">Algorithm : '+ algo +'</h5>';
+                    inner += '<h5 class="card-title mb-3">'+ this.GetAlgoName(algo) +'</h5>';
 
                     inner += '<div class="form-floating mb-3">';
                         inner += '<textarea class="form-control" placeholder="Leave a comment here" id="text-'+algo+'" style="height: 30vh">';
                             inner += result.words[0];
                         inner += '</textarea>';
-                        inner += '<label for="text-'+algo+'">Words</label>';
+                        inner += '<label for="text-'+algo+'">Output</label>';
                     inner += '</div>';
 
                     inner += '<input type="button" value="Save Changes" class="btn btn-primary">';
