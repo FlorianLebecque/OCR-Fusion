@@ -148,14 +148,14 @@ class OcrAPI{
     }
 
     BrowseHistory(){
-        //let session_name = "test";
         let session_name = (document.getElementById("session_name").value == "")? "default": document.getElementById("session_name").value;
 
-        //let session_name = (document.getElementById("session_name").value);
-        let payload = {
-            session : session_name
-        };
+        let current_index = 1;//commence par la première page
+        let start_index = 1;
+        let end_index = 10;
+
         let url = new URL('http://127.0.0.1:5154/Ocr');
+        document.getElementById("itemShow").innerHTML = "";
 
         let params = {session:session_name};
         url.search = new URLSearchParams(params).toString();
@@ -163,25 +163,59 @@ class OcrAPI{
         // Converting received data to JSON
         .then((response) => response.json())
         .then((json) => {
+            let table_size = 10;
+            let array_lenght = json.length;
+            let max_index = array_lenght / table_size;
+            if(array_lenght % table_size > 0){
+                max_index++;
+            }
             
         // 2. Create a variable to store HTML table headers
-            let li = `<tr><th>Image name</th><th>Preview of the result</th><th>Algorithm</th><th>View</th></tr>`;
-        
-            // 3. Loop through each data and add a table row//https://getbootstrap.com/docs/5.0/helpers/text-truncation/
-            json.forEach((user) => {
-            li += `<tr>
-                <td>${user.imageName}</td>
-                <td class="d-inline-block text-truncate" style="max-width: 350px;">${user.words} </td>
-                <td class="d-inline-block text-truncate" style="max-width: 150px;">Algo</td>
-                <td class="d-inline-block text-truncate" style="max-width: 150px;">View</td>
-            </tr>`;
-            });
-            //<td>${user.words} </td>
-        
-            // 4. DOM Display result
-            document.getElementById("table_result").innerHTML = li;
-        });
 
-    }
+            // 3. Loop through each data and add a table row//https://getbootstrap.com/docs/5.0/helpers/text-truncation/
+            //json.forEach((data) => {
+            for (let i = 0; i<array_lenght; i++){
+                let data = json[i];
+
+                var tr = document.createElement("tr");
+                var tdImageName = document.createElement("td");
+                var tdPreview = document.createElement("td");
+                var tdAlgo = document.createElement("td");
+                var tdView = document.createElement("td");
+                var button = document.createElement("button");
+                tdImageName.innerHTML = data.imageName;
+                tdPreview.innerHTML = data.words;
+                tdAlgo.innerHTML = data.algorithm;
+                button.innerText = "View";
+                tdPreview.className="d-inline-block text-truncate";
+                tdPreview.style.maxWidth="350px";
+
+                button.addEventListener("click", () => {
+
+                    this.builder.InitCardWrapper();
+                    this.builder.InitCard(data.algorithm);
+                    this.builder.BuildCardHistory(data.algorithm,data);
+                    event.preventDefault();//garder le event sinon fonctionne pas !!! 
+                });
+                tdView.appendChild(button);
+                tr.appendChild(tdImageName);
+                tr.appendChild(tdPreview);
+                tr.appendChild(tdAlgo);
+                tr.appendChild(tdView);
+                document.getElementById("itemShow").appendChild(tr);
+                //Regarder pour le style https://www.youtube.com/watch?v=EsB0ufgLytk&list=PLyb-PdAs945lKNTwnXzmP58kWhk_0Xteg&index=1&t=0s
+
+            };
+        
+        $(".index_buttons button").remove();
+        $(".index_buttons").append('<button>Previous</button>');
+        for(var i=1; i<+ max_index; i++){
+            $(".index_buttons").append('<button index="'+i+'">'+i+'</button>');
+        }
+        $(".index_buttons").append('<button>Next</button>');
+        });
+        //Finir tuto = https://www.youtube.com/watch?v=xKjz4mv77Ls&list=PLyb-PdAs945lKNTwnXzmP58kWhk_0Xteg&index=1&t=0s
+
+    };
 
 }
