@@ -22,7 +22,10 @@ namespace OCR_Fusion.Controllers {
 
         [HttpGet]
         public List<OutputDefinition> test(string session) {
-            return Utils.Gets<OutputDefinition>("outputs", session);
+
+            List<OutputDefinition> result = Utils.Gets<OutputDefinition>("outputs", session);
+
+            return result.FindAll(x => x.session == session);
         }
 
         [HttpPost]
