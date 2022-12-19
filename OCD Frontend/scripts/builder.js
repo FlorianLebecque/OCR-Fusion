@@ -28,10 +28,10 @@ class Builder{
             let checkbox = '';
 
             if(count == (algo.length -1)){
-                checkbox += '<div style="display:flex;">';
+                checkbox += '<div style="display:flex; justify-content:space-between;align-items:center;">';
 
             }else{
-                checkbox += '<div class="mb-3" style="display:flex;">';
+                checkbox += '<div class="mb-3" style="display:flex;justify-content:space-between;align-items:center;">';
             }
 
             checkbox += '<div class="form-check form-switch me-2">';
