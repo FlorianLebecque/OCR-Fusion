@@ -1,7 +1,6 @@
 class Paramertersbuilder{
     Build(algo_id,parameters){
 
-
         let form = "";
 
         for (const key in parameters) {
@@ -35,10 +34,10 @@ class Paramertersbuilder{
 
         let textParam = "";
 
-        textParam += '<div class="mb-3" style="display:flex;">';
+        textParam += '<div class="mb-3 parameters-holder">';
         textParam += '  <div class="form-check form-switch me-2">';
-        textParam += '      <input class="form-check-input" name="'+algo_id+'" type="checkbox" role="switch" id="'+id+'" >';
         textParam += '      <label class="form-check-label" for="'+id+'">'+textParameter.title+'</label>';
+        textParam += '      <input class="form-check-input" name="'+algo_id+'" type="checkbox" role="switch" id="'+id+'" >';
         textParam += '  </div>';
         textParam += '  <div class="form-text">'+textParameter.description+'</div>'
         textParam += '</div>';
@@ -51,15 +50,24 @@ class Paramertersbuilder{
 
         let textParam = "";
 
-        textParam += '<div class="mb-3">';
+        textParam += '<div class="mb-3 parameters-holder" style="display:flex;">';
 
         textParam += '<label for="'+id+'" class="form-label">'+textParameter.title+'</label>';
 
         textParam += '<select class="form-select" aria-label="Default select example">';
-        textParam += '  <option selected>Open this select menu</option>';
-        textParam += '  <option value="1">One</option>';
-        textParam += '  <option value="2">Two</option>';
-        textParam += '  <option value="3">Three</option>';
+
+        let options = JSON.parse(textParameter.options);
+        console.log(options);
+
+        for(const val in options){
+
+            if(val == textParameter.default){
+                textParam += '  <option value="'+val+' selected>'+options[val]+'</option>';
+            }else{
+                textParam += '  <option value="'+val+'">'+options[val]+'</option>';
+            }
+
+        }
         textParam += '</select>';
         textParam += '<div class="form-text">'+textParameter.description+'</div>'
 
@@ -78,7 +86,7 @@ class Paramertersbuilder{
 
         let textParam = "";
 
-        textParam += '<div class="mb-3">';
+        textParam += '<div class="mb-3 parameters-holder">';
         textParam += '<label for="'+id+'" class="form-label">'+textParameter.title+'</label>';
         textParam += '<input name="'+algo_id+'" type="text" class="form-control" id="'+id+'" value="'+textParameter.default+'" >';
         textParam += '<div class="form-text">'+textParameter.description+'</div>'
