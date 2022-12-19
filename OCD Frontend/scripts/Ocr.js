@@ -64,17 +64,15 @@ class OcrAPI{
 
         canvas.getContext('2d').drawImage(video, 0, 0, video.offsetWidth, video.offsetHeight);
 
-
-
         let filename = "test.jpeg";
-        
-        var blobBin = atob(canvas.toDataURL('image/jpeg').split(',')[1]);
-        var array = [];
-        for(var i = 0; i < blobBin.length; i++) {
+        this.filename = filename
+        let blobBin = atob(canvas.toDataURL('image/jpeg').split(',')[1]);
+        let array = [];
+        for(let i = 0; i < blobBin.length; i++) {
             array.push(blobBin.charCodeAt(i));
         }
-        var file=new Blob([new Uint8Array(array)], {type: 'image/png'});
-
+        let file = new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
+        file = new File([file], filename)
 
         console.log(file);
 
