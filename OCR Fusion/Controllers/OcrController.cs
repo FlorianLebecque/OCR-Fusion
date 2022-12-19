@@ -9,47 +9,34 @@ namespace OCR_Fusion.Controllers {
     [ApiController]
     [Route("[controller]")]
     public class OcrController : ControllerBase {
+        private IConfiguration configuration;
+        public OcrController(IConfiguration configuration) {
+            this.configuration = configuration;
+        }
 
-
-        private IWebHostEnvironment Environment;
-        private string uploadPath;
-
-        public OcrController(IWebHostEnvironment _environment) {
-            Environment = _environment;
-
-            //uploadPath = Path.Combine(Environment.WebRootPath, "Uploads/");
-            uploadPath = "Uploads/";
-
+        [HttpPatch]
+        public void UpdateOuput(OutputDefinition output) {
+            Utils.Update<OutputDefinition>("outputs", output);
         }
 
 
-        [HttpGet(Name = "GetText")]
-        public OutputDefinition Get(InputDefinition input) {
-
-            
-
-            return new OutputDefinition();
+        [HttpGet]
+        public List<OutputDefinition> test(string session) {
+            return Utils.Gets<OutputDefinition>("outputs", session);
         }
-
 
         [HttpPost]
+        public OutputDefinition RequestOCR(InputDefinition input) {
+
+            OCRController ocrController = new OCRController(Multiplex.GetOCR(input,configuration));
+            return ocrController.GetText(input);
+        }
+
+        [HttpPut]
         public string PostImage(IFormFile file) {
 
-            if (!Directory.Exists(uploadPath)) {
-                Directory.CreateDirectory(uploadPath);
-            }
+            return OCRController.UploadImage(file);
 
-            if (file.Length > 0) {
-
-                string filename = Path.Combine(uploadPath, file.FileName);
-
-                using (var fileStream = new FileStream(filename, FileMode.Create)) {
-                    file.CopyToAsync(fileStream);
-                }
-                return filename;
-            }
-
-            return "0";
         }
     }
 }

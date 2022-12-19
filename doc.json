@@ -1,0 +1,194 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "OCR Fusion",
+      "version": "1.0"
+    },
+    "paths": {
+      "/Image": {
+        "get": {
+          "tags": [
+            "Image"
+          ],
+          "operationId": "{filename}",
+          "parameters": [
+            {
+              "name": "filename",
+              "in": "query",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/Ocr": {
+        "post": {
+          "tags": [
+            "Ocr"
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputDefinition"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputDefinition"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputDefinition"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/OutputDefinition"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/OutputDefinition"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/OutputDefinition"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Ocr"
+          ],
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                },
+                "encoding": {
+                  "file": {
+                    "style": "form"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "InputDefinition": {
+          "type": "object",
+          "properties": {
+            "imageName": {
+              "type": "string",
+              "nullable": true
+            },
+            "isHandWritten": {
+              "type": "boolean"
+            },
+            "regions": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Vector"
+                }
+              },
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "OutputDefinition": {
+          "type": "object",
+          "properties": {
+            "imageName": {
+              "type": "string",
+              "nullable": true
+            },
+            "words": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            },
+            "regions": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Vector"
+                }
+              },
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "Vector": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number",
+              "format": "float"
+            },
+            "y": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  }

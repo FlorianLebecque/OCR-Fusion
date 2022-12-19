@@ -8,12 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
+    <PackageReference Include="IronOcr" Version="2022.11.10109" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="OCR\HandWritten\" />
-    <Folder Include="OCR\Typography\" />
   </ItemGroup>
 
 </Project>

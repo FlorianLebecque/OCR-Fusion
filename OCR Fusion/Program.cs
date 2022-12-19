@@ -1,4 +1,5 @@
-using Microsoft.Extensions.FileProviders;
+using OCR_Fusion;
+using OCR_Fusion.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+//MangoCRUD db = new("test");
+//Utils.SetDatabaseInterface(db);
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -17,7 +24,7 @@ if (app.Environment.IsDevelopment()) {
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
