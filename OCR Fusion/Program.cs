@@ -7,11 +7,9 @@ var assembly = Assembly.GetExecutingAssembly();
 
 foreach (var type in assembly.GetTypes()) {
     var registerAttribute = type.GetCustomAttribute<RegisterAttribute>();
-
     if (registerAttribute != null) {
         Multiplex.Register(type, registerAttribute);
     }
-    
 }
 
 
