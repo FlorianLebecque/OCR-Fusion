@@ -8,8 +8,7 @@
     using System.Text.Json.Nodes;
 
     [Register("VisionOCR", "Vision", "Great recognition of printed and handwritten caracters")]
-        public class VisionOCR : IOCRManager
-    {
+        public class VisionOCR : IOCRManager {
         OutputDefinition output = new();
 
         public JsonObject GetParameters() {
