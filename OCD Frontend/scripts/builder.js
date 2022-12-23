@@ -99,7 +99,7 @@ class Builder{
         let wrapper = document.getElementById("cards-wrapper")
 
         let inner = "";
-        inner += "<div class='card-panel' id='card-"+algo+"'>";
+        inner += "<div class='card-panel' id='card-"+algo+"' onclick='select(\"card-"+algo+"\")'>";
         inner += '  <div class="t-card">';
         inner += '      <div  class="col align-self-center"><div class="lds-dual-ring"></div></div>';
         inner += '  </div>';

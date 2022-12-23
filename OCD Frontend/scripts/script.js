@@ -15,7 +15,16 @@ builder.Load();
 let ocr = new OcrAPI(builder);
 
 
+function select(card_id){
+    var elementVar = document.getElementById(card_id);
 
+    if(elementVar.hasAttribute("selected")){
+        elementVar.removeAttribute("selected");
+    }else{
+        elementVar.setAttribute("selected", "true");
+    }
+
+}
 
 
 

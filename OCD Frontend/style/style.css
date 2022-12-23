@@ -27,8 +27,21 @@ h1 {
     height: 40vh;
     border-radius: 0.2em;
     box-shadow: 10px 10px 262px 41px rgba(0,0,0,1) inset;
+    cursor: pointer;
+    z-index: 0;
+    transition: 100ms ease-in-out;
 
 }
+
+.card-panel[selected="true"]{
+    position: absolute;
+    top: 0;
+    left: 0;
+    translate: 75% 75%;
+    scale: 2;
+    z-index: 1;
+}
+
 
 .t-card{
     padding: 1em;
