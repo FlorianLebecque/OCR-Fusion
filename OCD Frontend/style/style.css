@@ -19,7 +19,6 @@ h1 {
 }
 
 .card-panel{
-    background-image: url("http://127.0.0.1:5154/Image/IMG20221129140627.jpg");
     background-attachment: fixed;
     background-position: top;
     background-size: contain;
@@ -35,11 +34,14 @@ h1 {
 
 .card-panel[selected="true"]{
     position: absolute;
-    top: 0;
-    left: 0;
-    translate: 75% 75%;
-    scale: 2;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50% ;
     z-index: 1;
+    width: 90vw;
+    height: 80vh;
+    background-color: lightgray;
+    background-blend-mode: multiply;
 }
 
 
