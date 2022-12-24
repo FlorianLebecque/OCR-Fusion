@@ -8,6 +8,61 @@ h1 {
     flex-direction: column;
 }
 
+#cards-wrapper{
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.card-panel{
+    background-attachment: fixed;
+    background-position: top;
+    background-size: contain;
+    width: 40vw;
+    height: 40vh;
+    border-radius: 0.2em;
+    box-shadow: 10px 10px 262px 41px rgba(0,0,0,1) inset;
+    cursor: pointer;
+    z-index: 0;
+    transition: 100ms ease-in-out;
+
+}
+
+.card-panel[selected="true"]{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50% ;
+    z-index: 1;
+    width: 90vw;
+    height: 80vh;
+    background-color: lightgray;
+    background-blend-mode: multiply;
+}
+
+
+.t-card{
+    padding: 1em;
+    color:white;
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    gap: 1em;
+    justify-content: space-between;
+}
+
+.t-card textarea{
+    background: transparent;
+    color: white;
+    width: 100%;
+    height: inherit;
+
+    resize: none;
+}
 
 .parameters-holder{
     display: flex;
@@ -53,20 +108,20 @@ display:none;
 }
   
 .form-input label {
-display:block;
-width:45%;
-height:45px;
-margin-left: 25%;
-line-height:50px;
-text-align:center;
-background:#1172c2;
-color:#fff;
-font-size:15px;
-font-family:"Open Sans",sans-serif;
-text-transform:Uppercase;
-font-weight:600;
-border-radius:5px;
-cursor:pointer;
+    display:block;
+    width:45%;
+    height:45px;
+    margin-left: 25%;
+    line-height:50px;
+    text-align:center;
+    background:#1172c2;
+    color:#fff;
+    font-size:15px;
+    font-family:"Open Sans",sans-serif;
+    text-transform:Uppercase;
+    font-weight:600;
+    border-radius:5px;
+    cursor:pointer;
 }
 
 .form-button {

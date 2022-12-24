@@ -107,6 +107,8 @@ class OcrAPI{
         let algos = document.getElementsByName("check-algos");
         let session_name = (document.getElementById("session").value == "")? "default": document.getElementById("session").value;
 
+        $("#control").hide();
+
         this.builder.InitCardWrapper();
 
         algos.forEach((check)=>{
@@ -130,7 +132,7 @@ class OcrAPI{
 
             });
 
-            this.builder.InitCard(ocr_algo);
+            this.builder.InitCard(ocr_algo,this.filename);
 
 
             let payload = {
