@@ -44,23 +44,37 @@
             <input type="button" onclick="ocr.BrowseHistory()"  class="form-control btn btn-outline-primary" value="See">
             
                 <div class="row">
+                    <div class="table">
+                    <div class="tab_head_container">
+                        <div class="page_limit">
+                            <span>Shows </span>
+                            <select id="table_size">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                            </select>
+                            <span> entries</span>
+                        </div>
+                    </div>
                     <table class="table w-auto" border="1" id="table_result" style="width:100%">
                         <thead>
                             <tr>
                                 <th scope="col">Image name</th>
                                 <th scope="col" style="width:350px">Preview of the result</th>
                                 <th scope="col">Algorithm</th>
-                                <th scope="col">View Button</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody id="itemShow"></tbody>
                       </table>
                       <div class="footer">
-                        <span>Showing 1 to 10 of 60 entries</span>
+                        <span></span>
                         <div class="index_buttons">
                         </div>
                       </div>
                 </div>
+            </div>
 
         </div>
 

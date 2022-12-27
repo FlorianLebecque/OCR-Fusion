@@ -42,3 +42,8 @@ button{
 button.active, button:hover{
 	background: linear-gradient(to bottom, rgb(243, 241, 241), rgb(190, 189, 189));
 }
+
+.tab_head_container{
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
