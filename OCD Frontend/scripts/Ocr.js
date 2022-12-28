@@ -255,33 +255,30 @@ class OcrAPI{
             });
 
             for(var i=1; i< max_index+1; i++){
-                $(".index_buttons").append('<button index="'+i+'">'+i+'</button>');
-            }
-
-            // for(var i=1; i< max_index; i++){ //focntionne pas, peut etre enlever les bouton chiffre ? 
-            //     $(".index_buttons").append('<button id="numbut"'+i+'"" index="'+i+'">'+i+'</button>');
-            //     let numbid = "numbut"+i;
-            //     let numbut = document.getElementById(numbid);
-            //     numbut.addEventListener("click", function(){
-            //         current_index = i;
-            //         //trouver moyen d'en faire une focntion
-            //         start_index = ((current_index - 1) * table_size)+1;
-            //         end_index = (start_index + table_size) -1;
-            //         if(end_index > array_lenght){
-            //             end_index = array_lenght;
-            //         }
-            //         $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
-            //         $(".index_buttons button").removeClass('active');
-            //         $(".index_buttons button[index='"+current_index+"']").addClass('active');
+                $(".index_buttons").append('<button id="numbut'+i+'" index="'+i+'">'+i+'</button>');
+                console.log("numbut"+i)
+                document.getElementById("numbut"+i).addEventListener("click", function(e){
+                    var target = e.target;
+                    var parent = target.parentNode;
+                    var index = [].indexOf.call(parent.children, target);
+                    console.log("index:", index);
+                    current_index = index;
+                    start_index = ((current_index - 1) * table_size)+1;
+                    end_index = (start_index + table_size) -1;
+                    if(end_index > array_lenght){
+                        end_index = array_lenght;
+                    }
+                    $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
+                    $(".index_buttons button").removeClass('active');
+                    $(".index_buttons button[index='"+current_index+"']").addClass('active');
             
-            //         ocr.DisplayTableRowHistory(json, start_index, end_index);
-            //     });
-            // }
+                    ocr.DisplayTableRowHistory(json, start_index, end_index);
+                })
+            }
 
 
             $(".index_buttons").append('<button id="nextbut">Next</button>');
             const nextbut = document.getElementById("nextbut");
-            window.alert("current_index :" + current_index+ "max index"+ max_index);
             nextbut.addEventListener("click", function(){
                 if (current_index < max_index){
                     current_index++;
@@ -340,12 +337,29 @@ class OcrAPI{
                     ocr.DisplayTableRowHistory(json, start_index, end_index);}
             });
             for(var i=1; i< max_index+1; i++){
-                $(".index_buttons").append('<button index="'+i+'">'+i+'</button>');
+                $(".index_buttons").append('<button id="numbut'+i+'" index="'+i+'">'+i+'</button>');
+                console.log("numbut"+i)
+                document.getElementById("numbut"+i).addEventListener("click", function(e){
+                    var target = e.target;
+                    var parent = target.parentNode;
+                    var index = [].indexOf.call(parent.children, target);
+                    console.log("index:", index);
+                    current_index = index;
+                    start_index = ((current_index - 1) * table_size)+1;
+                    end_index = (start_index + table_size) -1;
+                    if(end_index > array_lenght){
+                        end_index = array_lenght;
+                    }
+                    $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
+                    $(".index_buttons button").removeClass('active');
+                    $(".index_buttons button[index='"+current_index+"']").addClass('active');
+            
+                    ocr.DisplayTableRowHistory(json, start_index, end_index);
+                })
             }
 
             $(".index_buttons").append('<button id="nextbut">Next</button>');
             const nextbut = document.getElementById("nextbut");
-            window.alert("current_index :" + current_index+ "max index"+ max_index);
             nextbut.addEventListener("click", function(){
                 if (current_index < max_index){
                     current_index++;
