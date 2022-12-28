@@ -228,9 +228,9 @@ class OcrAPI{
         .then((json) => {
             
             //initialise pagination
-            let table_size = 5; //used to display the number of table rows. Default value is 10
+            let table_size = parseInt(document.getElementById("table_size").value); //used to display the number of table rows. Default value is 10
             let array_lenght = json.length;
-            let max_index = array_lenght / table_size;
+            let max_index = parseInt(array_lenght / table_size);
             if(array_lenght % table_size > 0){
                 max_index++;}
             
@@ -254,7 +254,7 @@ class OcrAPI{
                     ocr.DisplayTableRowHistory(json, start_index, end_index);}
             });
 
-            for(var i=1; i< max_index; i++){
+            for(var i=1; i< max_index+1; i++){
                 $(".index_buttons").append('<button index="'+i+'">'+i+'</button>');
             }
 
@@ -281,6 +281,7 @@ class OcrAPI{
 
             $(".index_buttons").append('<button id="nextbut">Next</button>');
             const nextbut = document.getElementById("nextbut");
+            window.alert("current_index :" + current_index+ "max index"+ max_index);
             nextbut.addEventListener("click", function(){
                 if (current_index < max_index){
                     current_index++;
@@ -317,13 +318,49 @@ class OcrAPI{
             if(end_index > array_lenght){
                 end_index = array_lenght;
             }
-            max_index = array_lenght / table_size;
+            max_index = parseInt(array_lenght / table_size);
             if(array_lenght % table_size > 0){
                 max_index++;}
             $(".index_buttons button").remove();
-            for(var i=1; i< max_index; i++){
+            $(".index_buttons").append('<button id="prevbut">Previous</button>');
+            const prevbut = document.getElementById("prevbut");
+            prevbut.addEventListener("click", ()=>{
+                if (current_index > 1){
+                    current_index--;
+                    //trouver moyen d'en faire une focntion
+                    start_index = ((current_index - 1) * table_size)+1;
+                    end_index = (start_index + table_size) -1;
+                    if(end_index > array_lenght){
+                        end_index = array_lenght;
+                    }
+                    $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
+                    $(".index_buttons button").removeClass('active');
+                    $(".index_buttons button[index='"+current_index+"']").addClass('active');
+            
+                    ocr.DisplayTableRowHistory(json, start_index, end_index);}
+            });
+            for(var i=1; i< max_index+1; i++){
                 $(".index_buttons").append('<button index="'+i+'">'+i+'</button>');
             }
+
+            $(".index_buttons").append('<button id="nextbut">Next</button>');
+            const nextbut = document.getElementById("nextbut");
+            window.alert("current_index :" + current_index+ "max index"+ max_index);
+            nextbut.addEventListener("click", function(){
+                if (current_index < max_index){
+                    current_index++;
+                    //trouver moyen d'en faire une focntion
+                    start_index = ((current_index - 1) * table_size)+1;
+                    end_index = (start_index + table_size) -1;
+                    if(end_index > array_lenght){
+                        end_index = array_lenght;
+                    }
+                    $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
+                    $(".index_buttons button").removeClass('active');
+                    $(".index_buttons button[index='"+current_index+"']").addClass('active');
+            
+                    ocr.DisplayTableRowHistory(json, start_index, end_index);}
+            });
             $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
             $(".index_buttons button").removeClass('active');
             $(".index_buttons button[index='"+current_index+"']").addClass('active');
