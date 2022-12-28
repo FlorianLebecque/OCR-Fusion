@@ -162,13 +162,7 @@ class OcrAPI{
     }
 
     DisplayTableRowHistory(json, start_index, end_index){
-        console.log("fonction focnitonne");
-        // let table_size = 5; //used to display the number of table rows. Default value is 10
-        // let array_lenght = json.length;
-        // let max_index = array_lenght / table_size;
-        // if(array_lenght % table_size > 0){
-        //     max_index++;
-        // }
+
         $("#itemShow tr").remove(); 
         let tab_start = start_index - 1;
         let tab_end = end_index;
@@ -295,175 +289,92 @@ class OcrAPI{
                     ocr.DisplayTableRowHistory(json, start_index, end_index);}
             });
 
-        start_index = ((current_index - 1) * table_size)+1;
-        end_index = (start_index + table_size) -1;
-        if(end_index > array_lenght){
-            end_index = array_lenght;
-        }
-        $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
-        $(".index_buttons button").removeClass('active');
-        $(".index_buttons button[index='"+current_index+"']").addClass('active');
-
-        this.DisplayTableRowHistory(json, start_index, end_index);
-
-        const selectsize = document.getElementById("table_size");
-        selectsize.addEventListener("change", function (){
-            table_size = parseInt($(this).val());
-            current_index = 1;
-            start_index = 1;
+            start_index = ((current_index - 1) * table_size)+1;
             end_index = (start_index + table_size) -1;
             if(end_index > array_lenght){
                 end_index = array_lenght;
             }
-            max_index = parseInt(array_lenght / table_size);
-            if(array_lenght % table_size > 0){
-                max_index++;}
-            $(".index_buttons button").remove();
-            $(".index_buttons").append('<button id="prevbut">Previous</button>');
-            const prevbut = document.getElementById("prevbut");
-            prevbut.addEventListener("click", ()=>{
-                if (current_index > 1){
-                    current_index--;
-                    //trouver moyen d'en faire une focntion
-                    start_index = ((current_index - 1) * table_size)+1;
-                    end_index = (start_index + table_size) -1;
-                    if(end_index > array_lenght){
-                        end_index = array_lenght;
-                    }
-                    $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
-                    $(".index_buttons button").removeClass('active');
-                    $(".index_buttons button[index='"+current_index+"']").addClass('active');
-            
-                    ocr.DisplayTableRowHistory(json, start_index, end_index);}
-            });
-            for(var i=1; i< max_index+1; i++){
-                $(".index_buttons").append('<button id="numbut'+i+'" index="'+i+'">'+i+'</button>');
-                console.log("numbut"+i)
-                document.getElementById("numbut"+i).addEventListener("click", function(e){
-                    var target = e.target;
-                    var parent = target.parentNode;
-                    var index = [].indexOf.call(parent.children, target);
-                    console.log("index:", index);
-                    current_index = index;
-                    start_index = ((current_index - 1) * table_size)+1;
-                    end_index = (start_index + table_size) -1;
-                    if(end_index > array_lenght){
-                        end_index = array_lenght;
-                    }
-                    $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
-                    $(".index_buttons button").removeClass('active');
-                    $(".index_buttons button[index='"+current_index+"']").addClass('active');
-            
-                    ocr.DisplayTableRowHistory(json, start_index, end_index);
-                })
-            }
-
-            $(".index_buttons").append('<button id="nextbut">Next</button>');
-            const nextbut = document.getElementById("nextbut");
-            nextbut.addEventListener("click", function(){
-                if (current_index < max_index){
-                    current_index++;
-                    //trouver moyen d'en faire une focntion
-                    start_index = ((current_index - 1) * table_size)+1;
-                    end_index = (start_index + table_size) -1;
-                    if(end_index > array_lenght){
-                        end_index = array_lenght;
-                    }
-                    $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
-                    $(".index_buttons button").removeClass('active');
-                    $(".index_buttons button[index='"+current_index+"']").addClass('active');
-            
-                    ocr.DisplayTableRowHistory(json, start_index, end_index);}
-            });
             $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
             $(".index_buttons button").removeClass('active');
             $(".index_buttons button[index='"+current_index+"']").addClass('active');
-            ocr.DisplayTableRowHistory(json, start_index, end_index);
-            });
+
+            this.DisplayTableRowHistory(json, start_index, end_index);
+
+            const selectsize = document.getElementById("table_size");
+            selectsize.addEventListener("change", function (){
+                table_size = parseInt($(this).val());
+                current_index = 1;
+                start_index = 1;
+                end_index = (start_index + table_size) -1;
+                if(end_index > array_lenght){
+                    end_index = array_lenght;
+                }
+                max_index = parseInt(array_lenght / table_size);
+                if(array_lenght % table_size > 0){
+                    max_index++;}
+                $(".index_buttons button").remove();
+                $(".index_buttons").append('<button id="prevbut">Previous</button>');
+                const prevbut = document.getElementById("prevbut");
+                prevbut.addEventListener("click", ()=>{
+                    if (current_index > 1){
+                        current_index--;
+                        //trouver moyen d'en faire une focntion
+                        start_index = ((current_index - 1) * table_size)+1;
+                        end_index = (start_index + table_size) -1;
+                        if(end_index > array_lenght){
+                            end_index = array_lenght;
+                        }
+                        $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
+                        $(".index_buttons button").removeClass('active');
+                        $(".index_buttons button[index='"+current_index+"']").addClass('active');
+                
+                        ocr.DisplayTableRowHistory(json, start_index, end_index);}
+                });
+                for(var i=1; i< max_index+1; i++){
+                    $(".index_buttons").append('<button id="numbut'+i+'" index="'+i+'">'+i+'</button>');
+                    console.log("numbut"+i)
+                    document.getElementById("numbut"+i).addEventListener("click", function(e){
+                        var target = e.target;
+                        var parent = target.parentNode;
+                        var index = [].indexOf.call(parent.children, target);
+                        console.log("index:", index);
+                        current_index = index;
+                        start_index = ((current_index - 1) * table_size)+1;
+                        end_index = (start_index + table_size) -1;
+                        if(end_index > array_lenght){
+                            end_index = array_lenght;
+                        }
+                        $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
+                        $(".index_buttons button").removeClass('active');
+                        $(".index_buttons button[index='"+current_index+"']").addClass('active');
+                
+                        ocr.DisplayTableRowHistory(json, start_index, end_index);
+                    })
+                }
+
+                $(".index_buttons").append('<button id="nextbut">Next</button>');
+                const nextbut = document.getElementById("nextbut");
+                nextbut.addEventListener("click", function(){
+                    if (current_index < max_index){
+                        current_index++;
+                        //trouver moyen d'en faire une focntion
+                        start_index = ((current_index - 1) * table_size)+1;
+                        end_index = (start_index + table_size) -1;
+                        if(end_index > array_lenght){
+                            end_index = array_lenght;
+                        }
+                        $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
+                        $(".index_buttons button").removeClass('active');
+                        $(".index_buttons button[index='"+current_index+"']").addClass('active');
+                
+                        ocr.DisplayTableRowHistory(json, start_index, end_index);}
+                });
+                $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
+                $(".index_buttons button").removeClass('active');
+                $(".index_buttons button[index='"+current_index+"']").addClass('active');
+                ocr.DisplayTableRowHistory(json, start_index, end_index);
+                });
         });
 
     };
-
-    // BrowseHistory(){
-    //     let session_name = (document.getElementById("session_name").value == "")? "default": document.getElementById("session_name").value;
-
-    //     let current_index = 1;//commence par la première page
-    //     let start_index = 1;
-    //     let end_index = 0;
-
-    //     let url = new URL('http://127.0.0.1:5154/Ocr');
-    //     document.getElementById("itemShow").innerHTML = "";
-
-    //     let params = {session:session_name};
-    //     url.search = new URLSearchParams(params).toString();
-    //     fetch(url)
-    //     // Converting received data to JSON
-    //     .then((response) => response.json())
-    //     .then((json) => {
-    //         this.DisplayTableRowHistory();
-    //         let table_size = 5; //used to display the number of table rows. Default value is 10
-    //         let array_lenght = json.length;
-    //         let max_index = array_lenght / table_size;
-    //         if(array_lenght % table_size > 0){
-    //             max_index++;
-    //         }
-            
-
-    //         // 3. Loop through each data and add a table row//https://getbootstrap.com/docs/5.0/helpers/text-truncation/
-    //         //json.forEach((data) => {
-    //         for (let i = 0; i<array_lenght; i++){
-    //             let data = json[i];
-
-    //             var tr = document.createElement("tr");
-    //             var tdImageName = document.createElement("td");
-    //             var tdPreview = document.createElement("td");
-    //             var tdAlgo = document.createElement("td");
-    //             var tdView = document.createElement("td");
-    //             var button = document.createElement("button");
-    //             tdImageName.innerHTML = data.imageName;
-    //             tdPreview.innerHTML = data.words;
-    //             tdAlgo.innerHTML = data.algorithm;
-    //             button.innerText = "View";
-    //             tdPreview.className="d-inline-block text-truncate";
-    //             tdPreview.style.maxWidth="350px";
-
-    //             button.addEventListener("click", () => {
-
-    //                 this.builder.InitCardWrapper();
-    //                 this.builder.InitCard(data.algorithm);
-    //                 this.builder.BuildCardHistory(data.algorithm,data);
-    //                 event.preventDefault();//garder le event sinon fonctionne pas !!! 
-    //             });
-    //             tdView.appendChild(button);
-    //             tr.appendChild(tdImageName);
-    //             tr.appendChild(tdPreview);
-    //             tr.appendChild(tdAlgo);
-    //             tr.appendChild(tdView);
-    //             document.getElementById("itemShow").appendChild(tr);
-    //             //Regarder pour le style https://www.youtube.com/watch?v=EsB0ufgLytk&list=PLyb-PdAs945lKNTwnXzmP58kWhk_0Xteg&index=1&t=0s
-
-    //         };
-        
-    //     $(".index_buttons button").remove();
-    //     $(".index_buttons").append('<button>Previous</button>');
-    //     for(var i=1; i<+ max_index; i++){
-    //         $(".index_buttons").append('<button index="'+i+'">'+i+'</button>');
-    //     }
-    //     $(".index_buttons").append('<button>Next</button>');
-
-    //     start_index = ((current_index - 1) * table_size)+1;
-    //     end_index = (start_index + table_size) -1;
-    //     if(end_index > array_lenght){
-    //         end_index = array_lenght;
-    //     }
-
-    //     $(".footer span").text('Showing '+start_index+' to '+end_index+' of '+array_lenght+' entries');
-    //     $(".index_buttons button").removeClass('active');
-    //     $(".index_buttons button[index='"+current_index+"']").addClass('active');
-
-    //     });
-    //     //Finir tuto = https://www.youtube.com/watch?v=xKjz4mv77Ls&list=PLyb-PdAs945lKNTwnXzmP58kWhk_0Xteg&index=1&t=0s
-
-    // };
-
 }
