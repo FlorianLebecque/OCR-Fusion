@@ -180,7 +180,7 @@ class OcrAPI{
             tdPreview.innerHTML = data.words;
             tdAlgo.innerHTML = data.algorithm;
             button.innerText = "View";
-            tdPreview.className="d-inline-block text-truncate";
+            tdPreview.className="text-truncate";
             tdPreview.style.maxWidth="350px";
 
             button.addEventListener("click", () => {
