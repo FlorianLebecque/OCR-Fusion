@@ -28,7 +28,7 @@ namespace OCR_Fusion {
             }
 
 
-            return (IOCRManager) Activator.CreateInstance(algos[input.algo].GetClass());
+            return (IOCRManager)Activator.CreateInstance(algos[input.algo].GetClass());
 
         }
     

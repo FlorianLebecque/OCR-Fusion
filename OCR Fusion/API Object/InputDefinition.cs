@@ -1,5 +1,6 @@
 ﻿
 using OCR_Fusion.API_Object;
+using System.Text.Json.Nodes;
 
 namespace OCR_Fusion {
     public class InputDefinition {
@@ -8,6 +9,8 @@ namespace OCR_Fusion {
         public string imageName { get; set; }
         public string algo { get; set; }
         public List<Vector[]> regions { get; set; }
+
+        public Dictionary<string,string>? parameters { get; set; }
 
     }
 }

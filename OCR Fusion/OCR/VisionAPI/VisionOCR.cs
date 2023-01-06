@@ -5,11 +5,16 @@
     using Grpc.Auth;
     using Google.Apis.Auth.OAuth2;
     using System.Buffers.Text;
+    using System.Text.Json.Nodes;
 
     [Register("VisionOCR", "Vision", "Great recognition of printed and handwritten caracters")]
-        public class VisionOCR : IOCRManager
-    {
+        public class VisionOCR : IOCRManager {
         OutputDefinition output = new();
+
+        public JsonObject GetParameters() {
+            return new JsonObject();
+        }
+
         public OutputDefinition GetText(InputDefinition input)
         {
             VisionText(input.imageName);

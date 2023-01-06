@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail;
 
 
 namespace OCR_Fusion.Controllers {
@@ -14,7 +15,7 @@ namespace OCR_Fusion.Controllers {
             filename = "Uploads/" + filename;
 
             if (!System.IO.File.Exists(filename)) {
-                throw new Exception("File not found");
+                return NotFound();
             }
 
             return File(System.IO.File.ReadAllBytes(filename), "image/"+Utils.GetExtention(filename));

@@ -13,7 +13,7 @@
 
         public static string[] allowedExtention {
             get {
-                string[] ae = { "png", "jepg", "jpg" };
+                string[] ae = { "png", "jpeg", "jpg" };
                 return ae;
             }
         }

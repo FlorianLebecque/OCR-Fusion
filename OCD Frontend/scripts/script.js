@@ -5,13 +5,32 @@ let srcimg;
 
 
 $("#imageWrapper").hide();
+$("#camera-wrapper").hide();
 
+let parametersBuilder = new Paramertersbuilder();
 
-let builder = new Builder();
+let builder = new Builder(parametersBuilder);
 builder.Load();
 
 let ocr = new OcrAPI(builder);
 
+
+function select(card_id){
+    var elementVar = document.getElementById(card_id);
+
+    if(elementVar.hasAttribute("selected")){
+        elementVar.removeAttribute("selected");
+    }else{
+        elementVar.setAttribute("selected", "true");
+    }
+
+}
+
+
+
+
+
+/*
 
 function showPreview(event, iduplaod){ 
     if(event.target.files.length > 0){
@@ -77,3 +96,4 @@ function ShowResults(){
     document.getElementById("preview-is-other").style.display = "block";
     return false;
 }
+*/
