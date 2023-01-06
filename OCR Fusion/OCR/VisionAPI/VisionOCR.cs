@@ -21,7 +21,8 @@
             string credential_path = @"ocrproject-371113-b08aeae56092.json";
             System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", credential_path);
             var client = ImageAnnotatorClient.Create();
-            Image image1 = Image.FromFile(@"Uploads\" + imageName);
+            string pathfile = @"Uploads\" + imageName;
+            Image image1 = Image.FromFile(pathfile);
 
             var response = client.DetectText(image1);
             foreach (var annotation in response)
