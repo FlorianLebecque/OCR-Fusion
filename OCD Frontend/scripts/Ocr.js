@@ -212,7 +212,7 @@ class OcrAPI{
             button.addEventListener("click", () => {
 
                 this.builder.InitCardWrapper();
-                this.builder.InitCard(data.algorithm);
+                this.builder.InitCard(data.algorithm, data.imageName);
                 this.builder.BuildCardHistory(data.algorithm,data);
                 event.preventDefault();//garder le event sinon fonctionne pas !!! 
             });

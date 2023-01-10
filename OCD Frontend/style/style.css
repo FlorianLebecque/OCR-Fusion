@@ -19,16 +19,20 @@ h1 {
 }
 
 .card-panel{
+    background-color: rgb(248, 248, 248);
     background-attachment: fixed;
     background-position: top;
     background-size: contain;
     width: 40vw;
     height: 40vh;
     border-radius: 0.2em;
-    box-shadow: 10px 10px 262px 41px rgba(0,0,0,1) inset;
+    box-shadow: 10px 10px 262px 41px rgb(244, 243, 253) inset;
     cursor: pointer;
     z-index: 0;
     transition: 100ms ease-in-out;
+    border-style: solid;
+    border-width: 0.1px;
+    border-color: rgb(172, 169, 201);
 
 }
 
@@ -47,7 +51,7 @@ h1 {
 
 .t-card{
     padding: 1em;
-    color:white;
+    color:black;
     display: flex;
     flex-direction: column;
     height: inherit;
@@ -57,9 +61,11 @@ h1 {
 
 .t-card textarea{
     background: transparent;
-    color: white;
+    border-color: rgb(172, 169, 201);
+    color: black;
     width: 100%;
     height: inherit;
+    padding: 15px;
 
     resize: none;
 }
