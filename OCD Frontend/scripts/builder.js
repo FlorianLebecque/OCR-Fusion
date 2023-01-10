@@ -110,7 +110,7 @@ class Builder{
         let card = document.getElementById("card-"+algo);
 
         let urlimage = 'http://127.0.0.1:5154/Image/'+imageName;
-        card.style.backgroundImage = "url('"+urlimage+"')";
+        //card.style.backgroundImage = "url('"+urlimage+"')";
 
     }
 

@@ -107,6 +107,32 @@ class OcrAPI{
         let algos = document.getElementsByName("check-algos");
         let session_name = (document.getElementById("session").value == "")? "default": document.getElementById("session").value;
 
+        let img = document.getElementById('imageHolder');
+        let wrapper = document.getElementById("result-wrapper");
+        let inner = ""
+        wrapper.innerHTML = "";
+        if (img.width > img.height){
+            inner += '<div class="row-xl">'
+            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="height:auto; width:100%;"class="img-fluid" id="imageHolder" alt="">'
+            inner += '</div>'
+            inner += '<div class="row">'
+            inner += '  <div id="cards-wrapper"></div>'
+            inner += '</div>'
+            this.imgFormat = 'paysage';
+        }
+        else {
+            inner += '<div class="row">'
+            inner += '<div class="col-xl">'
+            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="height:100%; width:auto;" class="img-fluid" id="imageHolder" alt="">'
+            inner += '</div>'
+            inner += '<div class="col">'
+            inner += '  <div id="cards-wrapper"></div>'
+            inner += '</div>'
+            inner += '</div>'
+            this.imgFormat = 'portrait';
+        }
+        wrapper.innerHTML = inner;
+
         $("#control").hide();
 
         this.builder.InitCardWrapper();
