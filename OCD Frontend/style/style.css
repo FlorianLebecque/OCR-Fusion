@@ -1,5 +1,5 @@
 h1 {
-    color: #0d6efd;
+    color: #274C77;
 }
 
 
@@ -174,4 +174,39 @@ display:none;
 
 #results{
 	display: block;
+}
+
+
+.nav-item{
+    color: #5277ac;
+}
+
+a:link {
+    color: #5277ac;
+
+  }
+  
+  a:visited {
+    color: #5277ac;
+  }
+  
+  a:hover {
+    color: #6482ac;
+  }
+  
+  a:active {
+    color: #5277ac;
+  }
+
+
+.form-check-input:checked {
+    background-color: #5277ac;
+    border-color: #5277ac;
+}
+
+btnUploadIndex
+
+#btnUploadIndex.active, #btnUploadIndex:hover{
+	background: #5277ac;
+    color: white;
 }

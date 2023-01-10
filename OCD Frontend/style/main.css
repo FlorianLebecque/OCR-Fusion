@@ -21,3 +21,14 @@ footer{
     padding: 1em;
     border-radius: 0.2em;
 }
+
+
+.form-check-input:checked {
+    background-color: #5277ac;
+    border-color: #5277ac;
+}
+
+
+#sessionnamebtnhome.active, #sessionnamebtnhome:hover, #sessionnamebtnhome{
+	background: #648b6c;
+}

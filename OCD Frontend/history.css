@@ -20,7 +20,8 @@
 }
 
 tr:hover td{
-	background-color: rgb(196, 228, 247);
+	font-weight: bold;
+    color: #CF7041;
 }
 
 .footer{
@@ -40,7 +41,14 @@ button{
 }
 
 button.active, button:hover{
-	background: linear-gradient(to bottom, rgb(243, 241, 241), rgb(190, 189, 189));
+	background: linear-gradient(to bottom, #CF7041, #CF7041);
+}
+#sessionnamebtn.active, #sessionnamebtn:hover, #sessionnamebtn{
+	background: #648b6c;
+}
+
+#nextbut:hover, #nextbut.active, #prevbut:hover, #prevbut.active, .numbut:hover, .numbut.active{
+	background: linear-gradient(to bottom, rgb(241, 243, 242), rgb(190, 189, 189));
 }
 
 .tab_head_container{
@@ -115,3 +123,100 @@ button.active, button:hover{
 	margin-left : 25px;
 	margin-right: 25px;
 }
+
+body {
+	margin:0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+nav{
+    box-shadow: 10px 10px 37px 0px rgba(0, 0, 0, 0.1);
+    margin-bottom: 4em;
+}
+
+footer{
+	position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#table-warper{
+	display: none;
+}
+
+.form-button input {
+	display:block;
+	width:45%;
+	height:45px;
+	margin-left: 25%;
+	line-height:50px;
+	text-align:center;
+	background:#c2116a;
+	color:#fff;
+	font-size:15px;
+	font-family:"Open Sans",sans-serif;
+	text-transform:Uppercase;
+	font-weight:600;
+	border-radius:5px;
+	cursor:pointer;
+}
+.panel{
+    padding: 1em;
+    border-radius: 0.2em;
+}
+
+#table_size {
+	border-color: rgb(202, 202, 204);
+	padding: 5px;
+	border-radius: 1px;
+	margin: 1px;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color:  #CF7041;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 0px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.nav-item{
+    color: #5277ac;
+}
+
+a:link {
+    color: #5277ac;
+
+  }
+  
+  a:visited {
+    color: #5277ac;
+  }
+  
+  a:hover {
+    color: #6482ac;
+  }
+  
+  a:active {
+    color: #5277ac;
+  }
