@@ -128,12 +128,12 @@ class Builder{
 
         let inner = "";
             inner += '<div class="t-card">';
-            inner += '<h2>Image Name : '+ result.imageName +'</h2>';
-            inner += '<h2>Algorithm : '+ algo +'</h2>';
+            inner += '<h3>Image Name : <br>'+ result.imageName +'</h3>';
+            inner += '<h3>Algorithm : '+ algo +'</h3>';
                     inner += '<textarea id="text-'+algo+'" rows="400" cols="40">';
                             inner += result.words[0];
                         inner += '</textarea>';
-                    inner += '<button class="btn btn-success"><i class="display-6 bi bi-check2"></i></button>';
+                    inner += '<button class="btn btn-success" id="btnsavemodif"><i class="display-6 bi bi-check2"></i></button>';
                 inner += '</div>';
             inner += '</div>';
 

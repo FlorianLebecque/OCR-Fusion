@@ -31,12 +31,14 @@
             </div>
         </nav>
 
+        <main class="container" style="padding: 1em; flex:auto">
+
         <div class="container">
 
             <div class="row panel border mb-3">
                 <div class="input-group">
                     <div class="form-floating" style="width:60vw">
-                        <input type="text" class="form-control" id="session_name" placeholder="Session name">
+                        <input type="text" class="form-control" id="session_name" placeholder="Session name" onkeydown = "if (event.keyCode == 13)document.getElementById('sessionnamebtn').click()" >
                         <label for="session">Session Name</label>
                     </div>
                     <button type="button" class="form-control btn btn-success" value="Process" onclick="ocr.BrowseHistory()" id="sessionnamebtn">
@@ -98,21 +100,17 @@
         </div>
         
         
-
+    </main>
 
         <footer>
             <div class="container text-center">
                 <div class="row"><p>By</p></div>
                 <div class="row">
-
-
-                <p class="fw-light">
-                    Louis-Antoine Devos, Florian and Sarah Liettefti Lens
-                </p>
+                    <p class="fw-light">
+                        Louis-Antoine Devos, Florian Lebecque and Sarah Liettefti Lens
+                    </p>
+                </div>
             </div>
-
-            </div>
-        </div>
         </footer>
 
 

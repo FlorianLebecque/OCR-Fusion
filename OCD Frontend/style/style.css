@@ -36,7 +36,7 @@ h1 {
 
 }
 
-.card-panel[selected="true"]{
+/* .card-panel[selected="true"]{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -46,7 +46,7 @@ h1 {
     height: 80vh;
     background-color: lightgray;
     background-blend-mode: multiply;
-}
+} */
 
 
 .t-card{
@@ -203,8 +203,6 @@ a:link {
     background-color: #5277ac;
     border-color: #5277ac;
 }
-
-btnUploadIndex
 
 #btnUploadIndex.active, #btnUploadIndex:hover{
 	background: #5277ac;
