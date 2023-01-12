@@ -469,10 +469,10 @@ class OcrAPI{
             })
             .then((response) => response.json())
             .then((data) => {
-                alert("Updated");
+                //alert("Updated");
             })
             .catch((error) => {
-                alert("Error");
+                //alert("Error");
             });
 
     };

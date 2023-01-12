@@ -68,7 +68,7 @@ namespace OCR_Fusion {
         public static void Delete<T>(string table, string session) {
             db.Delete<T>(table, session);
         }
-        public static Byte[] CropImage(string filepath, Vector[] cropArea)
+        public static Byte[] CropImageBytes(string filepath, Vector[] cropArea)
         {
             Bitmap bmpImage = new Bitmap(filepath);
             System.Drawing.Image img = System.Drawing.Image.FromFile(filepath);
@@ -79,11 +79,30 @@ namespace OCR_Fusion {
             int inputWidth = x2 - x1;
             int inputHeight = y2 - y1;
             Rectangle cropRectangle = new Rectangle(x1, y1, inputWidth, inputHeight);
-            var bytemap = bmpImage.Clone(cropRectangle, bmpImage.PixelFormat);
-            bmpImage.Dispose();
-            img.Dispose();
+            var bitmap = bmpImage.Clone(cropRectangle, bmpImage.PixelFormat);
             ImageConverter converter = new ImageConverter();
-            return (byte[])converter.ConvertTo(bytemap, typeof(byte[]));
+            return (byte[])converter.ConvertTo(bitmap, typeof(byte[]));
+        }
+
+        public static Stream CropOrNotImageStream(string filepath, InputDefinition input)
+        {
+
+            if (input.regions.Count != 0)
+            {
+                Byte[] cropImage = Utils.CropImageBytes(filepath, input.regions[0]);
+                MemoryStream imageStream = new MemoryStream(cropImage);
+                return imageStream;
+            }
+            else
+            {
+                Stream imageStream = ToStream(filepath);
+                return imageStream;
+            } 
+        }
+        public static Stream ToStream(string imagePath)
+        {
+            Stream stream = new FileStream(imagePath, FileMode.Open);
+            return stream;
         }
 
     }

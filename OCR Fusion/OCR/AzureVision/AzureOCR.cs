@@ -23,7 +23,7 @@
         public OutputDefinition GetText(InputDefinition input)
         {
             string imageFilePath = @"Uploads\" + input.imageName;
-            ReadFileUrl(client, imageFilePath, output).Wait();
+            ReadFileUrl(client, imageFilePath, input, output).Wait();
             output.imageName = input.imageName;
             return output;
         }
@@ -40,10 +40,9 @@
             return client;
         }
 
-        public static async Task ReadFileUrl(ComputerVisionClient client, string imagepath, OutputDefinition output)
+        public static async Task ReadFileUrl(ComputerVisionClient client, string imagepath, InputDefinition input, OutputDefinition output)
         {
-            // Read text from URL
-            Stream imageStream = ToStream(imagepath);
+            Stream imageStream = Utils.CropOrNotImageStream(imagepath, input);
             var textHeaders = await client.ReadInStreamAsync(imageStream);
 
             // After the request, get the operation location (operation ID)
@@ -77,11 +76,6 @@
                 }
             }
             output.words.Add(outputString);
-        }
-        public static Stream ToStream(string imagePath)
-        {
-            Stream stream = new FileStream(imagePath, FileMode.Open);
-            return stream;
         }
 
     }

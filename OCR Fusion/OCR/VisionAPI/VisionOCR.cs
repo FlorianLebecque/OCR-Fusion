@@ -100,7 +100,7 @@
             }
             if (input.regions.Count != 0)
             {
-                Byte[] cropImage = Utils.CropImage(pathfile, input.regions[0]);
+                Byte[] cropImage = Utils.CropImageBytes(pathfile, input.regions[0]);
                 image1 = Google.Cloud.Vision.V1.Image.FromBytes(cropImage);
             }
             if (input.parameters["document"] == "true")
@@ -111,6 +111,7 @@
             else
             {
                 var response = client.DetectText(image1, context);
+                
                 foreach (var annotation in response)
                 {
                     if (annotation.Description != null)
