@@ -74,14 +74,16 @@ class Builder{
         card.innerHTML = "";
 
         let inner = "";
-        
+
+        let text_area_id = 'text-'+algo;
         
         inner += '  <div class="t-card">';
             inner += '<h2>'+ this.GetAlgoName(algo) +'</h2>';
-                        inner += '<textarea id="text-'+algo+'">';
+                        inner += '<input hidden type="text" value="'+result.id+'">';
+                        inner += '<textarea id="'+text_area_id+'">';
                             inner += result.words[0];
                         inner += '</textarea>';
-                    inner += '<button class="btn btn-success"><i class="display-6 bi bi-check2"></i></button>';
+                    inner += '<button class="btn btn-success" onclick="ocr.Update(\''+result.id+'\',\''+text_area_id+'\')"><i class="display-6 bi bi-check2"></i></button>';
                 inner += '</div>';
             inner += '</div>';
         
