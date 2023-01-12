@@ -73,7 +73,7 @@
                 Byte[] cropImage = Utils.CropImage(pathfile, input.regions[0]);
                 image1 = Google.Cloud.Vision.V1.Image.FromBytes(cropImage);
             }
-            if (input.parameters["language"] == "on")
+            if (input.parameters["document"] == "on")
             {
                 var response = client.DetectDocumentText(image1);
                 foreach (var page in response.Pages)
