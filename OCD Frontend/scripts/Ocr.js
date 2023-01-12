@@ -117,16 +117,7 @@ class OcrAPI{
         let wrapper = document.getElementById("result-wrapper");
         let inner = ""
         wrapper.innerHTML = "";
-        if (img.width > img.height){
-            inner += '<div class="col-xl-12 mb-3">'
-            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="border-radius:0.5em;height:auto; width:100%;"class="img-fluid" id="imageHolder" alt="">'
-            inner += '</div>'
-            inner += '<div class="col-xl-12">'
-            inner += '  <div id="cards-wrapper"></div>'
-            inner += '</div>'
-            this.imgFormat = 'paysage';
-        }
-        else {
+        if (img.width < img.height){
             inner += '<div class="row">'
             inner += '<div class="col-md-4 col-xs-12">'
             inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="border-radius:0.5em;height:100%; width:auto;" class="img-fluid" id="imageHolder" alt="">'
@@ -136,6 +127,15 @@ class OcrAPI{
             inner += '</div>'
             inner += '</div>'
             this.imgFormat = 'portrait';
+        }
+        else {
+            inner += '<div class="col-xl-12 mb-3">'
+            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="border-radius:0.5em;height:auto; width:100%;"class="img-fluid" id="imageHolder" alt="">'
+            inner += '</div>'
+            inner += '<div class="col-xl-12">'
+            inner += '  <div id="cards-wrapper"></div>'
+            inner += '</div>'
+            this.imgFormat = 'paysage';
         }
         wrapper.innerHTML = inner;
 
