@@ -201,6 +201,7 @@
                     int inputHeight = y2 - y1;
                     var ContentArea = new CropRectangle(x: x1, y: y1, width: inputWidth, height: inputHeight);
                     ironInput.AddImage(pathfile, ContentArea);
+                    img.Dispose();
                 }
                 else
                 {

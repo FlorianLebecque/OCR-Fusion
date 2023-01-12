@@ -76,6 +76,7 @@
                 }
             }
             output.words.Add(outputString);
+            imageStream.Dispose();
         }
 
     }

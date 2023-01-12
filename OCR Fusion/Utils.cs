@@ -50,6 +50,7 @@ namespace OCR_Fusion {
 
             using (var fileStream = new FileStream(GetImagePath(image.FileName), FileMode.Create)) {
                 image.CopyTo(fileStream);
+                fileStream.Dispose();
             }
         }
 
@@ -81,7 +82,10 @@ namespace OCR_Fusion {
             Rectangle cropRectangle = new Rectangle(x1, y1, inputWidth, inputHeight);
             var bitmap = bmpImage.Clone(cropRectangle, bmpImage.PixelFormat);
             ImageConverter converter = new ImageConverter();
-            return (byte[])converter.ConvertTo(bitmap, typeof(byte[]));
+            Byte[] imageBytesArray = (byte[])converter.ConvertTo(bitmap, typeof(byte[]));
+            img.Dispose();
+            bitmap.Dispose();
+            return imageBytesArray;
         }
 
         public static Stream CropOrNotImageStream(string filepath, InputDefinition input)
