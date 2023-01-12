@@ -145,7 +145,4 @@ class Builder{
 
     }
 
-    Download(json, imageName)
-
-
 }
