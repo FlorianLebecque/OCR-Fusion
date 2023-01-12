@@ -16,7 +16,7 @@
     using static Google.Protobuf.Reflection.GeneratedCodeInfo.Types;
     using Google.Protobuf.Collections;
 
-    [Register("VisionOCR", "Google Cloud Vision", "Great recognition of printed and handwritten caracters")]
+    [Register("VisionOCR", "Google Cloud Vision", "Great for printed and handwritten text")]
         public class VisionOCR : IOCRManager {
         OutputDefinition output = new();
 

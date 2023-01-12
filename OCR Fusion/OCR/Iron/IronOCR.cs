@@ -6,7 +6,7 @@
     using OCR_Fusion.API_Object;
     using System.Text.Json.Nodes;
 
-    [Register("IronOCR","IronOCR (Tesseract)","Great recognition of printed caracters")]
+    [Register("IronOCR","IronOCR (Tesseract)","Great for printed text")]
     public class IronOCR : IOCRManager {
         OutputDefinition output = new();
 
