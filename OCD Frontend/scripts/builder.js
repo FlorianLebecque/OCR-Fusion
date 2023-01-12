@@ -1,6 +1,3 @@
-
-
-
 class Builder{
 
     constructor(_paramertersbuilder) {
@@ -74,14 +71,17 @@ class Builder{
         card.innerHTML = "";
 
         let inner = "";
-        
+
+        let text_area_id = 'text-'+algo;
         
         inner += '  <div class="t-card">';
             inner += '<h2>'+ this.GetAlgoName(algo) +'</h2>';
-                        inner += '<textarea id="text-'+algo+'">';
+                        inner += '<input hidden type="text" value="'+result.id+'">';
+                        inner += '<textarea id="'+text_area_id+'">';
                             inner += result.words[0];
                         inner += '</textarea>';
-                    inner += '<button class="btn btn-success"><i class="display-6 bi bi-check2"></i></button>';
+                    inner += '<button class="btn btn-success" onclick="ocr.Update(\''+result.id+'\',\''+text_area_id+'\')" style="background: #648b6c;"><i class="display-6 bi bi-check2"></i></button>';
+                    inner += '<button class="btn btn-success" id="btndownload" onclick="ocr.Download(\''+text_area_id+'\',\''+result.imageName+'\')"><b>Export result</b></button>';
                 inner += '</div>';
             inner += '</div>';
         
@@ -110,46 +110,37 @@ class Builder{
         let card = document.getElementById("card-"+algo);
 
         let urlimage = 'http://127.0.0.1:5154/Image/'+imageName;
-        card.style.backgroundImage = "url('"+urlimage+"')";
+        //card.style.backgroundImage = "url('"+urlimage+"')";
 
     }
 
     BuildCardHistory(algo,result){
+        let imageHold = document.getElementById("imageHolder");
+
+        imageHold.innerHTML =`<img src="http://127.0.0.1:5154/Image/${result.imageName}" style="height:auto; width:40vw;"class="img-fluid" id="imageHolder1" alt="">`;
+
         let card = document.getElementById("card-"+algo);
-        let urlimage = 'http://127.0.0.1:5154/Image/'+result.imageName;
+        let text_area_id = 'text-'+algo;
 
         card.innerHTML = "";
 
         let inner = "";
-        
-            inner += '<div>';
-                inner += '<div class="card-body">';
-                    inner += '<h4 class="card-title mb-3">Image Name : '+ result.imageName +'</h4>';
-                        inner += '<h5 class="card-title mb-3">Algorithm : '+ algo +'</h5>';
-                        inner += '<link href="history.css" rel="stylesheet">';
-                            inner += '<div class="preview">';
-                                //inner += '<p>'+urlimage+'</p>'
-                                //inner += '<img src='+urlimage+'>';
-                                inner += `<img src="http://127.0.0.1:5154/Image/${result.imageName}">`;
-                                //inner += '<img src="http://127.0.0.1:5154/Image/"'+result.imageName+'"">';
-                            inner += '</div>';
-
-                        inner += '<div class="form-floating mb-3">';
-                            inner += '<textarea class="form-control" placeholder="Leave a comment here" id="text-'+algo+'" style="height: 30vh">';
-                                inner += result.words[0];
-                            inner += '</textarea>';
-                            inner += '<label for="text-'+algo+'">Words</label>';
-                        inner += '</div>';
-
-                    inner += '<input type="button" value="Save Changes" class="btn btn-primary">';
+            inner += '<div class="t-card">';
+                inner += '<h3>Image Name : <br>'+ result.imageName +'</h3>';
+                inner += '<h3>Algorithm : '+ algo +'</h3>';
+                inner += '<input hidden type="text" value="'+result.id+'">';
+                    inner += '<textarea id="'+text_area_id+'" rows="400" cols="40">';
+                            inner += result.words[0];
+                        inner += '</textarea>';
+                    inner += '<button class="btn btn-success" id="btnsavemodif" onclick="ocr.Update(\''+result.id+'\',\''+text_area_id+'\')"><i class="display-6 bi bi-check2"></i></button>';
+                    inner += '<button class="btn btn-success" id="btndownload" onclick="ocr.Download(\''+text_area_id+'\',\''+result.imageName+'\')"><b>Export result</b></button>';
                 inner += '</div>';
             inner += '</div>';
+
+
         
         card.innerHTML = inner;
 
     }
-
-
-
 
 }

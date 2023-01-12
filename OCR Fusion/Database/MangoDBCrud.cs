@@ -16,9 +16,6 @@ namespace OCR_Fusion.Database {
             var client = new MongoClient(settings);
             db = client.GetDatabase(database_name);
 
-
-
-
         }
 
         public void Delete<T>(string table, string session) {
@@ -41,8 +38,12 @@ namespace OCR_Fusion.Database {
 
         }
 
-        public void Update<T>(string table, T value) {
-            throw new NotImplementedException();
+        public void Update<T>(string table,Guid id, T value) {
+
+            var collection = db.GetCollection<T>(table);
+
+            var result = collection.ReplaceOne(new BsonDocument("_id", id),value,new ReplaceOptions { IsUpsert = true});
+
         }
     }
 }

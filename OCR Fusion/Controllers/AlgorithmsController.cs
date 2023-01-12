@@ -8,7 +8,7 @@ namespace OCR_Fusion.Controllers {
     public class AlgorithmsController : ControllerBase {
 
         [HttpGet]
-        public List<Algorithms> Index() {
+        public List<Algorithms> Get() {
 
             return Multiplex.GetAlgos();
         }

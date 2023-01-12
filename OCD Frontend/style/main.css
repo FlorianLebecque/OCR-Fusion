@@ -21,3 +21,24 @@ footer{
     padding: 1em;
     border-radius: 0.2em;
 }
+
+
+.form-check-input:checked {
+    background-color: #5277ac;
+    border-color: #5277ac;
+}
+
+
+#sessionnamebtnhome.active, #sessionnamebtnhome:hover, #sessionnamebtnhome{
+	background: #648b6c;
+}
+
+#btndownload{
+    background: #B4BFC5;
+    border-color: #B4BFC5;
+    font-size:17px;
+	font-family:"Open Sans",sans-serif;
+    margin-left: 2px;
+    margin-right: 2px;
+    height: 120px;
+}

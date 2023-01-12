@@ -14,9 +14,8 @@ class OcrAPI{
 
         this.filename = files[0].name;
         let filename = this.filename;
-        data.append('file', files[0]);
+        data.append('file', files[0]);      
 
-        imageWrapper.html('<div class="col align-self-center"><div class="lds-dual-ring"></div></div>');
         imageWrapper.show(100);
 
         
@@ -29,7 +28,11 @@ class OcrAPI{
             contentType: false,
             statusCode:{
                 200: function(image){
-                    imageWrapper.html('<img src="http://127.0.0.1:5154/Image/'+filename+'" id="imageHolder" alt="">');
+                    $("#loader").hide();
+                    setTimeout(()=>{
+                        GetyImg('http://127.0.0.1:5154/Image/'+filename);
+
+                    },150);
                 }
             }
             
@@ -107,6 +110,35 @@ class OcrAPI{
         let algos = document.getElementsByName("check-algos");
         let session_name = (document.getElementById("session").value == "")? "default": document.getElementById("session").value;
 
+        let img = {
+            width : Utils.elementWidth(p5Div),
+            height : Utils.elementHeight(p5Div)
+        };
+        let wrapper = document.getElementById("result-wrapper");
+        let inner = ""
+        wrapper.innerHTML = "";
+        if (img.width > img.height){
+            inner += '<div class="col-xl-12 mb-3">'
+            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="border-radius:0.5em;height:auto; width:100%;"class="img-fluid" id="imageHolder" alt="">'
+            inner += '</div>'
+            inner += '<div class="col-xl-12">'
+            inner += '  <div id="cards-wrapper"></div>'
+            inner += '</div>'
+            this.imgFormat = 'paysage';
+        }
+        else {
+            inner += '<div class="row">'
+            inner += '<div class="col-md-4 col-xs-12">'
+            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="border-radius:0.5em;height:100%; width:auto;" class="img-fluid" id="imageHolder" alt="">'
+            inner += '</div>'
+            inner += '<div class="col-md-8 col-xs-12">'
+            inner += '  <div id="cards-wrapper"></div>'
+            inner += '</div>'
+            inner += '</div>'
+            this.imgFormat = 'portrait';
+        }
+        wrapper.innerHTML = inner;
+
         $("#control").hide();
 
         this.builder.InitCardWrapper();
@@ -134,13 +166,18 @@ class OcrAPI{
 
             this.builder.InitCard(ocr_algo,this.filename);
 
+            let selected_regions = [];
+            if((p1n)&&(p2n)){                
+                                
+                selected_regions = [[p1n,p2n]];
+            }
 
             let payload = {
                 session : session_name,
                 imageName : this.filename,
                 algo : ocr_algo,
                 parameters : parameters_obj,
-                regions : []
+                regions : selected_regions
             }
             
             fetch('http://127.0.0.1:5154/Ocr', {
@@ -180,13 +217,17 @@ class OcrAPI{
             tdPreview.innerHTML = data.words;
             tdAlgo.innerHTML = data.algorithm;
             button.innerText = "View";
+            button.className = "form-control btn btn-success";
+            button.style.backgroundColor = "#CF7041";
+            button.style.border = "0px";
             tdPreview.className="text-truncate";
             tdPreview.style.maxWidth="350px";
 
             button.addEventListener("click", () => {
+                console.log(data);
 
                 this.builder.InitCardWrapper();
-                this.builder.InitCard(data.algorithm);
+                this.builder.InitCard(data.algorithm, data.imageName);
                 this.builder.BuildCardHistory(data.algorithm,data);
                 event.preventDefault();//garder le event sinon fonctionne pas !!! 
             });
@@ -206,6 +247,7 @@ class OcrAPI{
         let current_index = 1;//commence par la première page
         let start_index = 1;
         let end_index = 0;
+        document.getElementById("table-warper").style.display = "block"
 
         //initialise session
 
@@ -249,7 +291,7 @@ class OcrAPI{
             });
 
             for(var i=1; i< max_index+1; i++){
-                $(".index_buttons").append('<button id="numbut'+i+'" index="'+i+'">'+i+'</button>');
+                $(".index_buttons").append('<button class="numbut" id="numbut'+i+'" index="'+i+'">'+i+'</button>');
                 console.log("numbut"+i)
                 document.getElementById("numbut"+i).addEventListener("click", function(e){
                     var target = e.target;
@@ -331,7 +373,7 @@ class OcrAPI{
                         ocr.DisplayTableRowHistory(json, start_index, end_index);}
                 });
                 for(var i=1; i< max_index+1; i++){
-                    $(".index_buttons").append('<button id="numbut'+i+'" index="'+i+'">'+i+'</button>');
+                    $(".index_buttons").append('<button class="numbut" id="numbut'+i+'" index="'+i+'">'+i+'</button>');
                     console.log("numbut"+i)
                     document.getElementById("numbut"+i).addEventListener("click", function(e){
                         var target = e.target;
@@ -376,5 +418,43 @@ class OcrAPI{
                 });
         });
 
+    };
+
+    Update(id,text_area_id){
+
+
+        let update_definition = {
+            Id:id,
+            words: document.getElementById(text_area_id).value
+        }
+
+        console.log(update_definition);
+
+        fetch('http://127.0.0.1:5154/Ocr', {
+                method: 'PATCH', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(update_definition),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                alert("Updated");
+            })
+            .catch((error) => {
+                alert("Error");
+            });
+
+    };
+
+    //Download(json, imageName){
+    Download(areaid, img){
+        let text = document.getElementById(areaid).value;
+        let data = "text/json;charset=utf-8," + text;
+        let a = document.createElement('a');
+        a.href = 'data:' + data;
+        a.download = img +'.txt';
+        a.innerHTML = 'download JSON';
+        a.click();
     };
 }

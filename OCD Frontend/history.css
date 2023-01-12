@@ -5,6 +5,9 @@
 	justify-content:center;
   
 }
+h3, textarea{
+	font-family:"Open Sans",sans-serif;
+}
 
 .preview {
 	width:350px;
@@ -20,15 +23,34 @@
 }
 
 tr:hover td{
-	background-color: rgb(196, 228, 247);
+	font-weight: bold;
+    color: #CF7041;
 }
 
 .footer{
 	margin-top: 25px;
-	font-size: 20px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+    font-size:15px;
+	font-family:"Open Sans",sans-serif;
+    border:0px;
+    border-radius: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+span{
+    width: 300px;
+}
+main{
+    margin-bottom: 100px;
+}
+footer{
+	position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: block;
+    margin-top: 50px;
 }
 
 button{
@@ -40,10 +62,201 @@ button{
 }
 
 button.active, button:hover{
-	background: linear-gradient(to bottom, rgb(243, 241, 241), rgb(190, 189, 189));
+	background: linear-gradient(to bottom, #CF7041, #CF7041);
+}
+#sessionnamebtn.active, #sessionnamebtn:hover, #sessionnamebtn{
+	background: #648b6c;
+}
+
+#btnsavemodif{
+    background: #648b6c;
+}
+
+#btndownload{
+    background: #B4BFC5;
+    border-color: #B4BFC5;
+    font-size:17px;
+	font-family:"Open Sans",sans-serif;
+    margin-left: 2px;
+    margin-right: 2px;
+    height: 120px;
+}
+
+#nextbut:hover, #nextbut.active, #prevbut:hover, #prevbut.active, .numbut:hover, .numbut.active{
+	background: linear-gradient(to bottom,#CF7041, #c26638);
+    color: white;
+}
+#nextbut, #prevbut, .numbut{
+	font-size:15px;
+	font-family:"Open Sans",sans-serif;
+    border:0px;
+    border-radius: 2px;
+    background-color: #faf0eb;
+    margin-left: 2px;
+    margin-right: 2px;
+
 }
 
 .tab_head_container{
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
+
+#cards-wrapper{
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.card-panel{
+    background-color: rgb(255, 255, 255);
+    background-attachment: fixed;
+    background-position: top;
+    background-size: contain;
+    width: 40vw;
+    height: 60vh;
+    border-radius: 0.2em;
+    box-shadow: 10px 10px 262px 41px rgb(244, 243, 253) inset;
+    cursor: pointer;
+    z-index: 0;
+    transition: 100ms ease-in-out;
+    border-style: solid;
+    border-width: 0.1px;
+    border-color: rgb(208, 208, 212);
+
+}
+
+/* .card-panel[selected="true"]{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50% ;
+    z-index: 1;
+    width: 90vw;
+    height: 80vh;
+    background-color: lightgray;
+    background-blend-mode: multiply;
+} */
+
+
+.t-card{
+    padding: 1em;
+    color:black;
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    gap: 1em;
+    justify-content: space-between;
+}
+
+.t-card textarea{
+    background: transparent;
+    border-color: rgb(208, 208, 212);
+    color: black;
+    width: 100%;
+    height: inherit;
+    padding: 15px;
+    resize: vertical;
+}
+
+.card{
+	margin-left : 25px;
+	margin-right: 25px;
+}
+
+body {
+	margin:0px;
+    min-height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative
+}
+
+nav{
+    box-shadow: 10px 10px 37px 0px rgba(0, 0, 0, 0.1);
+    margin-bottom: 4em;
+}
+
+#table-warper{
+	display: none;
+}
+
+.form-button input {
+	display:block;
+	width:45%;
+	height:45px;
+	margin-left: 25%;
+	line-height:50px;
+	text-align:center;
+	background:#c2116a;
+	color:#fff;
+	font-size:15px;
+	font-family:"Open Sans",sans-serif;
+	text-transform:Uppercase;
+	font-weight:600;
+	border-radius:5px;
+	cursor:pointer;
+}
+.panel{
+    padding: 1em;
+    border-radius: 0.2em;
+}
+
+#table_size {
+	border-color: rgb(202, 202, 204);
+	padding: 5px;
+	border-radius: 1px;
+	margin: 1px;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color:  #CF7041;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 0px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.nav-item{
+    color: #5277ac;
+}
+
+a:link {
+    color: #5277ac;
+
+  }
+  
+  a:visited {
+    color: #5277ac;
+  }
+  
+  a:hover {
+    color: #6482ac;
+  }
+  
+  a:active {
+    color: #5277ac;
+  }

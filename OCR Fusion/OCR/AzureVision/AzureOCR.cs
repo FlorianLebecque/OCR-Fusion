@@ -154,6 +154,10 @@
         //    }
         //}
 
+        public JsonObject GetParameters() {
+            return new JsonObject();
+        }
+
         //public static ComputerVisionClient Authenticate(string endpoint, string key)
         //{
         //    ComputerVisionClient client =
