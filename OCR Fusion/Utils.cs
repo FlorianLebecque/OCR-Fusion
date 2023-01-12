@@ -48,8 +48,8 @@
             db.Insert<T>(table,value);
         }
 
-        public static void Update<T>(string table, T value) {
-            db.Update<T>(table, value);
+        public static void Update<T>(string table, Guid id ,T value) {
+            db.Update<T>(table, id, value);
         }
 
         public static List<T> Gets<T>(string table, string session) {
