@@ -13,35 +13,70 @@
 
             JsonObject parameters = new();
 
-            JsonObject lang = new() {
+            JsonObject scale = new() {
                 { "type"        , "text" },
-                { "title"       , "Lang" },
-                { "description" , "Let defined witch lang the algorithm will use" },
-                { "default"     , "fr" }
+                { "title"       , "Scale" },
+                { "description" , "Scale factor" },
+                { "default"     , "1" }
+            };
+            JsonObject rotate = new() {
+                { "type"        , "text" },
+                { "title"       , "Rotate" },
+                { "description" , "Spefic rotation degrees" },
+                { "default"     , "0" }
             };
 
-            JsonObject fine = new() {
+            JsonObject lowqual = new() {
                 { "type"        , "check" },
-                { "title"       , "Fine" },
-                { "description" , "Let defined witch lang the algorithm will use" }
+                { "title"       , "Low quality scan" },
+                { "description" , "Straighten the image" }
+            };
+            JsonObject fastMod = new() {
+                { "type"        , "check" },
+                { "title"       , "Fast scan" },
+                { "description" , "Performance Tuning for Speed" }
+            };
+            JsonObject denoise = new() {
+                { "type"        , "check" },
+                { "title"       , "Denoise" },
+                { "description" , "Remove digital noise" }
+            };
+            JsonObject binarize = new() {
+                { "type"        , "check" },
+                { "title"       , "Binarize" },
+                { "description" , "Turn all pixels black and white" }
+            };
+            JsonObject invert = new() {
+                { "type"        , "check" },
+                { "title"       , "Invert" },
+                { "description" , "Invert all the colors" }
             };
 
-            JsonObject country = new();
-
-            Dictionary<string,string> options = new(){
+            JsonObject language = new();
+            Dictionary<string, string> options = new(){
+                {"none", "None"},
+                {"en", "English"},
                 {"fr", "French"},
                 {"nl", "Dutch"},
-                {"en", "English"} 
+                {"de", "German"},
+                {"it", "Italian"},
+                {"pt", "Portuguese"},
+                {"es", "Spanish"},
             };
 
-            country.Add("type"          , "select");
-            country.Add("title"         , "Country");
-            country.Add("description"   , "Let defined witch lang the algorithm will use");
-            country.Add("options"       , options.ToJson());
+            language.Add("type", "select");
+            language.Add("title", "Language");
+            language.Add("description", "Language used for text recognition");
+            language.Add("options", options.ToJson());
 
-            parameters.Add("lang"   ,lang);
-            parameters.Add("fine"   ,fine);
-            parameters.Add("country", country);
+            parameters.Add("lang" , language);
+            parameters.Add("scale", scale);
+            parameters.Add("rotate", rotate);
+            parameters.Add("lowqual", lowqual);
+            parameters.Add("denoise", denoise);
+            parameters.Add("binarize", binarize);
+            parameters.Add("invert", invert);
+            parameters.Add("fastMod", fastMod);
 
             return parameters;
         }
