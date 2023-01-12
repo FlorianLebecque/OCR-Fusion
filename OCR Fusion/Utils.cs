@@ -1,4 +1,9 @@
-﻿namespace OCR_Fusion {
+﻿using Google.Cloud.Vision.V1;
+using System.Drawing;
+using OCR_Fusion.API_Object;
+using System.Text.Json.Nodes;
+
+namespace OCR_Fusion {
     public class Utils {
 
         private static IDBCrud db;
@@ -63,5 +68,21 @@
         public static void Delete<T>(string table, string session) {
             db.Delete<T>(table, session);
         }
+        public static Byte[] CropImage(string filepath, Vector[] cropArea)
+        {
+            Bitmap bmpImage = new Bitmap(filepath);
+            System.Drawing.Image img = System.Drawing.Image.FromFile(filepath);
+            int x1 = (int)(cropArea[0].x * img.Width);
+            int y1 = (int)(cropArea[0].y * img.Height);
+            int x2 = (int)(cropArea[1].x * img.Width);
+            int y2 = (int)(cropArea[1].y * img.Height);
+            int inputWidth = x2 - x1;
+            int inputHeight = y2 - y1;
+            Rectangle cropRectangle = new Rectangle(x1, y1, inputWidth, inputHeight);
+            var bytemap = bmpImage.Clone(cropRectangle, bmpImage.PixelFormat);
+            ImageConverter converter = new ImageConverter();
+            return (byte[])converter.ConvertTo(bytemap, typeof(byte[]));
+        }
+
     }
 }

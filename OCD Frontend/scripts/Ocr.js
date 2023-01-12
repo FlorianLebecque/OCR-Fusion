@@ -11,29 +11,57 @@ class OcrAPI{
 
         let data = new FormData(),
             files = document.getElementById("imageUpload").files;
+        
+            this.filename = files[0].name;
+            let filename = this.filename;
+            data.append('file', files[0]);  
 
-        this.filename = files[0].name;
-        let filename = this.filename;
-        data.append('file', files[0]);
-
-        imageWrapper.html('<div class="col align-self-center"><div class="lds-dual-ring"></div></div>');
-        imageWrapper.show(100);
+            imageWrapper.show(100);
 
         
-        $.ajax({
-            url: "http://127.0.0.1:5154/Ocr",
-            type: 'put',
-            dataType: 'json',
-            data: data,
-            processData: false,
-            contentType: false,
-            statusCode:{
-                200: function(image){
-                    imageWrapper.html('<img src="http://127.0.0.1:5154/Image/'+filename+'" id="imageHolder" alt="">');
+            $.ajax({
+                url: "http://127.0.0.1:5154/Ocr",
+                type: 'put',
+                dataType: 'json',
+                data: data,
+                processData: false,
+                contentType: false,
+                statusCode:{
+                    200: function(image){
+                        $("#loader").hide();
+                        setTimeout(()=>{
+                            GetyImg('http://127.0.0.1:5154/Image/'+image.responseText);
+                        },150);
+                    }
                 }
-            }
-            
-        });
+                
+            });
+        
+
+        // this.filename = files[0].name;
+        // let filename = this.filename;
+        // data.append('file', files[0]);      
+
+        // imageWrapper.show(100);
+
+        
+        // $.ajax({
+        //     url: "http://127.0.0.1:5154/Ocr",
+        //     type: 'put',
+        //     dataType: 'json',
+        //     data: data,
+        //     processData: false,
+        //     contentType: false,
+        //     statusCode:{
+        //         200: function(image){
+        //             $("#loader").hide();
+        //             setTimeout(()=>{
+        //                 GetyImg('http://127.0.0.1:5154/Image/'+filename);
+
+        //             },150);
+        //         }
+        //     }
+        // });
     };
 
     async OpenCamera(){
@@ -107,29 +135,32 @@ class OcrAPI{
         let algos = document.getElementsByName("check-algos");
         let session_name = (document.getElementById("session").value == "")? "default": document.getElementById("session").value;
 
-        let img = document.getElementById('imageHolder');
+        let img = {
+            width : Utils.elementWidth(p5Div),
+            height : Utils.elementHeight(p5Div)
+        };
         let wrapper = document.getElementById("result-wrapper");
         let inner = ""
         wrapper.innerHTML = "";
-        if (img.width > img.height){
-            inner += '<div class="row-xl">'
-            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="height:auto; width:100%;"class="img-fluid" id="imageHolder" alt="">'
-            inner += '</div>'
+        if (img.width < img.height){
             inner += '<div class="row">'
-            inner += '  <div id="cards-wrapper"></div>'
+            inner += '<div class="col-md-4 col-xs-12">'
+            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="border-radius:0.5em;height:100%; width:auto;" class="img-fluid" id="imageHolder" alt="">'
             inner += '</div>'
-            this.imgFormat = 'paysage';
-        }
-        else {
-            inner += '<div class="row">'
-            inner += '<div class="col-xl">'
-            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="height:100%; width:auto;" class="img-fluid" id="imageHolder" alt="">'
-            inner += '</div>'
-            inner += '<div class="col">'
+            inner += '<div class="col-md-8 col-xs-12">'
             inner += '  <div id="cards-wrapper"></div>'
             inner += '</div>'
             inner += '</div>'
             this.imgFormat = 'portrait';
+        }
+        else {
+            inner += '<div class="col-xl-12 mb-3">'
+            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="border-radius:0.5em;height:auto; width:100%;"class="img-fluid" id="imageHolder" alt="">'
+            inner += '</div>'
+            inner += '<div class="col-xl-12">'
+            inner += '  <div id="cards-wrapper"></div>'
+            inner += '</div>'
+            this.imgFormat = 'paysage';
         }
         wrapper.innerHTML = inner;
 
@@ -154,19 +185,29 @@ class OcrAPI{
                 let key = input.id.split('_')[1];
                 let val = input.value;
 
+                if(input.type == "checkbox"){
+                    val = str(input.checked);
+                }
+
+
                 parameters_obj[key] = val;
 
             });
 
             this.builder.InitCard(ocr_algo,this.filename);
 
+            let selected_regions = [];
+            if((p1n)&&(p2n)){                
+                                
+                selected_regions = [[p1n,p2n]];
+            }
 
             let payload = {
                 session : session_name,
                 imageName : this.filename,
                 algo : ocr_algo,
                 parameters : parameters_obj,
-                regions : []
+                regions : selected_regions
             }
             
             fetch('http://127.0.0.1:5154/Ocr', {
@@ -213,6 +254,7 @@ class OcrAPI{
             tdPreview.style.maxWidth="350px";
 
             button.addEventListener("click", () => {
+                console.log(data);
 
                 this.builder.InitCardWrapper();
                 this.builder.InitCard(data.algorithm, data.imageName);
@@ -433,5 +475,16 @@ class OcrAPI{
                 alert("Error");
             });
 
-    }
+    };
+
+    //Download(json, imageName){
+    Download(areaid, img){
+        let text = document.getElementById(areaid).value;
+        let data = "text/json;charset=utf-8," + text;
+        let a = document.createElement('a');
+        a.href = 'data:' + data;
+        a.download = img +'.txt';
+        a.innerHTML = 'download JSON';
+        a.click();
+    };
 }
