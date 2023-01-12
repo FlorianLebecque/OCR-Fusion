@@ -16,7 +16,7 @@
     using static Google.Protobuf.Reflection.GeneratedCodeInfo.Types;
     using Google.Protobuf.Collections;
 
-    [Register("VisionOCR", "Vision", "Great recognition of printed and handwritten caracters")]
+    [Register("VisionOCR", "Google Cloud Vision", "Great recognition of printed and handwritten caracters")]
         public class VisionOCR : IOCRManager {
         OutputDefinition output = new();
 
@@ -24,13 +24,6 @@
         {
 
             JsonObject parameters = new();
-
-            JsonObject scale = new() {
-                { "type"        , "text" },
-                { "title"       , "Scale" },
-                { "description" , "Scale factor" },
-                { "default"     , "1" }
-            };
 
             JsonObject document = new() {
                 { "type"        , "check" },
@@ -56,7 +49,6 @@
             language.Add("options", options.ToJson());
 
             parameters.Add("language", language);
-            parameters.Add("scale", scale);
             parameters.Add("document", document);
             
 
