@@ -10,7 +10,7 @@ namespace OCR_Fusion.Controllers {
 
 
         [HttpGet("{filename}")]
-        public IActionResult GetImg(string filename) {
+        public IActionResult Get(string filename) {
 
             filename = "Uploads/" + filename;
 

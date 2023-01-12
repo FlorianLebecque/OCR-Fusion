@@ -15,13 +15,13 @@ namespace OCR_Fusion.Controllers {
         }
 
         [HttpPatch]
-        public void UpdateOuput(OutputDefinition output) {
+        public void Patch(OutputDefinition output) {
             Utils.Update<OutputDefinition>("outputs", output);
         }
 
 
         [HttpGet]
-        public List<OutputDefinition> test(string session) {
+        public List<OutputDefinition> Get(string session) {
 
             List<OutputDefinition> result = Utils.Gets<OutputDefinition>("outputs", session);
 
@@ -29,14 +29,14 @@ namespace OCR_Fusion.Controllers {
         }
 
         [HttpPost]
-        public OutputDefinition RequestOCR(InputDefinition input) {
+        public OutputDefinition Post(InputDefinition input) {
 
             OCRController ocrController = new OCRController(Multiplex.GetOCR(input,configuration));
             return ocrController.GetText(input);
         }
 
         [HttpPut]
-        public string PostImage(IFormFile file) {
+        public string Put(IFormFile file) {
 
             return OCRController.UploadImage(file);
 

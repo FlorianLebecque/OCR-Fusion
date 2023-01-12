@@ -17,6 +17,7 @@
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
+    using System.Text.Json.Nodes;
 
     [Register("AzureOCR", "Azure", "Great recognition of printed and handwritten caracters")]
         public class AzureOCR : IOCRManager
@@ -110,6 +111,10 @@
                 BinaryReader binaryReader = new BinaryReader(fileStream);
                 return binaryReader.ReadBytes((int)fileStream.Length);
             }
+        }
+
+        public JsonObject GetParameters() {
+            return new JsonObject();
         }
 
         //public static ComputerVisionClient Authenticate(string endpoint, string key)
