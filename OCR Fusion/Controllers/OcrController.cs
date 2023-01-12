@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using OCR_Fusion.API_Object;
-using Microsoft.AspNetCore.JsonPatch;
 
 namespace OCR_Fusion.Controllers {
 
