@@ -17,100 +17,142 @@
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
+    using System.Text.Json.Nodes;
+    using MongoDB.Bson;
 
     [Register("AzureOCR", "Azure", "Great recognition of printed and handwritten caracters")]
         public class AzureOCR : IOCRManager
     {
         OutputDefinition output = new();
 
-        static string subscriptionKey = "3f1acd7c922b4ed29d03fce1e1965b5b";
+        static string subscriptionKey = ""; // Include key
         static string endpoint = "https://azurevisionecam.cognitiveservices.azure.com/";
-        static string uriBase = endpoint + "vision/v2.1/ocr";
+        static string uriBase = endpoint + "vision/v3.2/read/analyze"; // v2.1/ocr
 
         //ComputerVisionClient client = Authenticate(endpoint, subscriptionKey);
 
         public OutputDefinition GetText(InputDefinition input)
         {
-            Task task = VisionTextAsync(input.imageName);
+            //Task task = VisionTextAsync(input.imageName);
+            
             output.imageName = input.imageName;
             return output;
         }
-        private async Task VisionTextAsync(string imageName)
+        public JsonObject GetParameters()
         {
-            string imageFilePath = @"Uploads\" + imageName;
 
-            if (File.Exists(imageFilePath))
-            {
-                await MakeOCRRequest(imageFilePath, output);
-            }
-                //ReadFileUrl(client, imagepath, output).Wait();
+            JsonObject parameters = new();
+
+            JsonObject lang = new() {
+                { "type"        , "text" },
+                { "title"       , "Lang" },
+                { "description" , "Let defined witch lang the algorithm will use" },
+                { "default"     , "fr" }
+            };
+
+            JsonObject fine = new() {
+                { "type"        , "check" },
+                { "title"       , "Fine" },
+                { "description" , "Let defined witch lang the algorithm will use" }
+            };
+
+            JsonObject country = new();
+
+            Dictionary<string, string> options = new(){
+                {"fr", "French"},
+                {"nl", "Dutch"},
+                {"en", "English"}
+            };
+
+            country.Add("type", "select");
+            country.Add("title", "Country");
+            country.Add("description", "Let defined witch lang the algorithm will use");
+            country.Add("options", options.ToJson());
+
+            parameters.Add("lang", lang);
+            parameters.Add("fine", fine);
+            parameters.Add("country", country);
+
+            return parameters;
         }
 
-        static async Task MakeOCRRequest(string imageFilePath, OutputDefinition output)
-        {
-            try
-            {
-                HttpClient client = new HttpClient();
+        //private async Task VisionTextAsync(string imageName)
+        //{
+        //    string imageFilePath = @"Uploads\" + imageName;
 
-                // Request headers.
-                client.DefaultRequestHeaders.Add(
-                    "Ocp-Apim-Subscription-Key", subscriptionKey);
+        //    if (File.Exists(imageFilePath))
+        //    {
+        //        await MakeOCRRequest(imageFilePath, output);
+        //    }
+        //        //ReadFileUrl(client, imagepath, output).Wait();
+        //}
 
-                // Request parameters. 
-                // The language parameter doesn't specify a language, so the 
-                // method detects it automatically.
-                // The detectOrientation parameter is set to true, so the method detects and
-                // and corrects text orientation before detecting text.
-                string requestParameters = "language=unk&detectOrientation=true";
+        //static async Task MakeOCRRequest(string imageFilePath, OutputDefinition output)
+        //{
+        //    try
+        //    {
+        //        HttpClient client = new HttpClient();
 
-                // Assemble the URI for the REST API method.
-                string uri = uriBase + "?" + requestParameters;
+        //        // Request headers.
+        //        client.DefaultRequestHeaders.Add(
+        //            "Ocp-Apim-Subscription-Key", subscriptionKey);
 
-                HttpResponseMessage response;
+        //        // Request parameters. 
+        //        // The language parameter doesn't specify a language, so the 
+        //        // method detects it automatically.
+        //        // The detectOrientation parameter is set to true, so the method detects and
+        //        // and corrects text orientation before detecting text.
+        //        string requestParameters = "language=en"; // params : &detectOrientation=true
 
-                // Read the contents of the specified local image
-                // into a byte array.
-                byte[] byteData = GetImageAsByteArray(imageFilePath);
+        //        // Assemble the URI for the REST API method.
+        //        string uri = uriBase + "?" + requestParameters;
 
-                // Add the byte array as an octet stream to the request body.
-                using (ByteArrayContent content = new ByteArrayContent(byteData))
-                {
-                    // This example uses the "application/octet-stream" content type.
-                    // The other content types you can use are "application/json"
-                    // and "multipart/form-data".
-                    content.Headers.ContentType =
-                        new MediaTypeHeaderValue("application/octet-stream");
+        //        HttpResponseMessage response;
 
-                    // Asynchronously call the REST API method.
-                    response = await client.PostAsync(uri, content);
-                }
+        //        // Read the contents of the specified local image
+        //        // into a byte array.
+        //        byte[] byteData = GetImageAsByteArray(imageFilePath);
 
-                // Asynchronously get the JSON response.
-                string contentString = await response.Content.ReadAsStringAsync();
+        //        // Add the byte array as an octet stream to the request body.
+        //        using (ByteArrayContent content = new ByteArrayContent(byteData))
+        //        {
+        //            // This example uses the "application/octet-stream" content type.
+        //            // The other content types you can use are "application/json"
+        //            // and "multipart/form-data".
+        //            content.Headers.ContentType =
+        //                new MediaTypeHeaderValue("application/octet-stream");
 
-                // Display the JSON response.
-                Console.WriteLine("\nResponse:\n\n{0}\n",
-                    JToken.Parse(contentString).ToString());
+        //            // Asynchronously call the REST API method.
+        //            response = await client.PostAsync(uri, content);
+        //        }
 
-                //output.words.Add()
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("\n" + e.Message);
-            }
-        }
+        //        // Asynchronously get the JSON response.
+        //        // string contentString = await response.Content.ReadAsStringAsync();
 
-        static byte[] GetImageAsByteArray(string imageFilePath)
-        {
-            // Open a read-only file stream for the specified file.
-            using (FileStream fileStream =
-                new FileStream(imageFilePath, FileMode.Open, FileAccess.Read))
-            {
-                // Read the file's contents into a byte array.
-                BinaryReader binaryReader = new BinaryReader(fileStream);
-                return binaryReader.ReadBytes((int)fileStream.Length);
-            }
-        }
+        //        // Display the JSON response.
+        //        // Console.WriteLine("\nResponse:\n\n{0}\n",
+        //        //JToken.Parse(contentString).ToString());
+
+        //        //output.words.Add()
+               
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine("\n" + e.Message);
+        //    }
+        //}
+
+        //static byte[] GetImageAsByteArray(string imageFilePath)
+        //{
+        //    // Open a read-only file stream for the specified file.
+        //    using (FileStream fileStream =
+        //        new FileStream(imageFilePath, FileMode.Open, FileAccess.Read))
+        //    {
+        //        // Read the file's contents into a byte array.
+        //        BinaryReader binaryReader = new BinaryReader(fileStream);
+        //        return binaryReader.ReadBytes((int)fileStream.Length);
+        //    }
+        //}
 
         //public static ComputerVisionClient Authenticate(string endpoint, string key)
         //{
