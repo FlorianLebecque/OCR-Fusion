@@ -20,7 +20,7 @@
     using System.Text.Json.Nodes;
     using MongoDB.Bson;
 
-    [Register("AzureOCR", "Azure", "Great recognition of printed and handwritten caracters")]
+    [Register("AzureOCR", "Azure Computer Vision", "Great for printed and handwritten text")]
         public class AzureOCR : IOCRManager
     {
         OutputDefinition output = new();
