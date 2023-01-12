@@ -67,11 +67,14 @@ namespace OCR_Fusion {
         public static Byte[] CropImage(string filepath, Vector[] cropArea)
         {
             Bitmap bmpImage = new Bitmap(filepath);
-            Vector xy1 = cropArea[0];
-            Vector xy2 = cropArea[1];
-            float inputWidth = xy2.x - xy1.x;
-            float inputHeight = xy2.y - xy1.y;
-            Rectangle cropRectangle = new Rectangle((int)xy1.x, (int)xy1.y, (int)inputWidth, (int)inputHeight);
+            System.Drawing.Image img = System.Drawing.Image.FromFile(filepath);
+            int x1 = (int)(cropArea[0].x * img.Width);
+            int y1 = (int)(cropArea[0].y * img.Height);
+            int x2 = (int)(cropArea[1].x * img.Width);
+            int y2 = (int)(cropArea[1].y * img.Height);
+            int inputWidth = x2 - x1;
+            int inputHeight = y2 - y1;
+            Rectangle cropRectangle = new Rectangle(x1, y1, inputWidth, inputHeight);
             var bytemap = bmpImage.Clone(cropRectangle, bmpImage.PixelFormat);
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(bytemap, typeof(byte[]));

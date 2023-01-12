@@ -56,22 +56,25 @@
         private void IronText(InputDefinition input)
         {
             var Ocr = new IronTesseract();
-            
-                
+            string pathfile = @"Uploads\" + input.imageName;
+
             using (var ironInput = new OcrInput())
             {
                 if (input.regions.Count != 0)
                 {
-                    Vector xy1 = input.regions[0][0];
-                    Vector xy2 = input.regions[0][1];
-                    float inputWidth = xy2.x - xy1.x;
-                    float inputHeight = xy2.y - xy1.y;
-                    var ContentArea = new CropRectangle(x: xy1.x, y: xy1.y, width: inputWidth, height: inputHeight);
-                    ironInput.AddImage(@"Uploads\" + input.imageName, ContentArea);
+                    System.Drawing.Image img = System.Drawing.Image.FromFile(pathfile);
+                    int x1 = (int)(input.regions[0][0].x * img.Width);
+                    int y1 = (int)(input.regions[0][0].y * img.Height);
+                    int x2 = (int)(input.regions[0][1].x * img.Width);
+                    int y2 = (int)(input.regions[0][1].y * img.Height);
+                    int inputWidth = x2 - x1;
+                    int inputHeight = y2 - y1;
+                    var ContentArea = new CropRectangle(x: x1, y: y1, width: inputWidth, height: inputHeight);
+                    ironInput.AddImage(pathfile, ContentArea);
                 }
                 else
                 {
-                    ironInput.AddImage(@"Uploads\" + input.imageName);
+                    ironInput.AddImage(pathfile);
                 }
                 var Result = Ocr.Read(ironInput);
                 output.words.Add(Result.Text);
