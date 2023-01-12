@@ -161,7 +161,7 @@ class OcrAPI{
                 let val = input.value;
 
                 if(input.type == "checkbox"){
-                    val = input.checked;
+                    val = str(input.checked);
                 }
 
 
