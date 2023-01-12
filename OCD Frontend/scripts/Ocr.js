@@ -407,4 +407,31 @@ class OcrAPI{
         });
 
     };
+
+    Update(id,text_area_id){
+
+
+        let update_definition = {
+            Id:id,
+            words: document.getElementById(text_area_id).value
+        }
+
+        console.log(update_definition);
+
+        fetch('http://127.0.0.1:5154/Ocr', {
+                method: 'PATCH', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(update_definition),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                alert("Updated");
+            })
+            .catch((error) => {
+                alert("Error");
+            });
+
+    }
 }
