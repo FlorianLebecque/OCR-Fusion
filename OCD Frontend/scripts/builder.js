@@ -118,24 +118,24 @@ class Builder{
 
     BuildCardHistory(algo,result){
         let imageHold = document.getElementById("imageHolder");
-        //imageHold.innerHTML =`<img src="http://127.0.0.1:5154/Image/${result.imageName}" style="height:auto; width:100%;"class="img-fluid" id="imageHolder1" alt="">`;
+
         imageHold.innerHTML =`<img src="http://127.0.0.1:5154/Image/${result.imageName}" style="height:auto; width:40vw;"class="img-fluid" id="imageHolder1" alt="">`;
 
-
-
         let card = document.getElementById("card-"+algo);
-        let urlimage = 'http://127.0.0.1:5154/Image/'+result.imageName;
+        let text_area_id = 'text-'+algo;
 
         card.innerHTML = "";
 
         let inner = "";
             inner += '<div class="t-card">';
-            inner += '<h3>Image Name : <br>'+ result.imageName +'</h3>';
-            inner += '<h3>Algorithm : '+ algo +'</h3>';
-                    inner += '<textarea id="text-'+algo+'" rows="400" cols="40">';
+                inner += '<h3>Image Name : <br>'+ result.imageName +'</h3>';
+                inner += '<h3>Algorithm : '+ algo +'</h3>';
+                inner += '<input hidden type="text" value="'+result.id+'">';
+                    inner += '<textarea id="'+text_area_id+'" rows="400" cols="40">';
                             inner += result.words[0];
                         inner += '</textarea>';
-                    inner += '<button class="btn btn-success" id="btnsavemodif"><i class="display-6 bi bi-check2"></i></button>';
+                    inner += '<button class="btn btn-success" id="btnsavemodif" onclick="ocr.Update(\''+result.id+'\',\''+text_area_id+'\')"><i class="display-6 bi bi-check2"></i></button>';
+                    //inner += '<button class="btn btn-success" id="btndownload" onclick="ocr.Download('+result.words[0]+','+ result.imageName +')"><b>Export result</b></button>';
                 inner += '</div>';
             inner += '</div>';
 
@@ -145,7 +145,7 @@ class Builder{
 
     }
 
-
+    Download(json, imageName)
 
 
 }
