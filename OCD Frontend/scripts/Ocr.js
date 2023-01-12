@@ -11,26 +11,7 @@ class OcrAPI{
 
         let data = new FormData(),
             files = document.getElementById("imageUpload").files;
-            console.log(typeof(files[0]));
-            //application/pdf
-            //image/jpeg
-            //image/png
-
-        if (files[0].type == "application/pdf"){
-            window.alert("Conversion to come");
-            this.filename = files[0].name;
-            let filename = this.filename;
-            // let src = URL.createObjectURL(files[0]);
-            // data.append('file', files[0]);  
-
-            imageWrapper.show(100);
-            
-            //var src = (files[0]).toDataURL("image/jpeg", 0.8);
-            //console.log(src);
-            // $("#loader").hide();
-            // GetyImg('http://127.0.0.1:5154/Image/'+filename);
-        }
-        else{
+        
             this.filename = files[0].name;
             let filename = this.filename;
             data.append('file', files[0]);  
@@ -49,14 +30,13 @@ class OcrAPI{
                     200: function(image){
                         $("#loader").hide();
                         setTimeout(()=>{
-                            GetyImg('http://127.0.0.1:5154/Image/'+filename);
-    
+                            GetyImg('http://127.0.0.1:5154/Image/'+image.responseText);
                         },150);
                     }
                 }
                 
             });
-        }
+        
 
         // this.filename = files[0].name;
         // let filename = this.filename;
@@ -81,7 +61,6 @@ class OcrAPI{
         //             },150);
         //         }
         //     }
-            
         // });
     };
 
