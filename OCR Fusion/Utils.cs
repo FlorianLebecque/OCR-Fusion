@@ -36,6 +36,10 @@ namespace OCR_Fusion {
             if (!Directory.Exists(uploadPath)) {
                 Directory.CreateDirectory(uploadPath);
             }
+
+            if (!Directory.Exists(uploadPath+"temps/")) {
+                Directory.CreateDirectory(uploadPath+"temps/");
+            }
         } 
 
         public static string GetImagePath(string imageName) {
