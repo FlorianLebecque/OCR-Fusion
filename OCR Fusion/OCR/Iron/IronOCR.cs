@@ -2,6 +2,7 @@
 {
     using IronOcr;
     using MongoDB.Bson;
+    using OCR_Fusion.API_Object;
     using System.Text.Json.Nodes;
 
     [Register("IronOCR","Iron","Great recognition of printed caracters")]
@@ -47,18 +48,35 @@
 
         public OutputDefinition GetText(InputDefinition input)
         {
-            IronText(input.imageName);
+            IronText(input);
             output.imageName = input.imageName;
             return output;
         }
 
-        private void IronText(string imageName)
+        private void IronText(InputDefinition input)
         {
             var Ocr = new IronTesseract();
-            using (var Input = new OcrInput())
+            string pathfile = @"Uploads\" + input.imageName;
+
+            using (var ironInput = new OcrInput())
             {
-                Input.AddImage(@"Uploads\" + imageName);
-                var Result = Ocr.Read(Input);
+                if (input.regions.Count != 0)
+                {
+                    System.Drawing.Image img = System.Drawing.Image.FromFile(pathfile);
+                    int x1 = (int)(input.regions[0][0].x * img.Width);
+                    int y1 = (int)(input.regions[0][0].y * img.Height);
+                    int x2 = (int)(input.regions[0][1].x * img.Width);
+                    int y2 = (int)(input.regions[0][1].y * img.Height);
+                    int inputWidth = x2 - x1;
+                    int inputHeight = y2 - y1;
+                    var ContentArea = new CropRectangle(x: x1, y: y1, width: inputWidth, height: inputHeight);
+                    ironInput.AddImage(pathfile, ContentArea);
+                }
+                else
+                {
+                    ironInput.AddImage(pathfile);
+                }
+                var Result = Ocr.Read(ironInput);
                 output.words.Add(Result.Text);
             }
         }
