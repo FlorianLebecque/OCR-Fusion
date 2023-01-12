@@ -80,6 +80,8 @@ namespace OCR_Fusion {
             int inputHeight = y2 - y1;
             Rectangle cropRectangle = new Rectangle(x1, y1, inputWidth, inputHeight);
             var bytemap = bmpImage.Clone(cropRectangle, bmpImage.PixelFormat);
+            bmpImage.Dispose();
+            img.Dispose();
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(bytemap, typeof(byte[]));
         }
