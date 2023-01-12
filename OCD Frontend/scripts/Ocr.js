@@ -160,6 +160,11 @@ class OcrAPI{
                 let key = input.id.split('_')[1];
                 let val = input.value;
 
+                if(input.type == "checkbox"){
+                    val = input.checked;
+                }
+
+
                 parameters_obj[key] = val;
 
             });
