@@ -11,13 +11,48 @@
     using SharpCompress.Common;
     using System.Drawing;
     using System.Drawing.Imaging;
+    using MongoDB.Bson;
+    using static System.Net.Mime.MediaTypeNames;
+    using static Google.Protobuf.Reflection.GeneratedCodeInfo.Types;
 
     [Register("VisionOCR", "Vision", "Great recognition of printed and handwritten caracters")]
         public class VisionOCR : IOCRManager {
         OutputDefinition output = new();
 
-        public JsonObject GetParameters() {
-            return new JsonObject();
+        public JsonObject GetParameters()
+        {
+
+            JsonObject parameters = new();
+
+            JsonObject scale = new() {
+                { "type"        , "text" },
+                { "title"       , "Scale" },
+                { "description" , "Let defined witch lang the algorithm will use" },
+                { "default"     , "1" }
+            };
+
+            JsonObject document = new() {
+                { "type"        , "check" },
+                { "title"       , "Document" },
+                { "description" , "Let defined witch lang the algorithm will use" }
+            };
+
+            JsonObject language = new();
+            Dictionary<string, string> options = new(){
+                {"en", "English"},
+                {"fr", "French"}
+            };
+
+            language.Add("type", "select");
+            language.Add("title", "Language");
+            language.Add("description", "Let defined witch lang the algorithm will use");
+            language.Add("options", options.ToJson());
+
+            parameters.Add("scale", scale);
+            parameters.Add("document", document);
+            parameters.Add("language", language);
+
+            return parameters;
         }
 
         public OutputDefinition GetText(InputDefinition input)
@@ -38,12 +73,37 @@
                 Byte[] cropImage = Utils.CropImage(pathfile, input.regions[0]);
                 image1 = Google.Cloud.Vision.V1.Image.FromBytes(cropImage);
             }
-            var response = client.DetectText(image1);
-            foreach (var annotation in response)
+            if (input.parameters["language"] == "on")
             {
-                if (annotation.Description != null)
+                var response = client.DetectDocumentText(image1);
+                foreach (var page in response.Pages)
                 {
-                    output.words.Add(annotation.Description);
+                    foreach (var block in page.Blocks)
+                    {
+                        string box = string.Join(" - ", block.BoundingBox.Vertices.Select(v => $"({v.X}, {v.Y})"));
+                        Console.WriteLine($"Block {block.BlockType} at {box}");
+                        foreach (var paragraph in block.Paragraphs)
+                        {
+                            box = string.Join(" - ", paragraph.BoundingBox.Vertices.Select(v => $"({v.X}, {v.Y})"));
+                            Console.WriteLine($"  Paragraph at {box}");
+                            foreach (var word in paragraph.Words)
+                            {
+                                Console.WriteLine($"    Word: {string.Join("", word.Symbols.Select(s => s.Text))}");
+                            }
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                var response = client.DetectText(image1);
+                foreach (var annotation in response)
+                {
+                    if (annotation.Description != null)
+                    {
+                        output.words.Add(annotation.Description);
+                    }
                 }
             }
 
