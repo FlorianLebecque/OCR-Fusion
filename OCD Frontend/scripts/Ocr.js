@@ -14,9 +14,8 @@ class OcrAPI{
 
         this.filename = files[0].name;
         let filename = this.filename;
-        data.append('file', files[0]);
+        data.append('file', files[0]);      
 
-        imageWrapper.html('<div class="col align-self-center"><div class="lds-dual-ring"></div></div>');
         imageWrapper.show(100);
 
         
@@ -29,7 +28,11 @@ class OcrAPI{
             contentType: false,
             statusCode:{
                 200: function(image){
-                    imageWrapper.html('<img src="http://127.0.0.1:5154/Image/'+filename+'" id="imageHolder" alt="">');
+                    $("#loader").hide();
+                    setTimeout(()=>{
+                        GetyImg('http://127.0.0.1:5154/Image/'+filename);
+
+                    },150);
                 }
             }
             
@@ -107,25 +110,28 @@ class OcrAPI{
         let algos = document.getElementsByName("check-algos");
         let session_name = (document.getElementById("session").value == "")? "default": document.getElementById("session").value;
 
-        let img = document.getElementById('imageHolder');
+        let img = {
+            width : Utils.elementWidth(p5Div),
+            height : Utils.elementHeight(p5Div)
+        };
         let wrapper = document.getElementById("result-wrapper");
         let inner = ""
         wrapper.innerHTML = "";
         if (img.width > img.height){
-            inner += '<div class="row-xl">'
-            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="height:auto; width:100%;"class="img-fluid" id="imageHolder" alt="">'
+            inner += '<div class="col-xl-12 mb-3">'
+            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="border-radius:0.5em;height:auto; width:100%;"class="img-fluid" id="imageHolder" alt="">'
             inner += '</div>'
-            inner += '<div class="row">'
+            inner += '<div class="col-xl-12">'
             inner += '  <div id="cards-wrapper"></div>'
             inner += '</div>'
             this.imgFormat = 'paysage';
         }
         else {
             inner += '<div class="row">'
-            inner += '<div class="col-xl">'
-            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="height:100%; width:auto;" class="img-fluid" id="imageHolder" alt="">'
+            inner += '<div class="col-md-4 col-xs-12">'
+            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="border-radius:0.5em;height:100%; width:auto;" class="img-fluid" id="imageHolder" alt="">'
             inner += '</div>'
-            inner += '<div class="col">'
+            inner += '<div class="col-md-8 col-xs-12">'
             inner += '  <div id="cards-wrapper"></div>'
             inner += '</div>'
             inner += '</div>'
@@ -160,13 +166,18 @@ class OcrAPI{
 
             this.builder.InitCard(ocr_algo,this.filename);
 
+            let selected_regions = [];
+            if((p1n)&&(p2n)){                
+                                
+                selected_regions = [[p1n,p2n]];
+            }
 
             let payload = {
                 session : session_name,
                 imageName : this.filename,
                 algo : ocr_algo,
                 parameters : parameters_obj,
-                regions : []
+                regions : selected_regions
             }
             
             fetch('http://127.0.0.1:5154/Ocr', {

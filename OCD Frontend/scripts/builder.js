@@ -1,6 +1,3 @@
-
-
-
 class Builder{
 
     constructor(_paramertersbuilder) {
