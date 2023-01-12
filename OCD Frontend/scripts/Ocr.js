@@ -107,6 +107,32 @@ class OcrAPI{
         let algos = document.getElementsByName("check-algos");
         let session_name = (document.getElementById("session").value == "")? "default": document.getElementById("session").value;
 
+        let img = document.getElementById('imageHolder');
+        let wrapper = document.getElementById("result-wrapper");
+        let inner = ""
+        wrapper.innerHTML = "";
+        if (img.width > img.height){
+            inner += '<div class="row-xl">'
+            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="height:auto; width:100%;"class="img-fluid" id="imageHolder" alt="">'
+            inner += '</div>'
+            inner += '<div class="row">'
+            inner += '  <div id="cards-wrapper"></div>'
+            inner += '</div>'
+            this.imgFormat = 'paysage';
+        }
+        else {
+            inner += '<div class="row">'
+            inner += '<div class="col-xl">'
+            inner += '  <img src="http://127.0.0.1:5154/Image/'+this.filename+'" style="height:100%; width:auto;" class="img-fluid" id="imageHolder" alt="">'
+            inner += '</div>'
+            inner += '<div class="col">'
+            inner += '  <div id="cards-wrapper"></div>'
+            inner += '</div>'
+            inner += '</div>'
+            this.imgFormat = 'portrait';
+        }
+        wrapper.innerHTML = inner;
+
         $("#control").hide();
 
         this.builder.InitCardWrapper();
@@ -180,13 +206,16 @@ class OcrAPI{
             tdPreview.innerHTML = data.words;
             tdAlgo.innerHTML = data.algorithm;
             button.innerText = "View";
+            button.className = "form-control btn btn-success";
+            button.style.backgroundColor = "#CF7041";
+            button.style.border = "0px";
             tdPreview.className="text-truncate";
             tdPreview.style.maxWidth="350px";
 
             button.addEventListener("click", () => {
 
                 this.builder.InitCardWrapper();
-                this.builder.InitCard(data.algorithm);
+                this.builder.InitCard(data.algorithm, data.imageName);
                 this.builder.BuildCardHistory(data.algorithm,data);
                 event.preventDefault();//garder le event sinon fonctionne pas !!! 
             });
@@ -206,6 +235,7 @@ class OcrAPI{
         let current_index = 1;//commence par la première page
         let start_index = 1;
         let end_index = 0;
+        document.getElementById("table-warper").style.display = "block"
 
         //initialise session
 
@@ -249,7 +279,7 @@ class OcrAPI{
             });
 
             for(var i=1; i< max_index+1; i++){
-                $(".index_buttons").append('<button id="numbut'+i+'" index="'+i+'">'+i+'</button>');
+                $(".index_buttons").append('<button class="numbut" id="numbut'+i+'" index="'+i+'">'+i+'</button>');
                 console.log("numbut"+i)
                 document.getElementById("numbut"+i).addEventListener("click", function(e){
                     var target = e.target;
@@ -331,7 +361,7 @@ class OcrAPI{
                         ocr.DisplayTableRowHistory(json, start_index, end_index);}
                 });
                 for(var i=1; i< max_index+1; i++){
-                    $(".index_buttons").append('<button id="numbut'+i+'" index="'+i+'">'+i+'</button>');
+                    $(".index_buttons").append('<button class="numbut" id="numbut'+i+'" index="'+i+'">'+i+'</button>');
                     console.log("numbut"+i)
                     document.getElementById("numbut"+i).addEventListener("click", function(e){
                         var target = e.target;

@@ -7,22 +7,23 @@
         <link href="history.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     </head>
     <body>
 
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.html"><h1>OCR AI </h1></a>
+                <a class="navbar-brand" href="index.html" style="color: #5277ac;"><h1>OCR Fusion</h1></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.html" style="color: #5277ac;">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="history.html">History</a>
+                        <a class="nav-link" href="history.html" style="color: #5277ac;">History</a>
                     </li>
                     
                 </ul>
@@ -30,21 +31,33 @@
             </div>
         </nav>
 
+        <main class="container" style="padding: 1em; flex:auto">
+
         <div class="container">
-            <input type=button onclick=window.location.href='index.html'; value="< Back" class="btn btn-secondary"/>
-       
 
+            <div class="row panel border mb-3">
+                <div class="input-group">
+                    <div class="form-floating" style="width:60vw">
+                        <input type="text" class="form-control" id="session_name" placeholder="Session name" onkeydown = "if (event.keyCode == 13)document.getElementById('sessionnamebtn').click()" >
+                        <label for="session">Session Name</label>
+                    </div>
+                    <button type="button" class="form-control btn btn-success" value="Process" onclick="ocr.BrowseHistory()" id="sessionnamebtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-file-check" viewBox="0 0 16 16">
+                            <path d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                            <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
 
-        
-        
-
-        <div class="row">
-
-            <input type="text" id="session_name">
-            <input type="button" onclick="ocr.BrowseHistory()"  class="form-control btn btn-outline-primary" value="See">
+        <!-- <div class="row">
+                <input type="text" id="session_name" placeholder="Session name">
+                <input type="button" onclick="ocr.BrowseHistory()"  class="form-control btn btn-outline-primary" value="See" id="SeeButton">
+            </div> -->
             
+            <div class="row panel border mb-3" id="table-warper">
                 <div class="row">
-                    <div class="table">
+                    <div class="table" >
                     <div class="tab_head_container">
                         <div class="page_limit">
                             <span>Shows </span>
@@ -57,7 +70,7 @@
                             <span> entries</span>
                         </div>
                     </div>
-                    <table class="table" border="1" id="table_result" style="width:100%">
+                    <table class="styled-table" id="table_result" style="width:100%">
                         <thead>
                             <tr>
                                 <th scope="col">Image name</th>
@@ -75,27 +88,29 @@
                       </div>
                 </div>
             </div>
-
         </div>
 
-        <div id="cards-wrapper">
+        </div>
+        <div class="row">
+            <div class="col-xl" id="imageHolder"></div>
+            <div class="col">
+                <div id="cards-wrapper">
+                </div>
+            </div>
         </div>
         
-
+        
+    </main>
 
         <footer>
             <div class="container text-center">
                 <div class="row"><p>By</p></div>
                 <div class="row">
-
-
-                <p class="fw-light">
-                    Louis-Antoine Devos, Florian and Sarah Liettefti Lens
-                </p>
+                    <p class="fw-light">
+                        Louis-Antoine Devos, Florian Lebecque and Sarah Liettefti Lens
+                    </p>
+                </div>
             </div>
-
-            </div>
-        </div>
         </footer>
 
 
