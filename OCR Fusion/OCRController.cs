@@ -31,6 +31,12 @@
             }
 
             string extention = Utils.GetExtention(image.FileName);
+            if(extention == "pdf") {
+                PDFConverter p = new();
+                return p.Convert(image);
+            }
+
+
             if (!Utils.allowedExtention.Contains(extention)) {
                 return "not supported extention";
             }
