@@ -135,7 +135,7 @@ class Builder{
                             inner += result.words[0];
                         inner += '</textarea>';
                     inner += '<button class="btn btn-success" id="btnsavemodif" onclick="ocr.Update(\''+result.id+'\',\''+text_area_id+'\')"><i class="display-6 bi bi-check2"></i></button>';
-                    //inner += '<button class="btn btn-success" id="btndownload" onclick="ocr.Download('+result.words[0]+','+ result.imageName +')"><b>Export result</b></button>';
+                    inner += '<button class="btn btn-success" id="btndownload" onclick="ocr.Download(\''+text_area_id+'\',\''+result.imageName+'\')"><b>Export result</b></button>';
                 inner += '</div>';
             inner += '</div>';
 

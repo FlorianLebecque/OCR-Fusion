@@ -436,12 +436,14 @@ class OcrAPI{
 
     };
 
-    // Download(json, imageName){
-    //     let data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(Object.fromEntries(json)));
-    //     let a = document.createElement('a');
-    //     a.href = 'data:' + data;
-    //     a.download = imageName+'.json';
-    //     a.innerHTML = 'download JSON';
-    //     a.click();
-    // }
+    //Download(json, imageName){
+    Download(areaid, img){
+        let text = document.getElementById(areaid).value;
+        let data = "text/json;charset=utf-8," + text;
+        let a = document.createElement('a');
+        a.href = 'data:' + data;
+        a.download = img +'.txt';
+        a.innerHTML = 'download JSON';
+        a.click();
+    };
 }
