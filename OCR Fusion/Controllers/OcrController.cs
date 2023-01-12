@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
-
-
+using OCR_Fusion.API_Object;
 
 namespace OCR_Fusion.Controllers {
 
@@ -15,10 +14,18 @@ namespace OCR_Fusion.Controllers {
         }
 
         [HttpPatch]
-        public void Patch(OutputDefinition output) {
-            Utils.Update<OutputDefinition>("outputs", output);
-        }
+        public void Patch(UpdateDefinition input) {
 
+            Guid target_id = new Guid(input.Id);
+            List<OutputDefinition> result = Utils.Gets<OutputDefinition>("outputs", "");
+            OutputDefinition upDate = result.Find(x => x.Id == target_id);
+
+            upDate.words = new List<string> { input.Words };
+
+            //OutputDefinition upDate = new OutputDefinition(new Guid(input.Id),input.Words);
+
+            Utils.Update<OutputDefinition>("outputs",upDate.Id ,upDate);
+        }
 
         [HttpGet]
         public List<OutputDefinition> Get(string session) {

@@ -224,6 +224,7 @@ class OcrAPI{
             tdPreview.style.maxWidth="350px";
 
             button.addEventListener("click", () => {
+                console.log(data);
 
                 this.builder.InitCardWrapper();
                 this.builder.InitCard(data.algorithm, data.imageName);
@@ -444,5 +445,16 @@ class OcrAPI{
                 alert("Error");
             });
 
-    }
+    };
+
+    //Download(json, imageName){
+    Download(areaid, img){
+        let text = document.getElementById(areaid).value;
+        let data = "text/json;charset=utf-8," + text;
+        let a = document.createElement('a');
+        a.href = 'data:' + data;
+        a.download = img +'.txt';
+        a.innerHTML = 'download JSON';
+        a.click();
+    };
 }

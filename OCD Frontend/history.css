@@ -5,6 +5,9 @@
 	justify-content:center;
   
 }
+h3, textarea{
+	font-family:"Open Sans",sans-serif;
+}
 
 .preview {
 	width:350px;
@@ -67,6 +70,16 @@ button.active, button:hover{
 
 #btnsavemodif{
     background: #648b6c;
+}
+
+#btndownload{
+    background: #B4BFC5;
+    border-color: #B4BFC5;
+    font-size:17px;
+	font-family:"Open Sans",sans-serif;
+    margin-left: 2px;
+    margin-right: 2px;
+    height: 120px;
 }
 
 #nextbut:hover, #nextbut.active, #prevbut:hover, #prevbut.active, .numbut:hover, .numbut.active{
