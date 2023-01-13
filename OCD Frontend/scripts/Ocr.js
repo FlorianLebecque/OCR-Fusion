@@ -29,6 +29,8 @@ class OcrAPI{
                 statusCode:{
                     200: function(image){
                         $("#loader").hide();
+                        ocr.filename = image.responseText;
+                        
                         setTimeout(()=>{
                             GetyImg('http://127.0.0.1:5154/Image/'+image.responseText);
                         },150);
