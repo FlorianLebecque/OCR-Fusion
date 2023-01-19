@@ -1,7 +1,6 @@
 ﻿.main{
     display:flex;
     flex-flow:column;
-    margin-bottom:1em;
 }
 
 .bar {
@@ -53,4 +52,10 @@
 .parameter-collapse {
     transform-origin:top;
     animation: collapse 0.2s ease-in-out 0s forwards;
+}
+
+.parameters-wrapper {
+    display: flex;
+    flex-flow: column;
+    gap:1em;
 }

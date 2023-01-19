@@ -1,17 +1,16 @@
-﻿<h3>Algorithms</h3>
-@inject HttpClient Http
+﻿@inject HttpClient Http
 
-@if (algos == null)
-{
-    <p><em>Loading...</em></p>
+@if (algos == null){
+    <Loading/>
 }
-else
-{
+else {
+    <div class="main">
+        @foreach (var algo in algos)
+        {
+            <Algorithm algorithm=@algo/>
+        }
+    </div>
     
-    @foreach (var algo in algos)
-    {
-        <Algorithm algorithm=@algo></Algorithm>
-    }
         
 }
 
