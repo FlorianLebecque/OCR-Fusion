@@ -5,13 +5,16 @@ namespace OCR_Fusion.Database {
     public class MangoCRUD : IDBCrud {
         private IMongoDatabase db;
 
-        public MangoCRUD(string database) {
+        public MangoCRUD(string database_name) {
 
-            //Create the database if it don't exist
 
-            //initiate database connection
-            var client = new MongoClient();
-            db = client.GetDatabase(database);
+            var settings = MongoClientSettings.FromConnectionString("mongodb+srv://test:123@cluster0.syhqt6b.mongodb.net/?retryWrites=true&w=majority");
+
+
+            settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+
+            var client = new MongoClient(settings);
+            db = client.GetDatabase(database_name);
 
         }
 
@@ -35,8 +38,12 @@ namespace OCR_Fusion.Database {
 
         }
 
-        public void Update<T>(string table, T value) {
-            throw new NotImplementedException();
+        public void Update<T>(string table,Guid id, T value) {
+
+            var collection = db.GetCollection<T>(table);
+
+            var result = collection.ReplaceOne(new BsonDocument("_id", id),value,new ReplaceOptions { IsUpsert = true});
+
         }
     }
 }

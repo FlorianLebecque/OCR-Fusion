@@ -1,18 +1,37 @@
 using OCR_Fusion;
 using OCR_Fusion.Database;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+
+var assembly = Assembly.GetExecutingAssembly();
+
+foreach (var type in assembly.GetTypes()) {
+    var registerAttribute = type.GetCustomAttribute<RegisterAttribute>();
+    if (registerAttribute != null) {
+        Multiplex.Register(type, registerAttribute);
+    }
+}
+
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddCors(options => {
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy => {
+                          policy.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+                      });
+});
 
+// Add services to the container.
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-//MangoCRUD db = new("test");
-//Utils.SetDatabaseInterface(db);
+MangoCRUD db = new("test");
+Utils.SetDatabaseInterface(db);
 
 
 
@@ -25,6 +44,8 @@ if (app.Environment.IsDevelopment()) {
 }
 
 //app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
