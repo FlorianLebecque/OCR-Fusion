@@ -33,4 +33,8 @@
     <Folder Include="Uploads\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\APIObject\APIObject.csproj" />
+  </ItemGroup>
+
 </Project>

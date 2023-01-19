@@ -1,7 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
-using System.Text.Json.Serialization;
 
-namespace OCR_Fusion.API_Object {
+namespace APIObject {
     public class UpdateDefinition {
 
         [BsonId]

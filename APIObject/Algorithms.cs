@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Nodes;
 
-namespace OCR_Fusion.API_Object {
+namespace APIObject{
     public class Algorithms {
 
         public string Id { get; set; }

@@ -1,10 +1,10 @@
-﻿namespace OCR_Fusion.OCR.Iron
-{
-    using Google.Api;
-    using IronOcr;
-    using MongoDB.Bson;
-    using OCR_Fusion.API_Object;
-    using System.Text.Json.Nodes;
+﻿using IronOcr;
+using MongoDB.Bson;
+using APIObject;
+using System.Text.Json.Nodes;
+
+namespace OCR_Fusion.OCR.Iron {
+    
 
     [Register("IronOCR","IronOCR (Tesseract)","Great for printed text")]
     public class IronOCR : IOCRManager {

@@ -1,12 +1,11 @@
-﻿namespace OCR_Fusion.OCR.AzureOCR
-{
-    using System;
-    using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
-    using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
-    using System.Threading.Tasks;
-    using System.IO;
-    using System.Threading;
-    using System.Text.Json.Nodes;
+﻿
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
+using System.Text.Json.Nodes;
+using APIObject;
+
+namespace OCR_Fusion.OCR.AzureOCR {
+    
 
     [Register("AzureOCR", "Azure Computer Vision", "Great for printed and handwritten text")]
         public class AzureOCR : IOCRManager

@@ -1,4 +1,6 @@
-﻿namespace OCR_Fusion {
+﻿using APIObject;
+
+namespace OCR_Fusion {
     public class OCRController {
 
         private IOCRManager ocrManager;        

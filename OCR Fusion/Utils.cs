@@ -1,7 +1,5 @@
-﻿using Google.Cloud.Vision.V1;
-using System.Drawing;
-using OCR_Fusion.API_Object;
-using System.Text.Json.Nodes;
+﻿using System.Drawing;
+using APIObject;
 
 namespace OCR_Fusion {
     public class Utils {

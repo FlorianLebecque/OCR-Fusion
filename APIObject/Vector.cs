@@ -1,4 +1,4 @@
-﻿namespace OCR_Fusion.API_Object {
+﻿namespace APIObject {
     public class Vector {
         public float x { get; set; }
         public float y { get; set; }

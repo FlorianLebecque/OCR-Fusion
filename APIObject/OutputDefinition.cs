@@ -1,8 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
-using OCR_Fusion.API_Object;
-using System.Text.Json.Nodes;
 
-namespace OCR_Fusion {
+namespace APIObject {
     public class OutputDefinition {
 
         public OutputDefinition() {

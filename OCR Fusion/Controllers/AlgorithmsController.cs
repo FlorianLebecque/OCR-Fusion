@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using OCR_Fusion.API_Object;
+﻿using Microsoft.AspNetCore.Mvc;
+using APIObject;
 
 namespace OCR_Fusion.Controllers {
     [Route("[controller]")]

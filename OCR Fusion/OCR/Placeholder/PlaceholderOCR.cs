@@ -1,4 +1,4 @@
-﻿using OCR_Fusion.API_Object;
+﻿using APIObject;
 using System.Text.Json.Nodes;
 
 namespace OCR_Fusion.OCR.Placeholder

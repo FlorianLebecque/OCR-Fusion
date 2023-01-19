@@ -1,11 +1,10 @@
 ﻿using System.Text.Json.Nodes;
 
-namespace OCR_Fusion {
+namespace APIObject {
     public interface IOCRManager {
 
         public JsonObject GetParameters();
         public OutputDefinition GetText(InputDefinition input );
-
 
     }
 }

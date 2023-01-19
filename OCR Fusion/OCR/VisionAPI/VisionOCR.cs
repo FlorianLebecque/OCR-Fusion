@@ -1,20 +1,11 @@
-﻿namespace OCR_Fusion.OCR.VisionAPI
-{
-    using Google.Cloud.Vision.V1;
-    using System;
-    using Grpc.Auth;
-    using Google.Apis.Auth.OAuth2;
-    using System.Buffers.Text;
-    using System.Text.Json.Nodes;
-    using IronOcr;
-    using ZstdSharp.Unsafe;
-    using SharpCompress.Common;
-    using System.Drawing;
-    using System.Drawing.Imaging;
-    using MongoDB.Bson;
-    using static System.Net.Mime.MediaTypeNames;
-    using static Google.Protobuf.Reflection.GeneratedCodeInfo.Types;
-    using Google.Protobuf.Collections;
+﻿using Google.Cloud.Vision.V1;
+using System.Text.Json.Nodes;
+using MongoDB.Bson;
+using APIObject;
+
+
+namespace OCR_Fusion.OCR.VisionAPI {
+    
 
     [Register("VisionOCR", "Google Cloud Vision", "Great for printed and handwritten text")]
         public class VisionOCR : IOCRManager {
