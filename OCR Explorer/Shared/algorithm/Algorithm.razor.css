@@ -11,3 +11,46 @@
     align-items:center;
 }
 
+@keyframes collapse {
+    from {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scaleY(0);
+        height:0;
+    }
+}
+
+@keyframes expend {
+    from {
+        opacity: 0;
+        height: 0;
+        transform: scaleY(0);
+    }
+
+    to {
+        opacity: 1;
+        height: auto;
+        transform: scaleY(1);
+    }
+}
+
+.hidden {
+    opacity: 0;
+    height: 0;
+    transform: scaleY(0);
+}
+
+.parameter-visible {
+    transform-origin: top;
+    animation: expend 0.2s ease-in-out 0s forwards;
+}
+
+
+.parameter-collapse {
+    transform-origin:top;
+    animation: collapse 0.2s ease-in-out 0s forwards;
+}
