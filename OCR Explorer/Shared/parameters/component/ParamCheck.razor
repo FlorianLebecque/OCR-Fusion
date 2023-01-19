@@ -1,0 +1,22 @@
+﻿
+<div class="d-flex justify-content-between">
+    <div>
+        <p>@parameter["title"]</p>
+    </div>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="@key">
+        <label class="form-check-label" for="@key"></label>
+    </div>
+</div>
+
+
+
+@code {
+
+    [Parameter]
+    public string key { get; set; }
+
+    [Parameter]
+    public JsonNode parameter { get; set; }
+
+}

@@ -1,0 +1,23 @@
+﻿
+
+<select id="@key" class="form-select" aria-label="@parameter["title"]">
+    @foreach(KeyValuePair<string,string> opt in options) {
+        <option value="@opt.Key">@opt.Value</option>
+    }
+</select>
+
+@code {
+
+    [Parameter]
+    public string key { get; set; }
+
+    [Parameter]
+    public JsonNode parameter { get; set; }
+
+    public Dictionary<string,string> options {
+        get {
+            return JsonConvert.DeserializeObject<Dictionary<string, string>>((string)parameter["options"]);
+        }
+    }
+
+}

@@ -1,0 +1,28 @@
+﻿
+
+@if((@parameters != null)&&(Id != null)){
+    @foreach(KeyValuePair<string,JsonNode> param in parameters.ToList()) {
+
+        @switch (param.Value["type"].ToString()) {
+            case "text":
+                <ParamInput key="@param.Key" parameter="@param.Value"/>
+                break;
+            case "check":
+                <ParamCheck key="@param.Key" parameter="@param.Value"/>
+                break;
+            case "select":
+                <ParamSelect key="@param.Key" parameter="@param.Value"/>
+                break;
+        }
+    }
+}
+
+
+
+@code {
+    [Parameter]
+    public List<KeyValuePair<string, JsonNode>>? parameters { get; set; }
+
+    [Parameter]
+    public string? Id { get; set; }
+}
