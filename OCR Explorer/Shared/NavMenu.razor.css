@@ -1,0 +1,7 @@
+nav {
+    box-shadow: 10px 10px 95px -1px rgba(0,0,0,0.21);
+    -webkit-box-shadow: 10px 10px 95px -1px rgba(0,0,0,0.21);
+    -moz-box-shadow: 10px 10px 95px -1px rgba(0,0,0,0.21);
+
+    margin-bottom:3em;
+}
