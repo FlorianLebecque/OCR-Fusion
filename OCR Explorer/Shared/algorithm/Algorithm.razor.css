@@ -1,0 +1,13 @@
+﻿.main{
+    display:flex;
+    flex-flow:column;
+    margin-bottom:1em;
+}
+
+.bar {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items:center;
+}
+

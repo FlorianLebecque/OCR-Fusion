@@ -1,6 +1,27 @@
-﻿<h3>AlgorithmsWrapper</h3>
+﻿<h3>Algorithms</h3>
 @inject HttpClient Http
 
+@if (algos == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    
+    @foreach (var algo in algos)
+    {
+        <Algorithm algorithm=@algo></Algorithm>
+    }
+        
+}
+
+
 @code {
+    private Algorithms[]? algos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        algos = await Http.GetFromJsonAsync<Algorithms[]>("http://127.0.0.1:5154/Algorithms");
+    }
 
 }

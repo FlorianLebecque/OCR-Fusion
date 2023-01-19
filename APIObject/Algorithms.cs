@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 
 namespace APIObject{
     public class Algorithms {
@@ -20,6 +21,14 @@ namespace APIObject{
             IOCRManager ocr = (IOCRManager)Activator.CreateInstance(algo);
 
             this.Parameters = ocr.GetParameters();
+        }
+
+        [JsonConstructor]
+        public Algorithms(string id, string name, string description, JsonObject? parameters) {
+            Id = id;
+            Name = name;
+            Description = description;
+            Parameters = parameters;
         }
 
         public Type GetClass() {

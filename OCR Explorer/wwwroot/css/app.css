@@ -1,5 +1,18 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
-    
+
+body{
+    background-color:var(--bs-light)
+}
+
+.panel {
+    background-color: white;
+    border: solid 1px;
+    border-radius: 0.2em;
+    padding: 1em;
+    border-color: var(--bs-gray-300);
+}
+
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
@@ -18,3 +31,4 @@
         right: 0.75rem;
         top: 0.5rem;
     }
+
