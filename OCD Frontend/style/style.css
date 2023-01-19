@@ -1,3 +1,4 @@
+
 #camera-wrapper{
     display: flex;
     flex-direction: column;
@@ -72,6 +73,7 @@
     gap:1em;
 }
 
+
 .center {
 	height:100%;
 	display:flex;
@@ -109,6 +111,7 @@ display:none;
 }
   
 .form-input label {
+
     display:block;
     width:45%;
     height:45px;
@@ -123,6 +126,7 @@ display:none;
     font-weight:600;
     border-radius:5px;
     cursor:pointer;
+
 }
 
 .form-button {
@@ -202,4 +206,5 @@ a:link {
 #btnUploadIndex.active, #btnUploadIndex:hover{
 	background: #5277ac;
     color: white;
+
 }

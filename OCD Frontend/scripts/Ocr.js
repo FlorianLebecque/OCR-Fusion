@@ -11,6 +11,7 @@ class OcrAPI{
 
         let data = new FormData(),
             files = document.getElementById("imageUpload").files;
+
         
             this.filename = files[0].name;
             let filename = this.filename;
@@ -114,27 +115,29 @@ class OcrAPI{
         imageWrapper.html('<div  class="col align-self-center"><div class="lds-dual-ring"></div></div>');
         imageWrapper.show(100);
 
+
         $.ajax({
             url: "http://127.0.0.1:5154/Ocr",
             type: 'put',
             dataType: 'json',
             data: data_file,
+
             processData: false,
             contentType: false,
             statusCode:{
                 200: function(image){
-
                     imageWrapper.html('<img src="http://127.0.0.1:5154/Image/'+filename+'" id="imageHolder" alt="">');
                 }
             }
             
         });
-        
     }
+
 
     RequestOCR(){
 
         let algos = document.getElementsByName("check-algos");
+
         let session_name = (document.getElementById("session").value == "")? "default": document.getElementById("session").value;
 
         let img = {
@@ -168,6 +171,7 @@ class OcrAPI{
 
         $("#control").hide();
 
+
         this.builder.InitCardWrapper();
 
         algos.forEach((check)=>{
@@ -178,6 +182,7 @@ class OcrAPI{
 
 
             let ocr_algo = check.id;
+
             let parameters_obj = {};
 
             let parameters_inputs = document.getElementsByName(ocr_algo);
@@ -204,12 +209,14 @@ class OcrAPI{
                 selected_regions = [[p1n,p2n]];
             }
 
+
             let payload = {
                 session : session_name,
                 imageName : this.filename,
                 algo : ocr_algo,
                 parameters : parameters_obj,
                 regions : selected_regions
+
             }
             
             fetch('http://127.0.0.1:5154/Ocr', {
@@ -229,7 +236,7 @@ class OcrAPI{
         });
 
     }
-
+    
     DisplayTableRowHistory(json, start_index, end_index){
 
         $("#itemShow tr").remove(); 
@@ -489,4 +496,5 @@ class OcrAPI{
         a.innerHTML = 'download JSON';
         a.click();
     };
+
 }

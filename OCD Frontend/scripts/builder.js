@@ -1,3 +1,4 @@
+
 class Builder{
 
     constructor(_paramertersbuilder) {
@@ -7,6 +8,7 @@ class Builder{
     async Load(){
 
         await fetch('http://127.0.0.1:5154/Algorithms')
+
             .then((response) => response.json())
             .then((json) => {
                 this.BuildCheckBox(json);
@@ -18,11 +20,14 @@ class Builder{
 
         let wrapper = document.getElementById("checkbox-wrapper");
 
+
         let count = 0;
+
 
         algo.forEach(algorithm => {
             
             let checkbox = '';
+
 
             if(count == (algo.length -1)){
                 checkbox += '<div style="display:flex; justify-content:space-between;align-items:center;">';
@@ -50,6 +55,7 @@ class Builder{
             count++;
 
             wrapper.innerHTML += checkbox;
+
         });
 
 
@@ -82,6 +88,7 @@ class Builder{
                         inner += '</textarea>';
                     inner += '<button class="btn btn-success" onclick="ocr.Update(\''+result.id+'\',\''+text_area_id+'\')" style="background: #648b6c;"><i class="display-6 bi bi-check2"></i></button>';
                     inner += '<button class="btn btn-success" id="btndownload" onclick="ocr.Download(\''+text_area_id+'\',\''+result.imageName+'\')"><b>Export result</b></button>';
+
                 inner += '</div>';
             inner += '</div>';
         
@@ -94,11 +101,14 @@ class Builder{
         wrapper.innerHTML = "";
     }
 
+
     InitCard(algo,imageName){
+
 
         let wrapper = document.getElementById("cards-wrapper")
 
         let inner = "";
+
         inner += "<div class='card-panel' id='card-"+algo+"' onclick='select(\"card-"+algo+"\")'>";
         inner += '  <div class="t-card">';
         inner += '      <div  class="col align-self-center"><div class="lds-dual-ring"></div></div>';
@@ -142,5 +152,6 @@ class Builder{
         card.innerHTML = inner;
 
     }
+
 
 }
